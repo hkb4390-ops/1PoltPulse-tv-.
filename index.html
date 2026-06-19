@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PlotPulse Premium | Next-Gen OTT Experience</title>
+    <!-- Firebase SDK Compat Core Links -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+    <!-- Tailwind CSS Engine -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        
+        :root {
+            --ott-bg: #030712;
+            --ott-surface: #0b1526;
+            --ott-primary: #3b82f6;
+            --ott-accent: #a855f7;
+        }
+
+        body {
+            background-color: var(--ott-bg);
+            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* JioHotstar Inspired Cinematic Glow Layer */
+        .fog-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background: radial-gradient(circle at 50% -20%, #1e3a8a 0%, #0b1526 45%, #030712 100%);
+        }
+
+        .ambient-glow {
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 60%;
+            background: radial-gradient(circle at 30% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 40%, rgba(59, 130, 246, 0.2) 0%, transparent 60%);
+            filter: blur(80px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Glassmorphic Core Design */
+        .glass-panel {
+            background: rgba(11, 21, 38, 0.6);
+            backdrop-filter: blur(24px) saturate(160%);
+            -webkit-backdrop-filter: blur(24px) saturate(160%);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:active {
+            transform: scale(0.97);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        /* Custom Horizontal Scroll Lock */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Fullscreen-Safe Responsive Watermark System */
+        .player-root {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000000;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        .watermark-container {
+            position: absolute;
+            top: 4%;
+            right: 4%;
+            z-index: 2147483647; /* Highest layer index safety */
+            width: 14%;
+            max-width: 90px;
+            min-width: 50px;
+            pointer-events: none;
+            opacity: 0.65;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Active Episode Playing State Animations */
+        .playing-active-card {
+            border: 1.5px solid var(--ott-primary) !important;
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.12) 0%, rgba(11, 21, 38, 0.8) 100%) !important;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.25);
+            position: relative;
+        }
+
+        /* Equalizer Wave Engine */
+        .eq-container {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            width: 18px;
+            height: 18px;
+        }
+
+        .eq-bar {
+            width: 3px;
+            height: 100%;
+            background-color: var(--ott-primary);
+            border-radius: 2px;
+            animation: bounceEqualizer 0.8s ease-in-out infinite alternate;
+        }
+        .eq-bar:nth-child(2) { animation-delay: 0.2s; animation-duration: 0.6s; }
+        .eq-bar:nth-child(3) { animation-delay: 0.4s; animation-duration: 0.9s; }
+
+        @keyframes bounceEqualizer {
+            0% { height: 20%; }
+            100% { height: 100%; }
+        }
+
+        /* Shimmer Base Infrastructure */
+        .shimmer-bg {
+            background: linear-gradient(90deg, #0b1526 25%, #16253f 50%, #0b1526 75%);
+            background-size: 200% 100%;
+            animation: shimmerSwipe 1.6s infinite linear;
+        }
+
+        @keyframes shimmerSwipe {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* Splash Page Transition Elements */
+        #splash-screen {
+            position: fixed;
+            inset: 0;
+            background: #030712;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .logo-glow {
+            text-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+            animation: logoScale 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        @keyframes logoScale {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Custom Spinner for Video Stream Loading States */
+        .video-loading-spinner {
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--ott-primary);
+            border-radius: 50%;
+            animation: rotateSpin 0.8s linear infinite;
+            z-index: 40;
+            display: none;
+        }
+
+        @keyframes rotateSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="antialiased select-none">
+
+    <!-- Layered Engine Overlays -->
+    <div class="fog-overlay"></div>
+    <div class="ambient-glow"></div>
+
+    <!-- Splash Screen Panel -->
+    <div id="splash-screen">
+        <h1 class="text-4xl font-extrabold italic tracking-tighter logo-glow text-white">
+            PLOT<span class="text-blue-500">PULSE</span>
+        </h1>
+        <div class="w-16 h-1 bg-blue-500 rounded-full mt-4 overflow-hidden relative">
+            <div class="absolute inset-0 bg-white w-1/2 rounded-full animation-load" style="animation: shimmerSwipe 1s infinite linear;"></div>
+        </div>
+    </div>
+
+    <!-- Top Master Application Bar -->
+    <nav class="fixed top-0 inset-x-0 h-16 glass-panel z-50 px-4 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <h1 class="text-xl font-black italic tracking-tighter cursor-pointer" onclick="navigateHome()">
+                PLOT<span class="text-blue-500">PULSE</span>
+            </h1>
+        </div>
+        
+        <!-- Premium Live Native Search Integration Box -->
+        <div class="flex-1 max-w-md mx-6 relative">
+            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">🔍</span>
+            <input type="text" id="master-search" oninput="executeSearchFilter(this.value)" placeholder="शोज़ या एपिसोड्स खोजें..." class="w-full h-9 pl-9 pr-4 bg-white/5 border border-white/10 rounded-full text-xs text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white/10 transition-all">
+        </div>
+
+        <div class="flex items-center gap-4">
+            <button onclick="toggleNotificationPanel()" class="relative p-2 rounded-full hover:bg-white/5 transition-all active:scale-90">
+                <span class="text-xl">🔔</span>
+                <span id="notif-badge" class="absolute top-1 right-1 w-2.5 h-2.5 bg-blue-500 rounded-full hidden"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Master Container View Routing Stack -->
+    <main class="pt-20 px-4 pb-24 max-w-6xl mx-auto space-y-8" id="view-home">
+        
+        <!-- SECTION 2: Interactive Real-Time Hero Banner Slider Component -->
+        <section id="hero-slider-container" class="relative w-full aspect-[16/7] md:aspect-[16/5] rounded-3xl overflow-hidden glass-card shadow-2xl">
+            <!-- Dynamic Wrapper Injection Core Target -->
+            <div id="hero-slider-target" class="w-full h-full relative">
+                <!-- Skeleton Shimmer Placeholder default state -->
+                <div class="w-full h-full shimmer-bg"></div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Real-Time Dynamic Date Filtering Component (Latest Uploads Today) -->
+        <section class="space-y-4">
+            <div class="flex justify-between items-center">
+                <h2 class="text-sm font-bold tracking-widest text-blue-400 uppercase">Latest Uploads Today</h2>
+                <span class="h-px bg-white/10 flex-1 ml-4"></span>
+            </div>
+            <div id="today-uploads-target" class="flex gap-4 overflow-x-auto hide-scrollbar py-2">
+                <!-- Injected via Core JavaScript Parser Routine -->
+            </div>
+        </section>
+
+        <!-- SECTION 4: Local Storage Tracking Component (Continue Watching Stack) -->
+        <section id="continue-watching-section" class="space-y-4 hidden">
+            <div class="flex justify-between items-center">
+                <h2 class="text-sm font-bold tracking-widest text-purple-400 uppercase">Continue Watching</h2>
+                <span class="h-px bg-white/10 flex-1 ml-4"></span>
+            </div>
+            <div id="continue-watching-target" class="flex gap-4 overflow-x-auto hide-scrollbar py-2">
+                <!-- Local State Client Insertion Block -->
+            </div>
+        </section>
+
+        <!-- SECTION 5: Dynamic Standard Comprehensive Grid Layout Array (All Shows Block) -->
+        <section class="space-y-4">
+            <div class="flex justify-between items-center">
+                <h2 class="text-sm font-bold tracking-widest text-gray-400 uppercase">All Shows</h2>
+                <span class="h-px bg-white/10 flex-1 ml-4"></span>
+            </div>
+            <div id="all-shows-target" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Initial Core Skeleton Generation Elements -->
+                <div class="h-28 shimmer-bg rounded-2xl"></div>
+                <div class="h-28 shimmer-bg rounded-2xl"></div>
+                <div class="h-28 shimmer-bg rounded-2xl"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Native SPA Internal Router Module: Show Detail Overlay View Module -->
+    <div id="view-detail" class="hidden pt-20 px-4 pb-24 max-w-4xl mx-auto space-y-6">
+        <!-- Navigation Breadcrumb Track -->
+        <button onclick="navigateHome()" class="flex items-center gap-2 text-xs font-semibold text-blue-400 bg-white/5 px-4 py-2 rounded-full border border-white/5 active:scale-95 transition-transform">
+            <span>←</span> मुख्य पृष्ठ पर वापस जाएँ
+        </button>
+
+        <!-- Dynamic Structural Layer View Engine Assembly Block -->
+        <div id="detail-structural-target" class="space-y-6">
+            <!-- Dynamic Architecture Insertion Target Block -->
+        </div>
+    </div>
+
+    <!-- Floating Native Interactive Window Component: Real-Time Active Notification Side Overlay Panel -->
+    <div id="notification-sidebar" class="fixed top-16 right-0 bottom-0 w-80 glass-panel z-40 transform translate-x-full transition-transform duration-300 ease-in-out p-4 overflow-y-auto space-y-4">
+        <div class="flex justify-between items-center border-b border-white/10 pb-2">
+            <h3 class="font-bold text-sm tracking-wide text-gray-300">अपलोड नोटिफिकेशन</h3>
+            <button onclick="toggleNotificationPanel()" class="text-xs text-blue-400 px-2 py-1 bg-white/5 rounded-md">बंद करें</button>
+        </div>
+        <div id="notification-stack-target" class="space-y-3">
+            <!-- Native Content Stream Interface Injections -->
+            <p class="text-xs text-gray-400 text-center py-8">कोई नया नोटिफिकेशन नहीं है</p>
+        </div>
+    </div>
+
+    <!-- Complete Functional JavaScript Controller Infrastructure Engine Logic Block -->
+    <script>
+        // Production Verified Global Target Configuration Setup Model
+        const firebaseConfig = {
+            databaseURL: "https://hry-study-default-rtdb.firebaseio.com/"
+        };
+        
+        // Safe Framework Application Bootstrap Sequence Engine
+        firebase.initializeApp(firebaseConfig);
+        const databaseRef = firebase.database();
+
+        // Standard Operational Master Application Execution Variables Tracking Registry
+        let systemDatabasePayload = null;
+        let activeSliderSequenceIndex = 0;
+        let runningSliderIntervalHandle = null;
+        let localStateTargetShowId = null;
+        let localStateTargetEpisodeId = null;
+
+        // Custom Cross-Standard Real-Time System Clock Date Normalizer Logic Model
+        function extractSystemNormalizedDate() {
+            const liveClock = new Date();
+            const dateDigit = String(liveClock.getDate()).padStart(2, '0');
+            const monthDigit = String(liveClock.getMonth() + 1).padStart(2, '0');
+            const yearDigit = liveClock.getFullYear();
+            
+            // Standardizes matching matrix profiles across variant system nodes automatically
+            return {
+                slashed: `${dateDigit}/${monthDigit}/${yearDigit}`,
+                hyphenated: `${yearDigit}-${monthDigit}-${dateDigit}`
+            };
+        }
+
+        // Framework Base System Initiation Handler Entry Point Realization Routine
+        document.addEventListener("DOMContentLoaded", () => {
+            synchronizeMasterApplicationData();
+            evaluateClientTrackingBuffer();
+            
+            // Soft-Dismiss Application Splash Loader Mask Overlay Sequence
+            setTimeout(() => {
+                const mask = document.getElementById("splash-screen");
+                mask.style.opacity = "0";
+                setTimeout(() => mask.style.display = "none", 600);
+            }, 1200);
+        });
+
+        // Core Synchronous Lifecycle Pipeline Interface Layer
+        function synchronizeMasterApplicationData() {
+            databaseRef.ref('shows').on('value', (dataSnapshot) => {
+                if(dataSnapshot.exists()) {
+                    systemDatabasePayload = dataSnapshot.val();
+                    console.log("PlotPulse Core Pipeline Sync Succeeded:", systemDatabasePayload);
+                    
+                    // Trigger Live Rendering Components Lifecycle Processing Loops
+                    generateHeroBannerSystem();
+                    renderLatestUploadsToday();
+                    renderGlobalShowsCatalogue();
+                    
+                    // If active view state matches sub-view parameters, dynamically hot-reload updates
+                    if(document.getElementById('view-detail').classList.contains('hidden') === false && localStateTargetShowId) {
+                        renderShowDetailsViewerPage(localStateTargetShowId, false);
+                    }
+                } else {
+                    console.error("Critical Failure: Firebase Reference Synchronizer returned empty payload mapping.");
+                }
+            }, (runtimeError) => {
+                console.error("Pipeline Thread Connection Broken: Interrupt encountered:", runtimeError);
+            });
+        }
+
+        // SECTION 2 Loop Assembly Engine (Dynamic Hero Banner Slider Realization Stack)
+        function generateHeroBannerSystem() {
+            clearInterval(runningSliderIntervalHandle);
+            const targetNode = document.getElementById("hero-slider-target");
+            let cumulativeEpisodesList = [];
+
+            // Compile entire array list from all nodes across schemas to capture current structural profiles
+            Object.entries(systemDatabasePayload).forEach(([showKey, showDetails]) => {
+                if(showDetails.episodes) {
+                    Object.entries(showDetails.episodes).forEach(([epKey, epDetails]) => {
+                        cumulativeEpisodesList.push({
+                            showId: showKey,
+                            showName: showDetails.name,
+                            episodeId: epKey,
+                            ...epDetails
+                        });
+                    });
+                }
+            });
+
+            if(cumulativeEpisodesList.length === 0) {
+                targetNode.innerHTML = `
+                    <div class="w-full h-full flex flex-col justify-center items-center bg-[#0b1526]/80 px-4 text-center">
+                        <span class="text-3xl mb-2">🎬</span>
+                        <p class="text-sm font-semibold tracking-wide text-gray-400">COMING SOON: No Content Found In Schema</p>
+                    </div>`;
+                return;
+            }
+
+            // Reverse Sort Index Vector Sequence mapping array prioritizing absolute fresh record indexing
+            cumulativeEpisodesList.sort((leftRecord, rightRecord) => (parseInt(rightRecord.num) || 0) - (parseInt(leftRecord.num) || 0));
+            
+            // Isolate Top Slice parameters array profile maximum allocations count
+            const boundarySliderSliceLimit = cumulativeEpisodesList.slice(0, 5);
+            
+            const executeSliderRenderCycle = () => {
+                if(activeSliderSequenceIndex >= boundarySliderSliceLimit.length) activeSliderSequenceIndex = 0;
+                const activeRecord = boundarySliderSliceLimit[activeSliderSequenceIndex];
+                
+                targetNode.innerHTML = `
+                    <div class="w-full h-full relative transition-all duration-700 ease-in-out">
+                        <img src="${activeRecord.thumb || '1000015927_2.jpg'}" class="w-full h-full object-cover opacity-60 transform scale-105" alt="Banner Graphic">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-black/30"></div>
+                        <div class="absolute bottom-4 left-4 right-4 space-y-2 max-w-md">
+                            <span class="px-2 py-0.5 bg-blue-500 text-[9px] font-bold tracking-widest rounded uppercase">LATEST ADDITION</span>
+                            <h2 class="text-lg md:text-2xl font-black text-white tracking-tight line-clamp-1">${activeRecord.showName}</h2>
+                            <p class="text-xs text-gray-300 font-medium line-clamp-1">एपिसोड ${activeRecord.num || '0'} : ${activeRecord.title || 'Untitled Episode'}</p>
+                            <button onclick="initiateOTTPlayerStream('${activeRecord.showId}', '${activeRecord.episodeId}')" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold text-xs rounded-xl flex items-center gap-2 shadow-lg shadow-blue-600/30 transition-all">
+                                <span>▶</span> WATCH NOW
+                            </button>
+                        </div>
+                    </div>`;
+                activeSliderSequenceIndex++;
+            };
+
+            executeSliderRenderCycle();
+            runningSliderIntervalHandle = setInterval(executeSliderRenderCycle, 5000);
+        }
+
+        // SECTION 3 Engine Interface Strategy (Today's Direct Realtime Matrix Synchronizer Profile)
+        function renderLatestUploadsToday() {
+            const targetInterfaceSlot = document.getElementById("today-uploads-target");
+            const structuralClockMatrix = extractSystemNormalizedDate();
+            let matchedUploadsList = [];
+
+            Object.entries(systemDatabasePayload).forEach(([showKey, showDetails]) => {
+                if(showDetails.episodes) {
+                    Object.entries(showDetails.episodes).forEach(([epKey, epDetails]) => {
+                        const dynamicSanitizedDateStr = String(epDetails.date || "").trim();
+                        if(dynamicSanitizedDateStr === structuralClockMatrix.slashed || dynamicSanitizedDateStr === structuralClockMatrix.hyphenated) {
+                            matchedUploadsList.push({
+                                showId: showKey,
+                                showName: showDetails.name,
+                                episodeId: epKey,
+                                ...epDetails
+                            });
+                        }
+                    });
+                }
+            });
+
+            if(matchedUploadsList.length === 0) {
+                targetInterfaceSlot.innerHTML = `
+                    <div class="w-full py-6 px-4 bg-white/5 border border-white/5 rounded-2xl flex flex-col justify-center items-center text-center">
+                        <span class="text-xl mb-1">📅</span>
+                        <p class="text-xs font-bold text-gray-400">COMING SOON</p>
+                        <p class="text-[10px] text-gray-500">No New Upload Today</p>
+                    </div>`;
+                return;
+            }
+
+            // Output generated matches directly array configuration mapping matrix
+            targetInterfaceSlot.innerHTML = matchedUploadsList.map(item => `
+                <div class="min-w-[240px] max-w-[240px] glass-card p-2 rounded-2xl space-y-2 flex-shrink-0">
+                    <div class="relative aspect-video rounded-xl overflow-hidden bg-black">
+                        <img src="${item.thumb || '1000015927_2.jpg'}" class="w-full h-full object-cover" alt="Thumb">
+                        <span class="absolute bottom-1 right-1 bg-black/70 px-1.5 py-0.5 rounded text-[9px] font-bold text-blue-400">EP ${item.num}</span>
+                    </div>
+                    <div class="space-y-1">
+                        <h4 class="text-xs font-bold text-white tracking-tight line-clamp-1">${item.showName}</h4>
+                        <p class="text-[10px] text-gray-400 line-clamp-1">${item.title}</p>
+                    </div>
+                    <button onclick="initiateOTTPlayerStream('${item.showId}', '${item.episodeId}')" class="w-full py-1.5 bg-white/5 hover:bg-blue-600 border border-white/10 hover:border-transparent text-white font-bold text-[11px] rounded-xl transition-all">
+                        WATCH NOW
+                    </button>
+                </div>
+            `).join('');
+            
+            // Dynamically propagate system upload arrays configuration to native Notification Engine Core
+            propagateRuntimeNotifications(matchedUploadsList);
+        }
+
+        // Notification Component Framework Link Handler Array Logic
+        function propagateRuntimeNotifications(todayArrays) {
+            const containerElement = document.getElementById("notification-stack-target");
+            const indicatorBadge = document.getElementById("notif-badge");
+
+            if(todayArrays.length === 0) {
+                containerElement.innerHTML = `<p class="text-xs text-gray-400 text-center py-8">कोई नया नोटिफिकेशन नहीं है</p>`;
+                indicatorBadge.classList.add("hidden");
+                return;
+            }
+
+            indicatorBadge.classList.remove("hidden");
+            containerElement.innerHTML = todayArrays.map(item => `
+                <div onclick="initiateOTTPlayerStream('${item.showId}', '${item.episodeId}')" class="p-2 bg-white/5 border border-white/10 rounded-xl flex gap-3 items-center cursor-pointer hover:bg-white/10 transition-all active:scale-95">
+                    <img src="${item.thumb || '1000015927_2.jpg'}" class="w-16 aspect-video object-cover rounded-lg bg-black">
+                    <div class="flex-1 min-w-0">
+                        <h5 class="text-xs font-bold text-white truncate">${item.showName}</h5>
+                        <p class="text-[10px] text-gray-400 truncate">EP ${item.num}: ${item.title}</p>
+                        <p class="text-[8px] text-blue-400 font-semibold mt-0.5">${item.date || ''}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // SECTION 5 Layer Logic Framework Module (All Shows UI Vector Renderer Map Array)
+        function renderGlobalShowsCatalogue() {
+            const primaryGridContainer = document.getElementById("all-shows-target");
+            primaryGridContainer.innerHTML = "";
+
+            Object.entries(systemDatabasePayload).forEach(([showId, showValue]) => {
+                const localizedEpisodesCount = showValue.episodes ? Object.keys(showValue.episodes).length : 0;
+                
+                primaryGridContainer.innerHTML += `
+                    <div onclick="renderShowDetailsViewerPage('${showId}', true)" class="glass-card p-3 rounded-2xl flex items-center gap-4 cursor-pointer border border-white/5 hover:border-blue-500/30 transition-all">
+                        <div class="relative w-28 aspect-video rounded-xl overflow-hidden bg-black flex-shrink-0">
+                            <img src="${showValue.thumb || '1000015927_2.jpg'}" class="w-full h-full object-cover" alt="Cover Grid Graphic">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-sm font-bold text-white tracking-tight truncate">${showValue.name}</h3>
+                            <p class="text-xs text-gray-400 font-medium mt-0.5">${localizedEpisodesCount} Episodes</p>
+                        </div>
+                        <span class="text-gray-500 text-sm pr-1">❯</span>
+                    </div>`;
+            });
+        }
+
+        // SHOW CARD CLICK FLOW Engine Interface Setup Integration Routine Block
+        function renderShowDetailsViewerPage(showId, transitWithScrollFocus = true) {
+            localStateTargetShowId = showId;
+            const routerHomeDOM = document.getElementById("view-home");
+            const routerDetailDOM = document.getElementById("view-detail");
+            const UIStructureTargetNode = document.getElementById("detail-structural-target");
+
+            routerHomeDOM.classList.add("hidden");
+            routerDetailDOM.classList.remove("hidden");
+            if(transitWithScrollFocus) window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            const structuralTargetShowRecord = systemDatabasePayload[showId];
+            if(!structuralTargetShowRecord) return;
+
+            // Sort Profiles Execution Vector Array based on descending index properties profile mappings array
+            let rawUnprocessedEpisodesArray = [];
+            if(structuralTargetShowRecord.episodes) {
+                Object.entries(structuralTargetShowRecord.episodes).forEach(([idString, dataProps]) => {
+                    rawUnprocessedEpisodesArray.push({
+                        episodeUniqueKey: idString,
+                        ...dataProps
+                    });
+                });
+            }
+
+            // Absolute Descending Numerical Alignment Core Sorting Mechanism System Logic Implementation Profile
+            rawUnprocessedEpisodesArray.sort((leftNode, rightNode) => (parseInt(rightNode.num) || 0) - (parseInt(leftNode.num) || 0));
+
+            // Evaluate Target Target Selection Matrix profiling setup models
+            let targetActiveSelectedEpisode = null;
+            if(localStateTargetEpisodeId && structuralTargetShowRecord.episodes[localStateTargetEpisodeId]) {
+                targetActiveSelectedEpisode = {
+                    episodeUniqueKey: localStateTargetEpisodeId,
+                    ...structuralTargetShowRecord.episodes[localStateTargetEpisodeId]
+                };
+            } else if(rawUnprocessedEpisodesArray.length > 0) {
+                targetActiveSelectedEpisode = rawUnprocessedEpisodesArray[0];
+                localStateTargetEpisodeId = targetActiveSelectedEpisode.episodeUniqueKey;
+            }
+
+            if(!targetActiveSelectedEpisode) {
+                UIStructureTargetNode.innerHTML = `<p class="text-xs text-center text-gray-400 py-12">इस शो में कोई एपिसोड उपलब्ध नहीं है।</p>`;
+                return;
+            }
+
+            // Write Persistent Application Buffer for tracking mechanisms dynamically
+            updateClientLocalCacheTrackingBuffer(showId, targetActiveSelectedEpisode);
+
+            // Construct Full Comprehensive Page View Mapping Matrix Structure Array Template Module Logic Layout Injection
+            UIStructureTargetNode.innerHTML = `
+                <!-- Consolidated Absolute Multi-Mode Protected OTT Media Core Stream Interface -->
+                <div class="player-root group">
+                    <div class="watermark-container">
+                        <img src="https://i.postimg.cc/yd1s4hdw/c73c0d3d-0c8f-4f55-ba34-017747e2a68d.png" class="w-full h-auto object-contain" alt="PlotPulse System Watermark Profile Asset Lock Layer">
+                    </div>
+                    <div id="stream-loader-spinner" class="video-loading-spinner"></div>
+                    <video id="ott-core-media-player" controls playsinline class="w-full h-full object-contain bg-black" style="display: none;"></video>
+                    <!-- Alternative Fallback UX Interaction Action Framework Button Area Component Block Plane Grid -->
+                    <div id="alternative-autoplay-ui-action-plate" class="absolute inset-0 bg-[#0b1526] flex flex-col justify-center items-center gap-3 p-4 text-center">
+                        <div class="w-14 h-14 rounded-full bg-blue-600 flex justify-center items-center text-white text-xl font-bold cursor-pointer hover:bg-blue-700 shadow-xl shadow-blue-600/20 active:scale-90 transition-transform animate-bounce" onclick="triggerManualBypassAutoplayOverrideStream()">▶</div>
+                        <p class="text-xs font-bold text-white tracking-wide uppercase">टैप करें और एपिसोड चलाएं</p>
+                        <p class="text-[10px] text-gray-400 max-w-xs">यदि आपका ब्राउज़र वीडियो लोड नहीं करता है, तो इस ओवरराइड एक्शन प्लेट बटन पर टैप करें।</p>
+                    </div>
+                </div>
+
+                <!-- Secondary Track Metadata Array Panel Infrastructure Elements Layer -->
+                <div class="glass-panel p-5 rounded-2xl space-y-3 relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-blue-600/10 rounded-full blur-xl pointer-events:none"></div>
+                    <div class="flex flex-wrap items-center gap-2">
+                        <span class="px-2 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] font-extrabold tracking-widest rounded-md uppercase border border-blue-500/10">STREAMING NOW</span>
+                        ${targetActiveSelectedEpisode.episodeUniqueKey === rawUnprocessedEpisodesArray[0]?.episodeUniqueKey ? `<span class="px-2 py-0.5 bg-purple-500 text-white text-[9px] font-black tracking-widest rounded-md uppercase">LATEST EPISODE</span>` : ''}
+                    </div>
+                    <div class="space-y-1">
+                        <h2 class="text-xl font-black text-white tracking-tight">${structuralTargetShowRecord.name}</h2>
+                        <h3 class="text-sm font-bold text-blue-400">एपिसोड ${targetActiveSelectedEpisode.num} : ${targetActiveSelectedEpisode.title || 'Untitled Title'}</h3>
+                    </div>
+                    <div class="flex items-center gap-4 text-xs font-semibold text-gray-400 border-t border-b border-white/5 py-2">
+                        <p>अपलोड तिथि: <span class="text-gray-200">${targetActiveSelectedEpisode.date || 'N/A'}</span></p>
+                    </div>
+                    <p class="text-xs text-gray-300 leading-relaxed font-medium">${targetActiveSelectedEpisode.desc || 'इस एपिसोड के लिए कोई विवरण उपलब्ध नहीं है।'}</p>
+                </div>
+
+                <!-- Comprehensive Array Node Listing Generation Layer UI Blocks Stack Engine Structure -->
+                <div class="space-y-4">
+                    <h3 class="text-xs font-black tracking-widest text-gray-400 uppercase">सभी एपिसोड्स (${rawUnprocessedEpisodesArray.length})</h3>
+                    <div class="space-y-3" id="episode-array-listing-target-node">
+                        ${rawUnprocessedEpisodesArray.map(epItem => {
+                            const validationCheckStringLink = String(epItem.video || "").trim();
+                            const checkIsActiveCurrentlyPlaying = (epItem.episodeUniqueKey === localStateTargetEpisodeId);
+                            const evaluationStatusMissingLink = (validationCheckStringLink === "" || validationCheckStringLink === "null" || validationCheckStringLink === "undefined");
+
+                            return `
+                                <div id="card-ep-${epItem.episodeUniqueKey}" class="glass-card p-3 rounded-2xl flex items-center justify-between gap-4 border border-white/5 ${checkIsActiveCurrentlyPlaying ? 'playing-active-card' : ''}">
+                                    <div class="flex items-center gap-3 min-w-0 flex-1">
+                                        <div class="relative w-20 aspect-video bg-black rounded-lg overflow-hidden flex-shrink-0">
+                                            <img src="${epItem.thumb || structuralTargetShowRecord.thumb || '1000015927_2.jpg'}" class="w-full h-full object-cover ${checkIsActiveCurrentlyPlaying ? 'opacity-80' : ''}" alt="Card Thumb">
+                                            ${checkIsActiveCurrentlyPlaying ? `
+                                                <div class="absolute inset-0 m-auto bg-blue-600/20 flex justify-center items-center">
+                                                    <div class="eq-container">
+                                                        <div class="eq-bar"></div>
+                                                        <div class="eq-bar"></div>
+                                                        <div class="eq-bar"></div>
+                                                    </div>
+                                                </div>
+                                            ` : ''}
+                                        </div>
+                                        <div class="min-w-0 flex-1">
+                                            <div class="flex items-center gap-2">
+                                                <h4 class="text-xs font-extrabold text-white truncate">${epItem.title || 'Untitled Episode'}</h4>
+                                                ${checkIsActiveCurrentlyPlaying ? `<span class="px-1.5 py-0.5 bg-blue-500 text-[7px] font-black tracking-wider rounded text-white flex-shrink-0 animate-pulse">NOW PLAYING</span>` : ''}
+                                            </div>
+                                            <p class="text-[10px] text-gray-400 font-semibold mt-0.5">एपिसोड ${epItem.num} • ${epItem.date || ''}</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Dynamic Action Button Selection Engine Strategy Logic Block Layout Area Configuration Profile -->
+                                    <div class="flex-shrink-0">
+                                        ${evaluationStatusMissingLink ? `
+                                            <button class="px-3 py-1.5 bg-gray-700/50 text-gray-500 text-[10px] font-extrabold tracking-wider rounded-xl cursor-not-allowed border border-white/5" disabled>COMING SOON</button>
+                                        ` : `
+                                            <button onclick="switchActiveTargetEpisodeExecutionSequence('${epItem.episodeUniqueKey}')" class="px-4 py-1.5 ${checkIsActiveCurrentlyPlaying ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20' : 'bg-white/5 hover:bg-white/10 text-gray-200 border border-white/10'} text-[11px] font-extrabold tracking-wider rounded-xl transition-all active:scale-95">
+                                                ${checkIsActiveCurrentlyPlaying ? 'REPLAY' : 'PLAY'}
+                                            </button>
+                                        `}
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>`;
+
+            // Core Injection Execution Pipeline Deployment Strategy
+            mountVideoPlayerEngineInstance(targetActiveSelectedEpisode.video);
+        }
+
+        // Framework Media Mount Sequence Controller Strategy Logic Block
+        function mountVideoPlayerEngineInstance(sourcePayloadURL) {
+            const playerElement = document.getElementById("ott-core-media-player");
+            const proxyLoaderSpinner = document.getElementById("stream-loader-spinner");
+            const manualActionBypassPlate = document.getElementById("alternative-autoplay-ui-action-plate");
+
+            if(!sourcePayloadURL || String(sourcePayloadURL).trim() === "" || String(sourcePayloadURL).trim() === "null") {
+                manualActionBypassPlate.innerHTML = `<p class="text-xs font-bold text-gray-400">STREAM ERROR: Link Missing</p>`;
+                return;
+            }
+
+            // High Fidelity Direct Cross-Proxy Dynamic URL Parser Automation Link Router Core Setup Model
+            let validatedTargetSourceString = String(sourcePayloadURL).trim();
+            if(!validatedTargetSourceString.startsWith("http://") && !validatedTargetSourceString.startsWith("https://")) {
+                validatedTargetSourceString = `https://telegram-video-proxy.vercel.app/stream?file_id=${validatedTargetSourceString}`;
+            }
+
+            playerElement.src = validatedTargetSourceString;
+            playerElement.load();
+
+            // Set UI Load Indicators and execute safe sandboxed asynchronous stream lifecycle operations
+            proxyLoaderSpinner.style.display = "block";
+
+            // Asynchronous Execution Context Handler
+            playerElement.play().then(() => {
+                // Success branch context path: device profile permitted seamless native browser autoplay execution
+                proxyLoaderSpinner.style.display = "none";
+                manualActionBypassPlate.style.display = "none";
+                playerElement.style.display = "block";
+            }).catch((browserAutoplayExceptionBlockError) => {
+                // Autoplay blocked branch handling path block logic deployment profile configurations
+                console.warn("Native Autoplay Thread Constraint Intercepted by Client Browser Policy Layer:", browserAutoplayExceptionBlockError);
+                proxyLoaderSpinner.style.display = "none";
+                manualActionBypassPlate.style.display = "flex"; // Fallback interface displays primary big action element overlay safely
+            });
+
+            // Dynamic Listening Bind Arrays setup configuration model bindings safely
+            playerElement.onwaiting = () => proxyLoaderSpinner.style.display = "block";
+            playerElement.onplaying = () => proxyLoaderSpinner.style.display = "none";
+        }
+
+        // UI Core Trigger Bypass Handler Logic Wrapper Matrix Module Element
+        function triggerManualBypassAutoplayOverrideStream() {
+            const playerElement = document.getElementById("ott-core-media-player");
+            const manualActionBypassPlate = document.getElementById("alternative-autoplay-ui-action-plate");
+            
+            manualActionBypassPlate.style.display = "none";
+            playerElement.style.display = "block";
+            playerElement.play();
+        }
+
+        // CRITICAL BUG #7 & EPISODE SWITCH Flow Implementation Logic Block Array Vector Mapping Setup
+        function switchActiveTargetEpisodeExecutionSequence(targetEpisodeKeyIdString) {
+            localStateTargetEpisodeId = targetEpisodeKeyIdString;
+            // Hot Reload specific layout segments synchronously without refreshing core document framework wrapper state layers
+            renderShowDetailsViewerPage(localStateTargetShowId, false);
+        }
+
+        // Unified Direct Invariant Action Router Stack Command Handlers Array
+        function navigateHome() {
+            localStateTargetShowId = null;
+            localStateTargetEpisodeId = null;
+            
+            document.getElementById("view-detail").classList.add("hidden");
+            document.getElementById("view-home").classList.remove("hidden");
+            
+            // Clean interface interaction parameters inputs values automatically
+            document.getElementById("master-search").value = "";
+            renderGlobalShowsCatalogue();
+            evaluateClientTrackingBuffer();
+        }
+
+        // Real-Time Search Filtering Implementation Infrastructure Engine
+        function executeSearchFilter(searchQueryString) {
+            const homeViewRouteDOMElement = document.getElementById("view-home");
+            const detailViewRouteDOMElement = document.getElementById("view-detail");
+            
+            // Auto-fallback routing management frame setup boundaries layers tracking
+            if(homeViewRouteDOMElement.classList.contains("hidden")) {
+                detailViewRouteDOMElement.classList.add("hidden");
+                homeViewRouteDOMElement.classList.remove("hidden");
+            }
+
+            const cleanNormalizedSearchValue = String(searchQueryString).trim().toLowerCase();
+            const primaryGridContainer = document.getElementById("all-shows-target");
+
+            if(cleanNormalizedSearchValue === "") {
+                renderGlobalShowsCatalogue();
+                return;
+            }
+
+            primaryGridContainer.innerHTML = "";
+            let matchValidationTrackerCount = 0;
+
+            Object.entries(systemDatabasePayload).forEach(([idString, showValue]) => {
+                const targetMatchShowNameStr = String(showValue.name || "").toLowerCase();
+                let checkEpisodeKeywordMatchFound = false;
+
+                if(showValue.episodes) {
+                    Object.values(showValue.episodes).forEach(epNode => {
+                        if(String(epNode.title || "").toLowerCase().includes(cleanNormalizedSearchValue)) {
+                            checkEpisodeKeywordMatchFound = true;
+                        }
+                    });
+                }
+
+                if(targetMatchShowNameStr.includes(cleanNormalizedSearchValue) || checkEpisodeKeywordMatchFound) {
+                    matchValidationTrackerCount++;
+                    const localizedCount = showValue.episodes ? Object.keys(showValue.episodes).length : 0;
+                    
+                    primaryGridContainer.innerHTML += `
+                        <div onclick="renderShowDetailsViewerPage('${idString}', true)" class="glass-card p-3 rounded-2xl flex items-center gap-4 cursor-pointer border border-blue-500/40 bg-blue-950/20 transition-all">
+                            <div class="relative w-28 aspect-video rounded-xl overflow-hidden bg-black flex-shrink-0">
+                                <img src="${showValue.thumb || '1000015927_2.jpg'}" class="w-full h-full object-cover" alt="Search Result Graphic">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <span class="text-[8px] bg-blue-500 text-white font-extrabold px-1.5 py-0.5 rounded tracking-widest uppercase">MATCH FOUND</span>
+                                <h3 class="text-sm font-bold text-white tracking-tight truncate mt-1">${showValue.name}</h3>
+                                <p class="text-xs text-gray-400 font-medium mt-0.5">${localizedCount} Episodes</p>
+                            </div>
+                        </div>`;
+                }
+            });
+
+            if(matchValidationTrackerCount === 0) {
+                primaryGridContainer.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-xs text-gray-400 font-semibold glass-panel rounded-2xl">
+                        🔍 आपकी खोज के अनुकूल कोई शो या एपिसोड नहीं मिला।
+                    </div>`;
+            }
+        }
+
+        // Persistent Tracking Mechanisms Model Architecture Logic Area (Continue Watching Architecture Layers)
+        function updateClientLocalCacheTrackingBuffer(showKeyId, episodeNodeDetails) {
+            try {
+                let cacheRegistryMapObject = JSON.parse(localStorage.getItem("plotpulse_local_tracking_registry")) || {};
+                
+                cacheRegistryMapObject[showKeyId] = {
+                    episodeId: episodeNodeDetails.episodeUniqueKey,
+                    episodeNum: episodeNodeDetails.num,
+                    episodeTitle: episodeNodeDetails.title || 'Untitled Title',
+                    thumbGraphic: episodeNodeDetails.thumb || '1000015927_2.jpg',
+                    updatedTimestampTicks: Date.now()
+                };
+
+                localStorage.setItem("plotpulse_local_tracking_registry", JSON.stringify(cacheRegistryMapObject));
+            } catch(storageExceptionError) {
+                console.error("Local System Storage Write Exception Intercepted safely:", storageExceptionError);
+            }
+        }
+
+        // SECTION 4 Execution Component Logic Layer Setup Routine Configuration Matrix
+        function evaluateClientTrackingBuffer() {
+            const sectionWrapperNode = document.getElementById("continue-watching-section");
+            const listingTargetSlot = document.getElementById("continue-watching-target");
+
+            try {
+                const cacheRegistryMapObject = JSON.parse(localStorage.getItem("plotpulse_local_tracking_registry")) || {};
+                const mapRecordsEntriesArray = Object.entries(cacheRegistryMapObject);
+
+                if(mapRecordsEntriesArray.length === 0 || !systemDatabasePayload) {
+                    sectionWrapperNode.classList.add("hidden");
+                    return;
+                }
+
+                // Sort tracking history records mapping arrays prioritizing freshly accessed elements tracks
+                mapRecordsEntriesArray.sort((leftElement, rightElement) => rightElement[1].updatedTimestampTicks - leftElement[1].updatedTimestampTicks);
+
+                sectionWrapperNode.classList.remove("hidden");
+                listingTargetSlot.innerHTML = "";
+
+                mapRecordsEntriesArray.forEach(([showKeyId, trackingMetaProps]) => {
+                    // Core validation match checks against live active database node models configurations bounds
+                    if(systemDatabasePayload[showKeyId]) {
+                        const targetParentShowNameStr = systemDatabasePayload[showKeyId].name;
+                        
+                        listingTargetSlot.innerHTML += `
+                            <div onclick="initiateOTTPlayerStream('${showKeyId}', '${trackingMetaProps.episodeId}')" class="min-w-[200px] max-w-[200px] glass-card p-2 rounded-2xl flex-shrink-0 relative group cursor-pointer border border-white/5 hover:border-purple-500/30">
+                                <div class="relative aspect-video rounded-xl overflow-hidden bg-black">
+                                    <img src="${trackingMetaProps.thumbGraphic || '1000015927_2.jpg'}" class="w-full h-full object-cover opacity-80" alt="Tracking Card Cover Image Graphic">
+                                    <div class="absolute bottom-0 inset-x-0 h-1 bg-purple-500"></div>
+                                </div>
+                                <div class="space-y-0.5 mt-1.5">
+                                    <h4 class="text-[11px] font-black text-white truncate tracking-tight">${targetParentShowNameStr}</h4>
+                                    <p class="text-[9px] text-gray-400 truncate font-semibold">EP ${trackingMetaProps.episodeNum}: ${trackingMetaProps.episodeTitle}</p>
+                                </div>
+                            </div>`;
+                    }
+                });
+            } catch(readBufferExceptionError) {
+                console.error("Tracking Engine Memory Segment Access Interrupted Exception:", readBufferExceptionError);
+                sectionWrapperNode.classList.add("hidden");
+            }
+        }
+
+        // Global Automation Bridge Interface Event Handler
+        function initiateOTTPlayerStream(showIdString, episodeIdString) {
+            localStateTargetShowId = showIdString;
+            localStateTargetEpisodeId = episodeIdString;
+            renderShowDetailsViewerPage(showIdString, true);
+        }
+
+        // Interface Visual Overlay Toggle Mechanism Wrapper Sequence Command Handler UI Block
+        function toggleNotificationPanel() {
+            const elementDomPanel = document.getElementById("notification-sidebar");
+            if(elementDomPanel.classList.contains("translate-x-full")) {
+                elementDomPanel.classList.remove("translate-x-full");
+            } else {
+                elementDomPanel.classList.add("translate-x-full");
+            }
+        }
+    </script>
+</body>
+</html>
