@@ -206,6 +206,36 @@
         </div>
     </div>
 
+    <!-- Sponsor Glass Popup Window -->
+    <div id="sponsor-popup" class="fixed inset-0 z-[100000] hidden items-center justify-center bg-[#030712]/70 backdrop-blur-md transition-opacity duration-500 opacity-0 px-4">
+        <div class="glass-card p-6 rounded-3xl w-full max-w-sm flex flex-col items-center text-center transform scale-90 transition-transform duration-500 border border-white/10 shadow-[0_0_40px_rgba(59,130,246,0.15)] relative overflow-hidden">
+            <!-- Ambient Popup Glow -->
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-500/20 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-purple-500/20 rounded-full blur-2xl pointer-events-none"></div>
+            
+            <!-- Sponsor Tag -->
+            <span class="px-3 py-1 bg-white/5 text-gray-400 text-[10px] font-black tracking-widest rounded-md uppercase border border-white/10 mb-5 relative z-10">SPONSOR</span>
+            
+            <!-- Content -->
+            <div class="relative z-10 w-16 h-16 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-full flex items-center justify-center mb-4 shadow-lg shadow-blue-500/30">
+                <span class="text-3xl">👨‍💻</span>
+            </div>
+            
+            <h3 class="text-xl font-black text-white tracking-tight relative z-10">Developer</h3>
+            <p class="text-sm font-bold text-blue-400 mb-6 relative z-10 tracking-wide">@himanshurajyadav</p>
+            
+            <!-- Action Buttons -->
+            <div class="flex gap-3 w-full relative z-10">
+                <button onclick="closeSponsorPopup()" class="flex-1 py-3 bg-red-600/90 hover:bg-red-600 text-white border border-red-500 font-bold text-[12px] uppercase tracking-wider rounded-xl transition-all active:scale-95 shadow-[0_0_15px_rgba(220,38,38,0.4)]">
+                    Close
+                </button>
+                <a href="http://hrry.online" target="_blank" onclick="closeSponsorPopup()" class="flex-1 py-3 bg-green-500/90 hover:bg-green-500 text-white border border-green-400/50 font-bold text-[12px] uppercase tracking-wider rounded-xl transition-all active:scale-95 shadow-[0_0_15px_rgba(34,197,94,0.3)] flex items-center justify-center">
+                    Open
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Top Master Application Bar -->
     <nav class="fixed top-0 inset-x-0 h-16 glass-panel z-50 px-4 flex justify-between items-center">
         <div class="flex items-center gap-3">
@@ -221,7 +251,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <button onclick="toggleNotificationPanel()" class="relative p-2 rounded-full hover:bg-white/5 transition-all active:scale-90">
+            <button id="notif-btn" onclick="toggleNotificationPanel(event)" class="relative p-2 rounded-full hover:bg-white/5 transition-all active:scale-90">
                 <span class="text-xl">🔔</span>
                 <span id="notif-badge" class="absolute top-1 right-1 w-2.5 h-2.5 bg-blue-500 rounded-full hidden"></span>
             </button>
@@ -294,7 +324,7 @@
     <div id="notification-sidebar" class="fixed top-16 right-0 bottom-0 w-80 glass-panel z-40 transform translate-x-full transition-transform duration-300 ease-in-out p-4 overflow-y-auto space-y-4">
         <div class="flex justify-between items-center border-b border-white/10 pb-2">
             <h3 class="font-bold text-sm tracking-wide text-gray-300">अपलोड नोटिफिकेशन</h3>
-            <button onclick="toggleNotificationPanel()" class="text-xs text-blue-400 px-2 py-1 bg-white/5 rounded-md">बंद करें</button>
+            <button onclick="toggleNotificationPanel(event)" class="text-xs text-blue-400 px-2 py-1 bg-white/5 rounded-md">बंद करें</button>
         </div>
         <div id="notification-stack-target" class="space-y-3">
             <!-- Native Content Stream Interface Injections -->
@@ -320,6 +350,41 @@
         let localStateTargetShowId = null;
         let localStateTargetEpisodeId = null;
 
+        // Sponsor Popup Logic
+        function showSponsorPopup() {
+            const popup = document.getElementById("sponsor-popup");
+            const popupCard = popup.querySelector('.glass-card');
+            popup.classList.remove("hidden");
+            popup.classList.add("flex");
+            // Trigger animation
+            setTimeout(() => {
+                popup.classList.remove("opacity-0");
+                popupCard.classList.remove("scale-90");
+                popupCard.classList.add("scale-100");
+            }, 50);
+        }
+
+        function closeSponsorPopup() {
+            const popup = document.getElementById("sponsor-popup");
+            const popupCard = popup.querySelector('.glass-card');
+            popup.classList.add("opacity-0");
+            popupCard.classList.remove("scale-100");
+            popupCard.classList.add("scale-90");
+            setTimeout(() => {
+                popup.classList.add("hidden");
+                popup.classList.remove("flex");
+            }, 500);
+        }
+
+        // Handle clicks outside notification panel to close it automatically
+        document.addEventListener('click', (e) => {
+            const panel = document.getElementById("notification-sidebar");
+            const btn = document.getElementById("notif-btn");
+            if (!panel.classList.contains("translate-x-full") && !panel.contains(e.target) && !btn.contains(e.target)) {
+                panel.classList.add("translate-x-full");
+            }
+        });
+
         // Custom Cross-Standard Real-Time System Clock Date Normalizer Logic Model
         function extractSystemNormalizedDate() {
             const liveClock = new Date();
@@ -339,11 +404,14 @@
             synchronizeMasterApplicationData();
             evaluateClientTrackingBuffer();
             
-            // Soft-Dismiss Application Splash Loader Mask Overlay Sequence
+            // Soft-Dismiss Application Splash Loader Mask Overlay Sequence & Trigger Sponsor Popup
             setTimeout(() => {
                 const mask = document.getElementById("splash-screen");
                 mask.style.opacity = "0";
-                setTimeout(() => mask.style.display = "none", 600);
+                setTimeout(() => {
+                    mask.style.display = "none";
+                    showSponsorPopup(); // Popup Appears Here
+                }, 600);
             }, 1200);
         });
 
@@ -411,14 +479,19 @@
                 const activeRecord = boundarySliderSliceLimit[activeSliderSequenceIndex];
                 
                 targetNode.innerHTML = `
-                    <div class="w-full h-full relative transition-all duration-700 ease-in-out">
-                        <img src="${activeRecord.thumb || '1000015927_2.jpg'}" class="w-full h-full object-cover opacity-60 transform scale-105" alt="Banner Graphic">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-black/30"></div>
-                        <div class="absolute bottom-4 left-4 right-4 space-y-2 max-w-md">
+                    <div class="w-full h-full relative transition-all duration-700 ease-in-out bg-black overflow-hidden">
+                        <!-- Main Image Cover -->
+                        <img src="${activeRecord.thumb || '1000015927_2.jpg'}" class="absolute inset-0 w-full h-full object-cover" alt="Banner Graphic">
+                        
+                        <!-- Gradients Overlay for Depth -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#030712] via-[#030712]/50 to-transparent"></div>
+                        
+                        <!-- Content Data Container -->
+                        <div class="absolute bottom-4 left-4 right-4 space-y-2 max-w-md z-10">
                             <span class="px-2 py-0.5 bg-blue-500 text-[9px] font-bold tracking-widest rounded uppercase">LATEST ADDITION</span>
-                            <h2 class="text-lg md:text-2xl font-black text-white tracking-tight line-clamp-1">${activeRecord.showName}</h2>
-                            <p class="text-xs text-gray-300 font-medium line-clamp-1">एपिसोड ${activeRecord.num || '0'} : ${activeRecord.title || 'Untitled Episode'}</p>
-                            <button onclick="initiateOTTPlayerStream('${activeRecord.showId}', '${activeRecord.episodeId}')" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold text-xs rounded-xl flex items-center gap-2 shadow-lg shadow-blue-600/30 transition-all">
+                            <h2 class="text-lg md:text-2xl font-black text-white tracking-tight line-clamp-1 drop-shadow-lg">${activeRecord.showName}</h2>
+                            <p class="text-xs text-gray-200 font-medium line-clamp-1 drop-shadow-md">एपिसोड ${activeRecord.num || '0'} : ${activeRecord.title || 'Untitled Episode'}</p>
+                            <button onclick="initiateOTTPlayerStream('${activeRecord.showId}', '${activeRecord.episodeId}')" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold text-xs rounded-xl flex items-center gap-2 shadow-lg shadow-blue-600/50 transition-all mt-1">
                                 <span>▶</span> WATCH NOW
                             </button>
                         </div>
@@ -581,13 +654,15 @@
             UIStructureTargetNode.innerHTML = `
                 <!-- Consolidated Absolute Multi-Mode Protected OTT Media Core Stream Interface -->
                 <div class="player-root group">
-                    <div class="watermark-container">
+                    <div class="watermark-container pointer-events-none">
                         <img src="https://i.postimg.cc/yd1s4hdw/c73c0d3d-0c8f-4f55-ba34-017747e2a68d.png" class="w-full h-auto object-contain" alt="PlotPulse System Watermark Profile Asset Lock Layer">
                     </div>
                     <div id="stream-loader-spinner" class="video-loading-spinner"></div>
-                    <video id="ott-core-media-player" controls playsinline class="w-full h-full object-contain bg-black" style="display: none;"></video>
+                    
+                    <video id="ott-core-media-player" controls playsinline class="w-full h-full object-contain bg-black absolute inset-0 z-0" style="display: none;"></video>
+                    
                     <!-- Alternative Fallback UX Interaction Action Framework Button Area Component Block Plane Grid -->
-                    <div id="alternative-autoplay-ui-action-plate" class="absolute inset-0 bg-[#0b1526] flex flex-col justify-center items-center gap-3 p-4 text-center">
+                    <div id="alternative-autoplay-ui-action-plate" class="absolute inset-0 bg-[#0b1526] z-20 flex flex-col justify-center items-center gap-3 p-4 text-center">
                         <div class="w-14 h-14 rounded-full bg-blue-600 flex justify-center items-center text-white text-xl font-bold cursor-pointer hover:bg-blue-700 shadow-xl shadow-blue-600/20 active:scale-90 transition-transform animate-bounce" onclick="triggerManualBypassAutoplayOverrideStream()">▶</div>
                         <p class="text-xs font-bold text-white tracking-wide uppercase">टैप करें और एपिसोड चलाएं</p>
                         <p class="text-[10px] text-gray-400 max-w-xs">यदि आपका ब्राउज़र वीडियो लोड नहीं करता है, तो इस ओवरराइड एक्शन प्लेट बटन पर टैप करें।</p>
@@ -670,13 +745,20 @@
             const proxyLoaderSpinner = document.getElementById("stream-loader-spinner");
             const manualActionBypassPlate = document.getElementById("alternative-autoplay-ui-action-plate");
 
+            // Reset UI states before loading new stream
+            playerElement.style.display = "none";
+            playerElement.pause();
+            playerElement.removeAttribute('src');
+
             if(!sourcePayloadURL || String(sourcePayloadURL).trim() === "" || String(sourcePayloadURL).trim() === "null") {
+                manualActionBypassPlate.style.display = "flex";
                 manualActionBypassPlate.innerHTML = `<p class="text-xs font-bold text-gray-400">STREAM ERROR: Link Missing</p>`;
                 return;
             }
 
-            // High Fidelity Direct Cross-Proxy Dynamic URL Parser Automation Link Router Core Setup Model
             let validatedTargetSourceString = String(sourcePayloadURL).trim();
+
+            // High Fidelity Direct Cross-Proxy Dynamic URL Parser Automation Link Router Core Setup Model
             if(!validatedTargetSourceString.startsWith("http://") && !validatedTargetSourceString.startsWith("https://")) {
                 validatedTargetSourceString = `https://telegram-video-proxy.vercel.app/stream?file_id=${validatedTargetSourceString}`;
             }
@@ -724,6 +806,14 @@
 
         // Unified Direct Invariant Action Router Stack Command Handlers Array
         function navigateHome() {
+            // BUG FIX: Stop media player and remove source when going back to home page so audio stops
+            const playerElement = document.getElementById("ott-core-media-player");
+            if (playerElement) {
+                playerElement.pause();
+                playerElement.removeAttribute('src');
+                playerElement.load(); // Forces player to clear state
+            }
+
             localStateTargetShowId = null;
             localStateTargetEpisodeId = null;
             
@@ -867,13 +957,10 @@
         }
 
         // Interface Visual Overlay Toggle Mechanism Wrapper Sequence Command Handler UI Block
-        function toggleNotificationPanel() {
+        function toggleNotificationPanel(event) {
+            if (event) event.stopPropagation(); // Prevent the body click listener from firing immediately
             const elementDomPanel = document.getElementById("notification-sidebar");
-            if(elementDomPanel.classList.contains("translate-x-full")) {
-                elementDomPanel.classList.remove("translate-x-full");
-            } else {
-                elementDomPanel.classList.add("translate-x-full");
-            }
+            elementDomPanel.classList.toggle("translate-x-full");
         }
     </script>
 </body>
