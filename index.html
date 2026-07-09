@@ -2,13 +2,12 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>PlotPulse Premium | Next-Gen OTT Experience</title>
-    <!-- Firebase SDK Compat Core Links -->
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
-    <!-- Tailwind CSS Engine -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/html5-qrcode"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
         
@@ -93,7 +92,7 @@
             position: absolute;
             top: 4%;
             right: 4%;
-            z-index: 2147483647; /* Highest layer index safety */
+            z-index: 2147483647;
             width: 14%;
             max-width: 90px;
             min-width: 50px;
@@ -160,7 +159,7 @@
         }
 
         .logo-glow {
-            text-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+            filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.5));
             animation: logoScale 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
 
@@ -192,31 +191,44 @@
 </head>
 <body class="antialiased select-none">
 
-    <!-- Layered Engine Overlays -->
     <div class="fog-overlay"></div>
     <div class="ambient-glow"></div>
 
-    <!-- Splash Screen Panel -->
     <div id="splash-screen">
-        <h1 class="text-4xl font-extrabold italic tracking-tighter logo-glow text-white">
-            PLOT<span class="text-blue-500">PULSE</span>
-        </h1>
-        <div class="w-16 h-1 bg-blue-500 rounded-full mt-4 overflow-hidden relative">
+        <img src="https://i.postimg.cc/9FGyQx3c/Picsart-26-07-09-11-25-31-749.png" alt="PlotPulse" class="h-24 md:h-32 object-contain logo-glow">
+        <div class="w-16 h-1 bg-blue-500 rounded-full mt-6 overflow-hidden relative">
             <div class="absolute inset-0 bg-white w-1/2 rounded-full animation-load" style="animation: shimmerSwipe 1s infinite linear;"></div>
         </div>
     </div>
 
-    <!-- Sponsor Glass Popup Window -->
-    <div id="sponsor-popup" class="fixed inset-0 z-[100000] hidden items-center justify-center bg-[#030712]/70 backdrop-blur-md transition-opacity duration-500 opacity-0 px-4">
-        <div class="glass-card p-6 rounded-3xl w-full max-w-sm flex flex-col items-center text-center transform scale-90 transition-transform duration-500 border border-white/10 shadow-[0_0_40px_rgba(59,130,246,0.15)] relative overflow-hidden">
-            <!-- Ambient Popup Glow -->
+    <div id="app-only-popup" class="fixed inset-0 z-[120000] hidden items-center justify-center bg-[#030712]/80 backdrop-blur-md transition-opacity duration-300 opacity-0 px-4">
+        <div class="glass-card p-6 rounded-3xl w-full max-w-sm flex flex-col items-center text-center transform scale-90 transition-transform duration-300 border border-white/10 shadow-[0_0_40px_rgba(59,130,246,0.15)] relative overflow-hidden" id="app-only-inner">
             <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-500/20 rounded-full blur-2xl pointer-events-none"></div>
             <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-purple-500/20 rounded-full blur-2xl pointer-events-none"></div>
             
-            <!-- Sponsor Tag -->
+            <div class="relative z-10 w-16 h-16 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-full flex items-center justify-center mb-4 shadow-lg shadow-blue-500/30">
+                <span class="text-3xl">📱</span>
+            </div>
+            
+            <h3 class="text-xl font-black text-white tracking-tight relative z-10 mb-2">App Only Feature</h3>
+            <p class="text-xs font-medium text-gray-300 mb-6 relative z-10 tracking-wide leading-relaxed">This feature is available for only android app user so download app and enjoy full app features.</p>
+            
+            <div class="flex gap-3 w-full relative z-10">
+                <button onclick="closeAppOnlyPopup()" class="flex-1 py-3 bg-white/5 hover:bg-white/10 text-white border border-white/10 font-bold text-[12px] uppercase tracking-wider rounded-xl transition-all active:scale-95">Close</button>
+                <a href="https://hrry.online/?id=Yadav0001" class="flex-1 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold text-[12px] uppercase tracking-wider rounded-xl transition-all active:scale-95 shadow-[0_0_15px_rgba(37,99,235,0.4)] flex items-center justify-center gap-2">
+                    Download 📥
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div id="sponsor-popup" class="fixed inset-0 z-[100000] hidden items-center justify-center bg-[#030712]/70 backdrop-blur-md transition-opacity duration-500 opacity-0 px-4">
+        <div class="glass-card p-6 rounded-3xl w-full max-w-sm flex flex-col items-center text-center transform scale-90 transition-transform duration-500 border border-white/10 shadow-[0_0_40px_rgba(59,130,246,0.15)] relative overflow-hidden">
+            <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-500/20 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-purple-500/20 rounded-full blur-2xl pointer-events-none"></div>
+            
             <span class="px-3 py-1 bg-white/5 text-gray-400 text-[10px] font-black tracking-widest rounded-md uppercase border border-white/10 mb-5 relative z-10">SPONSOR</span>
             
-            <!-- Content -->
             <div class="relative z-10 w-16 h-16 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-full flex items-center justify-center mb-4 shadow-lg shadow-blue-500/30">
                 <span class="text-3xl">👨‍💻</span>
             </div>
@@ -224,33 +236,32 @@
             <h3 class="text-xl font-black text-white tracking-tight relative z-10">Developer</h3>
             <p class="text-sm font-bold text-blue-400 mb-6 relative z-10 tracking-wide">@himanshurajyadav</p>
             
-            <!-- Action Buttons -->
             <div class="flex gap-3 w-full relative z-10">
-                <button onclick="closeSponsorPopup()" class="flex-1 py-3 bg-red-600/90 hover:bg-red-600 text-white border border-red-500 font-bold text-[12px] uppercase tracking-wider rounded-xl transition-all active:scale-95 shadow-[0_0_15px_rgba(220,38,38,0.4)]">
-                    Close
-                </button>
-                <a href="http://hrry.online" target="_blank" onclick="closeSponsorPopup()" class="flex-1 py-3 bg-green-500/90 hover:bg-green-500 text-white border border-green-400/50 font-bold text-[12px] uppercase tracking-wider rounded-xl transition-all active:scale-95 shadow-[0_0_15px_rgba(34,197,94,0.3)] flex items-center justify-center">
-                    Open
-                </a>
+                <button onclick="closeSponsorPopup()" class="flex-1 py-3 bg-red-600/90 hover:bg-red-600 text-white border border-red-500 font-bold text-[12px] uppercase tracking-wider rounded-xl transition-all active:scale-95 shadow-[0_0_15px_rgba(220,38,38,0.4)]">Close</button>
+                <a href="http://hrry.online" target="_blank" onclick="closeSponsorPopup()" class="flex-1 py-3 bg-green-500/90 hover:bg-green-500 text-white border border-green-400/50 font-bold text-[12px] uppercase tracking-wider rounded-xl transition-all active:scale-95 shadow-[0_0_15px_rgba(34,197,94,0.3)] flex items-center justify-center">Open</a>
             </div>
         </div>
     </div>
 
-    <!-- Top Master Application Bar -->
-    <nav class="fixed top-0 inset-x-0 h-16 glass-panel z-50 px-4 flex justify-between items-center">
+    <nav class="fixed top-0 inset-x-0 h-16 glass-panel z-50 px-2 md:px-4 flex justify-between items-center">
         <div class="flex items-center gap-3">
-            <h1 class="text-xl font-black italic tracking-tighter cursor-pointer" onclick="navigateHome()">
-                PLOT<span class="text-blue-500">PULSE</span>
-            </h1>
+            <img src="https://i.postimg.cc/9FGyQx3c/Picsart-26-07-09-11-25-31-749.png" alt="PlotPulse Logo" class="h-6 md:h-8 cursor-pointer object-contain" onclick="navigateHome()">
         </div>
         
-        <!-- Premium Live Native Search Integration Box -->
-        <div class="flex-1 max-w-md mx-6 relative">
+        <div class="flex-1 max-w-md mx-2 md:mx-6 relative">
             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">🔍</span>
-            <input type="text" id="master-search" oninput="executeSearchFilter(this.value)" placeholder="शोज़ या एपिसोड्स खोजें..." class="w-full h-9 pl-9 pr-4 bg-white/5 border border-white/10 rounded-full text-xs text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white/10 transition-all">
+            <input type="text" id="master-search" oninput="executeSearchFilter(this.value)" placeholder="खोजें..." class="w-full h-9 pl-9 pr-4 bg-white/5 border border-white/10 rounded-full text-xs text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white/10 transition-all">
         </div>
 
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-1.5 md:gap-2">
+            <a href="https://hrry.online/?id=Yadav0001" class="px-3 py-1.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold text-[10px] md:text-xs border border-blue-500/20 transition-all active:scale-90 flex items-center gap-1 shadow-sm whitespace-nowrap">
+                <span>Install App</span> 📥
+            </a>
+            
+            <button id="mobile-cast-status-btn" onclick="showAppOnlyPopup()" class="px-2 md:px-3 py-1.5 rounded-full bg-red-500/10 text-red-500 font-bold text-[10px] md:text-xs border border-red-500/20 transition-all active:scale-90 flex items-center gap-1 shadow-sm whitespace-nowrap">
+                <span class="hidden sm:inline">Cast On TV</span> 📺
+            </button>
+            
             <button id="notif-btn" onclick="toggleNotificationPanel(event)" class="relative p-2 rounded-full hover:bg-white/5 transition-all active:scale-90">
                 <span class="text-xl">🔔</span>
                 <span id="notif-badge" class="absolute top-1 right-1 w-2.5 h-2.5 bg-blue-500 rounded-full hidden"></span>
@@ -258,48 +269,58 @@
         </div>
     </nav>
 
-    <!-- Master Container View Routing Stack -->
+    <div id="mobile-cast-master-modal" class="fixed inset-0 z-[110000] hidden items-center justify-center bg-black/80 backdrop-blur-xl px-4 transition-all duration-300">
+        <div class="glass-card bg-[#030712] border border-white/10 p-6 rounded-3xl w-full max-w-md shadow-2xl relative overflow-hidden transition-all duration-300" id="cast-modal-inner-card">
+            <div id="mobile-cast-view-selector">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-lg font-black tracking-tight text-white flex items-center gap-2">📺 Connect With TV</h3>
+                    <button onclick="closePremiumCastSelectionPopup()" class="text-gray-400 bg-white/5 hover:bg-white/10 px-3 py-1 rounded-xl text-xs">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mobile-cast-sticky-hud-strip" class="fixed bottom-4 inset-x-4 h-14 glass-panel border border-green-500/30 bg-[#030712]/90 rounded-2xl z-[100000] hidden items-center justify-between px-4 shadow-xl shadow-green-900/10 animate-bounce transition-all duration-300">
+        <div class="flex items-center gap-3 min-w-0">
+            <span class="text-green-400 text-md flex-shrink-0 animate-pulse">📺</span>
+            <div class="min-w-0">
+                <p class="text-[11px] font-black tracking-wide text-white uppercase" id="sticky-hud-status-text">Casting On Your TV</p>
+                <p class="text-[9px] text-gray-400 truncate" id="sticky-hud-media-title">No Media Playing</p>
+            </div>
+        </div>
+        <button onclick="breakActiveCastingChannelPipeline()" class="px-3 py-1 bg-red-600 text-white font-bold text-[10px] rounded-lg tracking-wider uppercase flex-shrink-0 shadow-lg shadow-red-600/30">Stop</button>
+    </div>
+
     <main class="pt-20 px-4 pb-24 max-w-6xl mx-auto space-y-8" id="view-home">
         
-        <!-- SECTION 2: Interactive Real-Time Hero Banner Slider Component -->
         <section id="hero-slider-container" class="relative w-full aspect-[16/7] md:aspect-[16/5] rounded-3xl overflow-hidden glass-card shadow-2xl">
-            <!-- Dynamic Wrapper Injection Core Target -->
             <div id="hero-slider-target" class="w-full h-full relative">
-                <!-- Skeleton Shimmer Placeholder default state -->
                 <div class="w-full h-full shimmer-bg"></div>
             </div>
         </section>
 
-        <!-- SECTION 3: Real-Time Dynamic Date Filtering Component (Latest Uploads Today) -->
         <section class="space-y-4">
             <div class="flex justify-between items-center">
                 <h2 class="text-sm font-bold tracking-widest text-blue-400 uppercase">Latest Uploads Today</h2>
                 <span class="h-px bg-white/10 flex-1 ml-4"></span>
             </div>
-            <div id="today-uploads-target" class="flex gap-4 overflow-x-auto hide-scrollbar py-2">
-                <!-- Injected via Core JavaScript Parser Routine -->
-            </div>
+            <div id="today-uploads-target" class="flex gap-4 overflow-x-auto hide-scrollbar py-2"></div>
         </section>
 
-        <!-- SECTION 4: Local Storage Tracking Component (Continue Watching Stack) -->
         <section id="continue-watching-section" class="space-y-4 hidden">
             <div class="flex justify-between items-center">
                 <h2 class="text-sm font-bold tracking-widest text-purple-400 uppercase">Continue Watching</h2>
                 <span class="h-px bg-white/10 flex-1 ml-4"></span>
             </div>
-            <div id="continue-watching-target" class="flex gap-4 overflow-x-auto hide-scrollbar py-2">
-                <!-- Local State Client Insertion Block -->
-            </div>
+            <div id="continue-watching-target" class="flex gap-4 overflow-x-auto hide-scrollbar py-2"></div>
         </section>
 
-        <!-- SECTION 5: Dynamic Standard Comprehensive Grid Layout Array (All Shows Block) -->
         <section class="space-y-4">
             <div class="flex justify-between items-center">
                 <h2 class="text-sm font-bold tracking-widest text-gray-400 uppercase">All Shows</h2>
                 <span class="h-px bg-white/10 flex-1 ml-4"></span>
             </div>
             <div id="all-shows-target" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                <!-- Initial Core Skeleton Generation Elements -->
                 <div class="h-28 shimmer-bg rounded-2xl"></div>
                 <div class="h-28 shimmer-bg rounded-2xl"></div>
                 <div class="h-28 shimmer-bg rounded-2xl"></div>
@@ -307,56 +328,78 @@
         </section>
     </main>
 
-    <!-- Native SPA Internal Router Module: Show Detail Overlay View Module -->
     <div id="view-detail" class="hidden pt-20 px-4 pb-24 max-w-4xl mx-auto space-y-6">
-        <!-- Navigation Breadcrumb Track -->
         <button onclick="navigateHome()" class="flex items-center gap-2 text-xs font-semibold text-blue-400 bg-white/5 px-4 py-2 rounded-full border border-white/5 active:scale-95 transition-transform">
             <span>←</span> मुख्य पृष्ठ पर वापस जाएँ
         </button>
 
-        <!-- Dynamic Structural Layer View Engine Assembly Block -->
         <div id="detail-structural-target" class="space-y-6">
-            <!-- Dynamic Architecture Insertion Target Block -->
-        </div>
+            </div>
     </div>
 
-    <!-- Floating Native Interactive Window Component: Real-Time Active Notification Side Overlay Panel -->
     <div id="notification-sidebar" class="fixed top-16 right-0 bottom-0 w-80 glass-panel z-40 transform translate-x-full transition-transform duration-300 ease-in-out p-4 overflow-y-auto space-y-4">
         <div class="flex justify-between items-center border-b border-white/10 pb-2">
             <h3 class="font-bold text-sm tracking-wide text-gray-300">अपलोड नोटिफिकेशन</h3>
             <button onclick="toggleNotificationPanel(event)" class="text-xs text-blue-400 px-2 py-1 bg-white/5 rounded-md">बंद करें</button>
         </div>
         <div id="notification-stack-target" class="space-y-3">
-            <!-- Native Content Stream Interface Injections -->
             <p class="text-xs text-gray-400 text-center py-8">कोई नया नोटिफिकेशन नहीं है</p>
         </div>
     </div>
 
-    <!-- Complete Functional JavaScript Controller Infrastructure Engine Logic Block -->
     <script>
-        // Production Verified Global Target Configuration Setup Model
         const firebaseConfig = {
             databaseURL: "https://hry-study-default-rtdb.firebaseio.com/"
         };
         
-        // Safe Framework Application Bootstrap Sequence Engine
         firebase.initializeApp(firebaseConfig);
         const databaseRef = firebase.database();
 
-        // Standard Operational Master Application Execution Variables Tracking Registry
         let systemDatabasePayload = null;
         let activeSliderSequenceIndex = 0;
         let runningSliderIntervalHandle = null;
         let localStateTargetShowId = null;
         let localStateTargetEpisodeId = null;
 
-        // Sponsor Popup Logic
+        /* Mobile Cast Core Variables */
+        let html5QrScannerInstancePointerRef = null;
+        let connectedTvDeviceIdentificationStringKey = localStorage.getItem('plotpulse_connected_tv_uuid') || '';
+        let currentValidatedPairingCodeString = '';
+        let isMobileCastActiveConnectionState = false;
+        let tvConnectionListener = null;
+        let reconnectingTimeout = null;
+
+        // --- App Only Feature Popup Handler ---
+        function showAppOnlyPopup() {
+            const popup = document.getElementById("app-only-popup");
+            const popupInner = document.getElementById("app-only-inner");
+            popup.classList.remove("hidden");
+            popup.classList.add("flex");
+            setTimeout(() => {
+                popup.classList.remove("opacity-0");
+                popupInner.classList.remove("scale-90");
+                popupInner.classList.add("scale-100");
+            }, 10);
+        }
+
+        function closeAppOnlyPopup() {
+            const popup = document.getElementById("app-only-popup");
+            const popupInner = document.getElementById("app-only-inner");
+            popup.classList.add("opacity-0");
+            popupInner.classList.remove("scale-100");
+            popupInner.classList.add("scale-90");
+            setTimeout(() => {
+                popup.classList.add("hidden");
+                popup.classList.remove("flex");
+            }, 300);
+        }
+
+        // --- Sponsor Popup Handler ---
         function showSponsorPopup() {
             const popup = document.getElementById("sponsor-popup");
             const popupCard = popup.querySelector('.glass-card');
             popup.classList.remove("hidden");
             popup.classList.add("flex");
-            // Trigger animation
             setTimeout(() => {
                 popup.classList.remove("opacity-0");
                 popupCard.classList.remove("scale-90");
@@ -376,7 +419,6 @@
             }, 500);
         }
 
-        // Handle clicks outside notification panel to close it automatically
         document.addEventListener('click', (e) => {
             const panel = document.getElementById("notification-sidebar");
             const btn = document.getElementById("notif-btn");
@@ -385,67 +427,65 @@
             }
         });
 
-        // Custom Cross-Standard Real-Time System Clock Date Normalizer Logic Model
         function extractSystemNormalizedDate() {
             const liveClock = new Date();
             const dateDigit = String(liveClock.getDate()).padStart(2, '0');
             const monthDigit = String(liveClock.getMonth() + 1).padStart(2, '0');
             const yearDigit = liveClock.getFullYear();
             
-            // Standardizes matching matrix profiles across variant system nodes automatically
             return {
                 slashed: `${dateDigit}/${monthDigit}/${yearDigit}`,
                 hyphenated: `${yearDigit}-${monthDigit}-${dateDigit}`
             };
         }
 
-        // Framework Base System Initiation Handler Entry Point Realization Routine
+        function formatToDdMmYyyy(dateStr) {
+            if (!dateStr) return "N/A";
+            const cleanStr = String(dateStr).trim();
+            if (cleanStr.includes("-")) {
+                const parts = cleanStr.split("-");
+                if (parts[0].length === 4) {
+                    return `${parts[2]}/${parts[1]}/${parts[0]}`;
+                }
+            }
+            return cleanStr;
+        }
+
         document.addEventListener("DOMContentLoaded", () => {
             synchronizeMasterApplicationData();
             evaluateClientTrackingBuffer();
+            setupActiveCastingHUDStateSynchronizer();
             
-            // Soft-Dismiss Application Splash Loader Mask Overlay Sequence & Trigger Sponsor Popup
             setTimeout(() => {
                 const mask = document.getElementById("splash-screen");
                 mask.style.opacity = "0";
                 setTimeout(() => {
                     mask.style.display = "none";
-                    showSponsorPopup(); // Popup Appears Here
+                    setTimeout(showSponsorPopup, 4000); 
                 }, 600);
             }, 1200);
         });
 
-        // Core Synchronous Lifecycle Pipeline Interface Layer
         function synchronizeMasterApplicationData() {
             databaseRef.ref('shows').on('value', (dataSnapshot) => {
                 if(dataSnapshot.exists()) {
                     systemDatabasePayload = dataSnapshot.val();
-                    console.log("PlotPulse Core Pipeline Sync Succeeded:", systemDatabasePayload);
-                    
-                    // Trigger Live Rendering Components Lifecycle Processing Loops
                     generateHeroBannerSystem();
                     renderLatestUploadsToday();
                     renderGlobalShowsCatalogue();
                     
-                    // If active view state matches sub-view parameters, dynamically hot-reload updates
                     if(document.getElementById('view-detail').classList.contains('hidden') === false && localStateTargetShowId) {
                         renderShowDetailsViewerPage(localStateTargetShowId, false);
                     }
-                } else {
-                    console.error("Critical Failure: Firebase Reference Synchronizer returned empty payload mapping.");
                 }
-            }, (runtimeError) => {
-                console.error("Pipeline Thread Connection Broken: Interrupt encountered:", runtimeError);
             });
         }
 
-        // SECTION 2 Loop Assembly Engine (Dynamic Hero Banner Slider Realization Stack)
         function generateHeroBannerSystem() {
             clearInterval(runningSliderIntervalHandle);
             const targetNode = document.getElementById("hero-slider-target");
             let cumulativeEpisodesList = [];
 
-            // Compile entire array list from all nodes across schemas to capture current structural profiles
             Object.entries(systemDatabasePayload).forEach(([showKey, showDetails]) => {
                 if(showDetails.episodes) {
                     Object.entries(showDetails.episodes).forEach(([epKey, epDetails]) => {
@@ -459,19 +499,9 @@
                 }
             });
 
-            if(cumulativeEpisodesList.length === 0) {
-                targetNode.innerHTML = `
-                    <div class="w-full h-full flex flex-col justify-center items-center bg-[#0b1526]/80 px-4 text-center">
-                        <span class="text-3xl mb-2">🎬</span>
-                        <p class="text-sm font-semibold tracking-wide text-gray-400">COMING SOON: No Content Found In Schema</p>
-                    </div>`;
-                return;
-            }
+            if(cumulativeEpisodesList.length === 0) return;
 
-            // Reverse Sort Index Vector Sequence mapping array prioritizing absolute fresh record indexing
             cumulativeEpisodesList.sort((leftRecord, rightRecord) => (parseInt(rightRecord.num) || 0) - (parseInt(leftRecord.num) || 0));
-            
-            // Isolate Top Slice parameters array profile maximum allocations count
             const boundarySliderSliceLimit = cumulativeEpisodesList.slice(0, 5);
             
             const executeSliderRenderCycle = () => {
@@ -480,13 +510,8 @@
                 
                 targetNode.innerHTML = `
                     <div class="w-full h-full relative transition-all duration-700 ease-in-out bg-black overflow-hidden">
-                        <!-- Main Image Cover -->
-                        <img src="${activeRecord.thumb || '1000015927_2.jpg'}" class="absolute inset-0 w-full h-full object-cover" alt="Banner Graphic">
-                        
-                        <!-- Gradients Overlay for Depth -->
+                        <img src="${activeRecord.thumb || '1000015927_2.jpg'}" class="absolute inset-0 w-full h-full object-cover">
                         <div class="absolute inset-0 bg-gradient-to-t from-[#030712] via-[#030712]/50 to-transparent"></div>
-                        
-                        <!-- Content Data Container -->
                         <div class="absolute bottom-4 left-4 right-4 space-y-2 max-w-md z-10">
                             <span class="px-2 py-0.5 bg-blue-500 text-[9px] font-bold tracking-widest rounded uppercase">LATEST ADDITION</span>
                             <h2 class="text-lg md:text-2xl font-black text-white tracking-tight line-clamp-1 drop-shadow-lg">${activeRecord.showName}</h2>
@@ -503,7 +528,6 @@
             runningSliderIntervalHandle = setInterval(executeSliderRenderCycle, 5000);
         }
 
-        // SECTION 3 Engine Interface Strategy (Today's Direct Realtime Matrix Synchronizer Profile)
         function renderLatestUploadsToday() {
             const targetInterfaceSlot = document.getElementById("today-uploads-target");
             const structuralClockMatrix = extractSystemNormalizedDate();
@@ -535,11 +559,10 @@
                 return;
             }
 
-            // Output generated matches directly array configuration mapping matrix
             targetInterfaceSlot.innerHTML = matchedUploadsList.map(item => `
                 <div class="min-w-[240px] max-w-[240px] glass-card p-2 rounded-2xl space-y-2 flex-shrink-0">
                     <div class="relative aspect-video rounded-xl overflow-hidden bg-black">
-                        <img src="${item.thumb || '1000015927_2.jpg'}" class="w-full h-full object-cover" alt="Thumb">
+                        <img src="${item.thumb || '1000015927_2.jpg'}" class="w-full h-full object-cover">
                         <span class="absolute bottom-1 right-1 bg-black/70 px-1.5 py-0.5 rounded text-[9px] font-bold text-blue-400">EP ${item.num}</span>
                     </div>
                     <div class="space-y-1">
@@ -552,17 +575,14 @@
                 </div>
             `).join('');
             
-            // Dynamically propagate system upload arrays configuration to native Notification Engine Core
             propagateRuntimeNotifications(matchedUploadsList);
         }
 
-        // Notification Component Framework Link Handler Array Logic
         function propagateRuntimeNotifications(todayArrays) {
             const containerElement = document.getElementById("notification-stack-target");
             const indicatorBadge = document.getElementById("notif-badge");
 
             if(todayArrays.length === 0) {
-                containerElement.innerHTML = `<p class="text-xs text-gray-400 text-center py-8">कोई नया नोटिफिकेशन नहीं है</p>`;
                 indicatorBadge.classList.add("hidden");
                 return;
             }
@@ -580,7 +600,6 @@
             `).join('');
         }
 
-        // SECTION 5 Layer Logic Framework Module (All Shows UI Vector Renderer Map Array)
         function renderGlobalShowsCatalogue() {
             const primaryGridContainer = document.getElementById("all-shows-target");
             primaryGridContainer.innerHTML = "";
@@ -588,21 +607,41 @@
             Object.entries(systemDatabasePayload).forEach(([showId, showValue]) => {
                 const localizedEpisodesCount = showValue.episodes ? Object.keys(showValue.episodes).length : 0;
                 
+                let latestEpNum = "0";
+                let latestEpDate = "N/A";
+                if(localizedEpisodesCount > 0) {
+                    const epList = Object.values(showValue.episodes);
+                    epList.sort((a, b) => (parseInt(b.num) || 0) - (parseInt(a.num) || 0));
+                    latestEpNum = epList[0].num || "0";
+                    latestEpDate = formatToDdMmYyyy(epList[0].date);
+                }
+
                 primaryGridContainer.innerHTML += `
-                    <div onclick="renderShowDetailsViewerPage('${showId}', true)" class="glass-card p-3 rounded-2xl flex items-center gap-4 cursor-pointer border border-white/5 hover:border-blue-500/30 transition-all">
-                        <div class="relative w-28 aspect-video rounded-xl overflow-hidden bg-black flex-shrink-0">
-                            <img src="${showValue.thumb || '1000015927_2.jpg'}" class="w-full h-full object-cover" alt="Cover Grid Graphic">
+                    <div onclick="renderShowDetailsViewerPage('${showId}', true)" class="glass-card p-3 rounded-2xl flex flex-col gap-3 cursor-pointer border border-white/5 hover:border-blue-500/30 transition-all">
+                        <div class="flex items-center gap-4">
+                            <div class="relative w-24 aspect-video rounded-xl overflow-hidden bg-black flex-shrink-0">
+                                <img src="${showValue.thumb || '1000015927_2.jpg'}" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <h3 class="text-sm font-bold text-white tracking-tight truncate">${showValue.name}</h3>
+                                <p class="text-[11px] text-gray-400 font-medium mt-0.5">${localizedEpisodesCount} Total Episodes</p>
+                            </div>
+                            <span class="text-gray-500 text-sm pr-1">❯</span>
                         </div>
-                        <div class="flex-1 min-w-0">
-                            <h3 class="text-sm font-bold text-white tracking-tight truncate">${showValue.name}</h3>
-                            <p class="text-xs text-gray-400 font-medium mt-0.5">${localizedEpisodesCount} Episodes</p>
+                        <div class="flex gap-2 w-full pt-1">
+                            <div class="flex-1 bg-blue-600/20 border border-blue-500/30 rounded-xl p-1.5 text-center">
+                                <p class="text-[8px] uppercase tracking-wider text-blue-400 font-bold">Latest Episode</p>
+                                <p class="text-xs font-black text-blue-50 mt-0.5">EP-${latestEpNum}</p>
+                            </div>
+                            <div class="flex-1 bg-green-500/20 border border-green-500/40 rounded-xl p-1.5 text-center shadow-[inset_0_0_10px_rgba(34,197,94,0.1)]">
+                                <p class="text-[8px] uppercase tracking-wider text-green-400 font-bold">Uploaded Date</p>
+                                <p class="text-xs font-black text-green-300 mt-0.5 drop-shadow-sm">${latestEpDate}</p>
+                            </div>
                         </div>
-                        <span class="text-gray-500 text-sm pr-1">❯</span>
                     </div>`;
             });
         }
 
-        // SHOW CARD CLICK FLOW Engine Interface Setup Integration Routine Block
         function renderShowDetailsViewerPage(showId, transitWithScrollFocus = true) {
             localStateTargetShowId = showId;
             const routerHomeDOM = document.getElementById("view-home");
@@ -616,27 +655,17 @@
             const structuralTargetShowRecord = systemDatabasePayload[showId];
             if(!structuralTargetShowRecord) return;
 
-            // Sort Profiles Execution Vector Array based on descending index properties profile mappings array
             let rawUnprocessedEpisodesArray = [];
             if(structuralTargetShowRecord.episodes) {
                 Object.entries(structuralTargetShowRecord.episodes).forEach(([idString, dataProps]) => {
-                    rawUnprocessedEpisodesArray.push({
-                        episodeUniqueKey: idString,
-                        ...dataProps
-                    });
+                    rawUnprocessedEpisodesArray.push({ episodeUniqueKey: idString, ...dataProps });
                 });
             }
-
-            // Absolute Descending Numerical Alignment Core Sorting Mechanism System Logic Implementation Profile
             rawUnprocessedEpisodesArray.sort((leftNode, rightNode) => (parseInt(rightNode.num) || 0) - (parseInt(leftNode.num) || 0));
 
-            // Evaluate Target Target Selection Matrix profiling setup models
             let targetActiveSelectedEpisode = null;
             if(localStateTargetEpisodeId && structuralTargetShowRecord.episodes[localStateTargetEpisodeId]) {
-                targetActiveSelectedEpisode = {
-                    episodeUniqueKey: localStateTargetEpisodeId,
-                    ...structuralTargetShowRecord.episodes[localStateTargetEpisodeId]
-                };
+                targetActiveSelectedEpisode = { episodeUniqueKey: localStateTargetEpisodeId, ...structuralTargetShowRecord.episodes[localStateTargetEpisodeId] };
             } else if(rawUnprocessedEpisodesArray.length > 0) {
                 targetActiveSelectedEpisode = rawUnprocessedEpisodesArray[0];
                 localStateTargetEpisodeId = targetActiveSelectedEpisode.episodeUniqueKey;
@@ -647,46 +676,45 @@
                 return;
             }
 
-            // Write Persistent Application Buffer for tracking mechanisms dynamically
             updateClientLocalCacheTrackingBuffer(showId, targetActiveSelectedEpisode);
 
-            // Construct Full Comprehensive Page View Mapping Matrix Structure Array Template Module Logic Layout Injection
             UIStructureTargetNode.innerHTML = `
-                <!-- Consolidated Absolute Multi-Mode Protected OTT Media Core Stream Interface -->
                 <div class="player-root group">
                     <div class="watermark-container pointer-events-none">
-                        <img src="https://i.postimg.cc/yd1s4hdw/c73c0d3d-0c8f-4f55-ba34-017747e2a68d.png" class="w-full h-auto object-contain" alt="PlotPulse System Watermark Profile Asset Lock Layer">
+                        <img src="https://i.postimg.cc/yd1s4hdw/c73c0d3d-0c8f-4f55-ba34-017747e2a68d.png" class="w-full h-auto object-contain">
                     </div>
                     <div id="stream-loader-spinner" class="video-loading-spinner"></div>
                     
                     <video id="ott-core-media-player" controls playsinline class="w-full h-full object-contain bg-black absolute inset-0 z-0" style="display: none;"></video>
                     
-                    <!-- Alternative Fallback UX Interaction Action Framework Button Area Component Block Plane Grid -->
+                    <div id="tv-casting-active-overlay-plate" class="absolute inset-0 bg-gradient-to-b from-[#0b1526] to-[#030712] z-30 hidden flex-col justify-center items-center gap-2 p-4 text-center border border-green-500/20">
+                        <div class="w-16 h-16 rounded-full bg-green-500/10 border border-green-500/30 flex justify-center items-center text-green-400 text-3xl animate-pulse">📺</div>
+                        <h4 class="text-sm font-black text-white uppercase tracking-wider mt-2">Casting Mode Active</h4>
+                        <p class="text-xs text-gray-400 max-w-xs">यह वीडियो वर्तमान में आपके कनेक्टेड स्मार्ट टीवी पर स्ट्रीम हो रहा है।</p>
+                    </div>
+
                     <div id="alternative-autoplay-ui-action-plate" class="absolute inset-0 bg-[#0b1526] z-20 flex flex-col justify-center items-center gap-3 p-4 text-center">
                         <div class="w-14 h-14 rounded-full bg-blue-600 flex justify-center items-center text-white text-xl font-bold cursor-pointer hover:bg-blue-700 shadow-xl shadow-blue-600/20 active:scale-90 transition-transform animate-bounce" onclick="triggerManualBypassAutoplayOverrideStream()">▶</div>
                         <p class="text-xs font-bold text-white tracking-wide uppercase">टैप करें और एपिसोड चलाएं</p>
-                        <p class="text-[10px] text-gray-400 max-w-xs">यदि आपका ब्राउज़र वीडियो लोड नहीं करता है, तो इस ओवरराइड एक्शन प्लेट बटन पर टैप करें।</p>
+                        <p class="text-[10px] text-gray-400 max-w-xs">यदि आपका ब्राउज़र वीडियो लोड नहीं करता है, तो इस ओवरराइड ACTION प्लेट बटन पर टैप करें।</p>
                     </div>
                 </div>
 
-                <!-- Secondary Track Metadata Array Panel Infrastructure Elements Layer -->
                 <div class="glass-panel p-5 rounded-2xl space-y-3 relative overflow-hidden">
                     <div class="absolute -right-10 -top-10 w-32 h-32 bg-blue-600/10 rounded-full blur-xl pointer-events:none"></div>
                     <div class="flex flex-wrap items-center gap-2">
                         <span class="px-2 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] font-extrabold tracking-widest rounded-md uppercase border border-blue-500/10">STREAMING NOW</span>
-                        ${targetActiveSelectedEpisode.episodeUniqueKey === rawUnprocessedEpisodesArray[0]?.episodeUniqueKey ? `<span class="px-2 py-0.5 bg-purple-500 text-white text-[9px] font-black tracking-widest rounded-md uppercase">LATEST EPISODE</span>` : ''}
                     </div>
                     <div class="space-y-1">
                         <h2 class="text-xl font-black text-white tracking-tight">${structuralTargetShowRecord.name}</h2>
                         <h3 class="text-sm font-bold text-blue-400">एपिसोड ${targetActiveSelectedEpisode.num} : ${targetActiveSelectedEpisode.title || 'Untitled Title'}</h3>
                     </div>
                     <div class="flex items-center gap-4 text-xs font-semibold text-gray-400 border-t border-b border-white/5 py-2">
-                        <p>अपलोड तिथि: <span class="text-gray-200">${targetActiveSelectedEpisode.date || 'N/A'}</span></p>
+                        <p>अपलोड तिथि: <span class="text-gray-200">${formatToDdMmYyyy(targetActiveSelectedEpisode.date)}</span></p>
                     </div>
                     <p class="text-xs text-gray-300 leading-relaxed font-medium">${targetActiveSelectedEpisode.desc || 'इस एपिसोड के लिए कोई विवरण उपलब्ध नहीं है।'}</p>
                 </div>
 
-                <!-- Comprehensive Array Node Listing Generation Layer UI Blocks Stack Engine Structure -->
                 <div class="space-y-4">
                     <h3 class="text-xs font-black tracking-widest text-gray-400 uppercase">सभी एपिसोड्स (${rawUnprocessedEpisodesArray.length})</h3>
                     <div class="space-y-3" id="episode-array-listing-target-node">
@@ -699,7 +727,7 @@
                                 <div id="card-ep-${epItem.episodeUniqueKey}" class="glass-card p-3 rounded-2xl flex items-center justify-between gap-4 border border-white/5 ${checkIsActiveCurrentlyPlaying ? 'playing-active-card' : ''}">
                                     <div class="flex items-center gap-3 min-w-0 flex-1">
                                         <div class="relative w-20 aspect-video bg-black rounded-lg overflow-hidden flex-shrink-0">
-                                            <img src="${epItem.thumb || structuralTargetShowRecord.thumb || '1000015927_2.jpg'}" class="w-full h-full object-cover ${checkIsActiveCurrentlyPlaying ? 'opacity-80' : ''}" alt="Card Thumb">
+                                            <img src="${epItem.thumb || structuralTargetShowRecord.thumb || '1000015927_2.jpg'}" class="w-full h-full object-cover ${checkIsActiveCurrentlyPlaying ? 'opacity-80' : ''}">
                                             ${checkIsActiveCurrentlyPlaying ? `
                                                 <div class="absolute inset-0 m-auto bg-blue-600/20 flex justify-center items-center">
                                                     <div class="eq-container">
@@ -713,18 +741,15 @@
                                         <div class="min-w-0 flex-1">
                                             <div class="flex items-center gap-2">
                                                 <h4 class="text-xs font-extrabold text-white truncate">${epItem.title || 'Untitled Episode'}</h4>
-                                                ${checkIsActiveCurrentlyPlaying ? `<span class="px-1.5 py-0.5 bg-blue-500 text-[7px] font-black tracking-wider rounded text-white flex-shrink-0 animate-pulse">NOW PLAYING</span>` : ''}
                                             </div>
-                                            <p class="text-[10px] text-gray-400 font-semibold mt-0.5">एपिसोड ${epItem.num} • ${epItem.date || ''}</p>
+                                            <p class="text-[10px] text-gray-400 font-semibold mt-0.5">एपिसोड ${epItem.num} • ${formatToDdMmYyyy(epItem.date)}</p>
                                         </div>
                                     </div>
-                                    
-                                    <!-- Dynamic Action Button Selection Engine Strategy Logic Block Layout Area Configuration Profile -->
                                     <div class="flex-shrink-0">
                                         ${evaluationStatusMissingLink ? `
                                             <button class="px-3 py-1.5 bg-gray-700/50 text-gray-500 text-[10px] font-extrabold tracking-wider rounded-xl cursor-not-allowed border border-white/5" disabled>COMING SOON</button>
                                         ` : `
-                                            <button onclick="switchActiveTargetEpisodeExecutionSequence('${epItem.episodeUniqueKey}')" class="px-4 py-1.5 ${checkIsActiveCurrentlyPlaying ? 'bg-blue-600 text-white shadow-md shadow-blue-500/20' : 'bg-white/5 hover:bg-white/10 text-gray-200 border border-white/10'} text-[11px] font-extrabold tracking-wider rounded-xl transition-all active:scale-95">
+                                            <button onclick="switchActiveTargetEpisodeExecutionSequence('${epItem.episodeUniqueKey}')" class="px-4 py-1.5 ${checkIsActiveCurrentlyPlaying ? 'bg-blue-600 text-white' : 'bg-white/5 hover:bg-white/10 text-gray-200'} text-[11px] font-extrabold tracking-wider rounded-xl transition-all active:scale-95">
                                                 ${checkIsActiveCurrentlyPlaying ? 'REPLAY' : 'PLAY'}
                                             </button>
                                         `}
@@ -735,20 +760,38 @@
                     </div>
                 </div>`;
 
-            // Core Injection Execution Pipeline Deployment Strategy
-            mountVideoPlayerEngineInstance(targetActiveSelectedEpisode.video);
+            mountVideoPlayerEngineInstance(targetActiveSelectedEpisode.video, structuralTargetShowRecord.name, targetActiveSelectedEpisode.num, targetActiveSelectedEpisode.title, targetActiveSelectedEpisode.thumb);
         }
 
-        // Framework Media Mount Sequence Controller Strategy Logic Block
-        function mountVideoPlayerEngineInstance(sourcePayloadURL) {
+        function mountVideoPlayerEngineInstance(sourcePayloadURL, showName = "", epNum = "", epTitle = "", thumbUrl = "") {
             const playerElement = document.getElementById("ott-core-media-player");
             const proxyLoaderSpinner = document.getElementById("stream-loader-spinner");
             const manualActionBypassPlate = document.getElementById("alternative-autoplay-ui-action-plate");
+            const tvCastingPlate = document.getElementById("tv-casting-active-overlay-plate");
 
-            // Reset UI states before loading new stream
             playerElement.style.display = "none";
             playerElement.pause();
             playerElement.removeAttribute('src');
+            
+            if (tvCastingPlate) tvCastingPlate.style.display = "none";
+
+            if(isMobileCastActiveConnectionState && connectedTvDeviceIdentificationStringKey) {
+                databaseRef.ref('casting_session/' + connectedTvDeviceIdentificationStringKey).set({
+                    videoUrl: sourcePayloadURL,
+                    showName: showName,
+                    epNum: epNum,
+                    epTitle: epTitle,
+                    thumbUrl: thumbUrl,
+                    trackId: localStateTargetShowId + "_" + epNum,
+                    timestamp: Date.now()
+                });
+                document.getElementById('sticky-hud-media-title').innerText = `${showName} - EP ${epNum}`;
+                
+                if (tvCastingPlate) tvCastingPlate.style.display = "flex";
+                if (manualActionBypassPlate) manualActionBypassPlate.style.display = "none";
+                if (proxyLoaderSpinner) proxyLoaderSpinner.style.display = "none";
+                return;
+            }
 
             if(!sourcePayloadURL || String(sourcePayloadURL).trim() === "" || String(sourcePayloadURL).trim() === "null") {
                 manualActionBypassPlate.style.display = "flex";
@@ -758,7 +801,6 @@
 
             let validatedTargetSourceString = String(sourcePayloadURL).trim();
 
-            // High Fidelity Direct Cross-Proxy Dynamic URL Parser Automation Link Router Core Setup Model
             if(!validatedTargetSourceString.startsWith("http://") && !validatedTargetSourceString.startsWith("https://")) {
                 validatedTargetSourceString = `https://telegram-video-proxy.vercel.app/stream?file_id=${validatedTargetSourceString}`;
             }
@@ -766,29 +808,33 @@
             playerElement.src = validatedTargetSourceString;
             playerElement.load();
 
-            // Set UI Load Indicators and execute safe sandboxed asynchronous stream lifecycle operations
             proxyLoaderSpinner.style.display = "block";
 
-            // Asynchronous Execution Context Handler
             playerElement.play().then(() => {
-                // Success branch context path: device profile permitted seamless native browser autoplay execution
                 proxyLoaderSpinner.style.display = "none";
                 manualActionBypassPlate.style.display = "none";
                 playerElement.style.display = "block";
-            }).catch((browserAutoplayExceptionBlockError) => {
-                // Autoplay blocked branch handling path block logic deployment profile configurations
-                console.warn("Native Autoplay Thread Constraint Intercepted by Client Browser Policy Layer:", browserAutoplayExceptionBlockError);
+            }).catch(() => {
                 proxyLoaderSpinner.style.display = "none";
-                manualActionBypassPlate.style.display = "flex"; // Fallback interface displays primary big action element overlay safely
+                manualActionBypassPlate.style.display = "flex"; 
             });
 
-            // Dynamic Listening Bind Arrays setup configuration model bindings safely
             playerElement.onwaiting = () => proxyLoaderSpinner.style.display = "block";
             playerElement.onplaying = () => proxyLoaderSpinner.style.display = "none";
+
+            playerElement.ontimeupdate = () => {
+                if(isMobileCastActiveConnectionState && playerElement.duration > 0) {
+                    databaseRef.ref('playback_controls/' + connectedTvDeviceIdentificationStringKey).update({
+                        currentPosition: playerElement.currentTime,
+                        duration: playerElement.duration,
+                        lastUpdated: Date.now()
+                    });
+                }
+            };
         }
 
-        // UI Core Trigger Bypass Handler Logic Wrapper Matrix Module Element
         function triggerManualBypassAutoplayOverrideStream() {
+            if (isMobileCastActiveConnectionState) return;
             const playerElement = document.getElementById("ott-core-media-player");
             const manualActionBypassPlate = document.getElementById("alternative-autoplay-ui-action-plate");
             
@@ -797,44 +843,41 @@
             playerElement.play();
         }
 
-        // CRITICAL BUG #7 & EPISODE SWITCH Flow Implementation Logic Block Array Vector Mapping Setup
         function switchActiveTargetEpisodeExecutionSequence(targetEpisodeKeyIdString) {
             localStateTargetEpisodeId = targetEpisodeKeyIdString;
-            // Hot Reload specific layout segments synchronously without refreshing core document framework wrapper state layers
             renderShowDetailsViewerPage(localStateTargetShowId, false);
         }
 
-        // Unified Direct Invariant Action Router Stack Command Handlers Array
         function navigateHome() {
-            // BUG FIX: Stop media player and remove source when going back to home page so audio stops
-            const playerElement = document.getElementById("ott-core-media-player");
-            if (playerElement) {
-                playerElement.pause();
-                playerElement.removeAttribute('src');
-                playerElement.load(); // Forces player to clear state
-            }
-
+            killNativeMobileVideoPlayerChannelStream();
             localStateTargetShowId = null;
             localStateTargetEpisodeId = null;
             
             document.getElementById("view-detail").classList.add("hidden");
             document.getElementById("view-home").classList.remove("hidden");
-            
-            // Clean interface interaction parameters inputs values automatically
             document.getElementById("master-search").value = "";
             renderGlobalShowsCatalogue();
             evaluateClientTrackingBuffer();
         }
 
-        // Real-Time Search Filtering Implementation Infrastructure Engine
+        function killNativeMobileVideoPlayerChannelStream() {
+            const playerElement = document.getElementById("ott-core-media-player");
+            if (playerElement) {
+                playerElement.pause();
+                playerElement.src = "";
+                playerElement.removeAttribute('src');
+                playerElement.load(); 
+            }
+        }
+
         function executeSearchFilter(searchQueryString) {
             const homeViewRouteDOMElement = document.getElementById("view-home");
             const detailViewRouteDOMElement = document.getElementById("view-detail");
             
-            // Auto-fallback routing management frame setup boundaries layers tracking
             if(homeViewRouteDOMElement.classList.contains("hidden")) {
+                killNativeMobileVideoPlayerChannelStream();
                 detailViewRouteDOMElement.classList.add("hidden");
-                homeViewRouteDOMElement.classList.remove("hidden");
+                homeViewRouteDOMElement.className = "pt-20 px-4 pb-24 max-w-6xl mx-auto space-y-8";
             }
 
             const cleanNormalizedSearchValue = String(searchQueryString).trim().toLowerCase();
@@ -854,9 +897,7 @@
 
                 if(showValue.episodes) {
                     Object.values(showValue.episodes).forEach(epNode => {
-                        if(String(epNode.title || "").toLowerCase().includes(cleanNormalizedSearchValue)) {
-                            checkEpisodeKeywordMatchFound = true;
-                        }
+                        if(String(epNode.title || "").toLowerCase().includes(cleanNormalizedSearchValue)) checkEpisodeKeywordMatchFound = true;
                     });
                 }
 
@@ -867,7 +908,7 @@
                     primaryGridContainer.innerHTML += `
                         <div onclick="renderShowDetailsViewerPage('${idString}', true)" class="glass-card p-3 rounded-2xl flex items-center gap-4 cursor-pointer border border-blue-500/40 bg-blue-950/20 transition-all">
                             <div class="relative w-28 aspect-video rounded-xl overflow-hidden bg-black flex-shrink-0">
-                                <img src="${showValue.thumb || '1000015927_2.jpg'}" class="w-full h-full object-cover" alt="Search Result Graphic">
+                                <img src="${showValue.thumb || '1000015927_2.jpg'}" class="w-full h-full object-cover">
                             </div>
                             <div class="flex-1 min-w-0">
                                 <span class="text-[8px] bg-blue-500 text-white font-extrabold px-1.5 py-0.5 rounded tracking-widest uppercase">MATCH FOUND</span>
@@ -879,18 +920,13 @@
             });
 
             if(matchValidationTrackerCount === 0) {
-                primaryGridContainer.innerHTML = `
-                    <div class="col-span-full py-12 text-center text-xs text-gray-400 font-semibold glass-panel rounded-2xl">
-                        🔍 आपकी खोज के अनुकूल कोई शो या एपिसोड नहीं मिला।
-                    </div>`;
+                primaryGridContainer.innerHTML = `<div class="col-span-full py-12 text-center text-xs text-gray-400 font-semibold glass-panel rounded-2xl">🔍 आपकी खोज के अनुकूल कोई शो या एपिसोड नहीं मिला।</div>`;
             }
         }
 
-        // Persistent Tracking Mechanisms Model Architecture Logic Area (Continue Watching Architecture Layers)
         function updateClientLocalCacheTrackingBuffer(showKeyId, episodeNodeDetails) {
             try {
                 let cacheRegistryMapObject = JSON.parse(localStorage.getItem("plotpulse_local_tracking_registry")) || {};
-                
                 cacheRegistryMapObject[showKeyId] = {
                     episodeId: episodeNodeDetails.episodeUniqueKey,
                     episodeNum: episodeNodeDetails.num,
@@ -898,14 +934,10 @@
                     thumbGraphic: episodeNodeDetails.thumb || '1000015927_2.jpg',
                     updatedTimestampTicks: Date.now()
                 };
-
                 localStorage.setItem("plotpulse_local_tracking_registry", JSON.stringify(cacheRegistryMapObject));
-            } catch(storageExceptionError) {
-                console.error("Local System Storage Write Exception Intercepted safely:", storageExceptionError);
-            }
+            } catch(e) {}
         }
 
-        // SECTION 4 Execution Component Logic Layer Setup Routine Configuration Matrix
         function evaluateClientTrackingBuffer() {
             const sectionWrapperNode = document.getElementById("continue-watching-section");
             const listingTargetSlot = document.getElementById("continue-watching-target");
@@ -919,21 +951,17 @@
                     return;
                 }
 
-                // Sort tracking history records mapping arrays prioritizing freshly accessed elements tracks
                 mapRecordsEntriesArray.sort((leftElement, rightElement) => rightElement[1].updatedTimestampTicks - leftElement[1].updatedTimestampTicks);
-
                 sectionWrapperNode.classList.remove("hidden");
                 listingTargetSlot.innerHTML = "";
 
                 mapRecordsEntriesArray.forEach(([showKeyId, trackingMetaProps]) => {
-                    // Core validation match checks against live active database node models configurations bounds
                     if(systemDatabasePayload[showKeyId]) {
                         const targetParentShowNameStr = systemDatabasePayload[showKeyId].name;
-                        
                         listingTargetSlot.innerHTML += `
                             <div onclick="initiateOTTPlayerStream('${showKeyId}', '${trackingMetaProps.episodeId}')" class="min-w-[200px] max-w-[200px] glass-card p-2 rounded-2xl flex-shrink-0 relative group cursor-pointer border border-white/5 hover:border-purple-500/30">
                                 <div class="relative aspect-video rounded-xl overflow-hidden bg-black">
-                                    <img src="${trackingMetaProps.thumbGraphic || '1000015927_2.jpg'}" class="w-full h-full object-cover opacity-80" alt="Tracking Card Cover Image Graphic">
+                                    <img src="${trackingMetaProps.thumbGraphic || '1000015927_2.jpg'}" class="w-full h-full object-cover opacity-80">
                                     <div class="absolute bottom-0 inset-x-0 h-1 bg-purple-500"></div>
                                 </div>
                                 <div class="space-y-0.5 mt-1.5">
@@ -943,24 +971,142 @@
                             </div>`;
                     }
                 });
-            } catch(readBufferExceptionError) {
-                console.error("Tracking Engine Memory Segment Access Interrupted Exception:", readBufferExceptionError);
-                sectionWrapperNode.classList.add("hidden");
-            }
+            } catch(e) { sectionWrapperNode.classList.add("hidden"); }
         }
 
-        // Global Automation Bridge Interface Event Handler
         function initiateOTTPlayerStream(showIdString, episodeIdString) {
             localStateTargetShowId = showIdString;
             localStateTargetEpisodeId = episodeIdString;
             renderShowDetailsViewerPage(showIdString, true);
         }
 
-        // Interface Visual Overlay Toggle Mechanism Wrapper Sequence Command Handler UI Block
         function toggleNotificationPanel(event) {
-            if (event) event.stopPropagation(); // Prevent the body click listener from firing immediately
+            if (event) event.stopPropagation(); 
             const elementDomPanel = document.getElementById("notification-sidebar");
             elementDomPanel.classList.toggle("translate-x-full");
+        }
+
+        function startTVPresenceListener() {
+            if (!connectedTvDeviceIdentificationStringKey) return;
+            
+            const tvRef = databaseRef.ref('tv_devices/' + connectedTvDeviceIdentificationStringKey);
+            
+            if (tvConnectionListener) tvRef.off('value', tvConnectionListener);
+
+            tvConnectionListener = tvRef.on('value', (snapshot) => {
+                if (snapshot.exists()) {
+                    const tvData = snapshot.val();
+                    if (tvData.connection === true) {
+                        clearTimeout(reconnectingTimeout);
+                        isMobileCastActiveConnectionState = true;
+                        
+                        const castBtn = document.getElementById('mobile-cast-status-btn');
+                        if(castBtn) {
+                            castBtn.innerHTML = '<span>Connected</span> 🟢';
+                            castBtn.className = "px-3 py-1.5 rounded-full bg-green-500 text-white font-bold text-xs transition-all active:scale-90 flex items-center gap-1.5 shadow-md shadow-green-500/20";
+                        }
+                        
+                        const stickyHud = document.getElementById('mobile-cast-sticky-hud-strip');
+                        if (stickyHud) {
+                            stickyHud.classList.remove('hidden');
+                            stickyHud.classList.add('flex');
+                            const statusText = document.getElementById('sticky-hud-status-text');
+                            if(statusText) {
+                                statusText.innerText = "Casting On Your TV";
+                                statusText.classList.replace('text-yellow-400', 'text-white');
+                            }
+                        }
+
+                        if(localStateTargetShowId && !document.getElementById('view-detail').classList.contains('hidden') && !document.getElementById('tv-casting-active-overlay-plate')?.style.display.includes('flex')) {
+                            renderShowDetailsViewerPage(localStateTargetShowId, false);
+                        }
+
+                    } else {
+                        handleTVDisconnecting();
+                    }
+                } else {
+                    handleTVDisconnecting();
+                }
+            });
+        }
+
+        function handleTVDisconnecting() {
+            if (!isMobileCastActiveConnectionState) return;
+            
+            const castBtn = document.getElementById('mobile-cast-status-btn');
+            if(castBtn) {
+                castBtn.innerHTML = '<span>Reconnecting</span> ⏳';
+                castBtn.className = "px-3 py-1.5 rounded-full bg-yellow-500/90 text-white font-bold text-xs transition-all active:scale-90 flex items-center gap-1.5 shadow-md shadow-yellow-500/20";
+            }
+            
+            const stickyHud = document.getElementById('mobile-cast-sticky-hud-strip');
+            if(stickyHud) {
+                const statusText = document.getElementById('sticky-hud-status-text');
+                if(statusText) {
+                    statusText.innerText = "Reconnecting To TV...";
+                    statusText.classList.add('text-yellow-400');
+                }
+            }
+
+            clearTimeout(reconnectingTimeout);
+            reconnectingTimeout = setTimeout(() => {
+                breakActiveCastingChannelPipeline();
+            }, 8000);
+        }
+
+        function setupActiveCastingHUDStateSynchronizer() {
+            if(!connectedTvDeviceIdentificationStringKey) {
+                breakActiveCastingChannelPipeline();
+                return;
+            }
+            startTVPresenceListener();
+        }
+
+        function breakActiveCastingChannelPipeline() {
+            clearTimeout(reconnectingTimeout);
+            if (tvConnectionListener && connectedTvDeviceIdentificationStringKey) {
+                databaseRef.ref('tv_devices/' + connectedTvDeviceIdentificationStringKey).off('value', tvConnectionListener);
+                tvConnectionListener = null;
+            }
+
+            isMobileCastActiveConnectionState = false;
+            
+            if(connectedTvDeviceIdentificationStringKey) {
+                databaseRef.ref('tv_devices/' + connectedTvDeviceIdentificationStringKey).remove();
+                databaseRef.ref('casting_session/' + connectedTvDeviceIdentificationStringKey).remove();
+                databaseRef.ref('playback_controls/' + connectedTvDeviceIdentificationStringKey).remove();
+            }
+            
+            connectedTvDeviceIdentificationStringKey = '';
+            currentValidatedPairingCodeString = '';
+            localStorage.removeItem('plotpulse_connected_tv_uuid');
+
+            const castBtn = document.getElementById('mobile-cast-status-btn');
+            if (castBtn) {
+                castBtn.innerHTML = '<span class="hidden sm:inline">Cast On TV</span> 📺';
+                castBtn.className = "px-2 md:px-3 py-1.5 rounded-full bg-red-500/10 text-red-500 font-bold text-[10px] md:text-xs border border-red-500/20 transition-all active:scale-90 flex items-center gap-1 shadow-sm whitespace-nowrap";
+            }
+            
+            const stickyHud = document.getElementById('mobile-cast-sticky-hud-strip');
+            if (stickyHud) {
+                stickyHud.classList.add('hidden');
+                stickyHud.classList.remove('flex');
+                const statusText = document.getElementById('sticky-hud-status-text');
+                if(statusText) statusText.classList.remove('text-yellow-400');
+            }
+            
+            if(localStateTargetShowId && !document.getElementById('view-detail').classList.contains('hidden')) {
+                renderShowDetailsViewerPage(localStateTargetShowId, false);
+                setTimeout(() => {
+                    const manualActionBypassPlate = document.getElementById("alternative-autoplay-ui-action-plate");
+                    if (manualActionBypassPlate && manualActionBypassPlate.style.display !== "none") {
+                         triggerManualBypassAutoplayOverrideStream();
+                    } else {
+                        const player = document.getElementById("ott-core-media-player");
+                        if(player) player.play().catch(e => console.log("Autoplay blocked", e));
+                    }
+                }, 500);
+            }
         }
     </script>
 </body>
