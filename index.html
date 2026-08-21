@@ -1,1113 +1,849 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en" class="antialiased dark">
 <head>
+    <!-- ======================================================================= -->
+    <!-- DOCUMENT METADATA & SEO CONFIGURATION                                   -->
+    <!-- ======================================================================= -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>PlotPulse Premium | Next-Gen OTT Experience</title>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="HRRY Premium Registration - Exclusive study mods Access Portal">
+    <meta name="author" content="HRRY Architecture Team">
+    
+    <!-- Open Graph / Social Media Preview Optimization -->
+    <meta property="og:title" content="HRRY Premium | study mods Registration">
+    <meta property="og:description" content="Secure and exclusive registration portal for HRRY members.">
+    <meta property="og:image" content="https://hrry.online/whatsapp-preview-image.jpg">
+    <meta property="og:url" content="https://hrry.online">
+    <meta property="og:type" content="website">
+
+    <title>HRRY | Official Premium Registration</title>
+
+    <!-- ======================================================================= -->
+    <!-- EXTERNAL DEPENDENCIES & LIBRARIES                                       -->
+    <!-- ======================================================================= -->
+    <!-- Tailwind CSS (CDN for rapid styling) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/html5-qrcode"></script>
+    
+    <!-- Phosphor Icons (Premium typography-matched iconography) -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- ======================================================================= -->
+    <!-- TAILWIND CONFIGURATION & EXTENDED THEME SYSTEM                          -->
+    <!-- ======================================================================= -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', 'Inter', 'Helvetica Neue', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            bg: '#030303',
+                            surface: '#0d0d0d',
+                            surfaceBorder: '#1f1f1f',
+                            inputBg: '#121212',
+                            textMain: '#f5f5f5',
+                            textSub: '#8a8a8a',
+                            success: '#22c55e',
+                            danger: '#ef4444'
+                        }
+                    },
+                    animation: {
+                        'enter-slide-up': 'slideUpEnter 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'fade-in-slow': 'fadeIn 1.2s ease-out forwards',
+                        'success-flash': 'successFlash 1.5s cubic-bezier(0.16, 1, 0.3, 1)',
+                        'feed-item-enter': 'feedItemEnter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards',
+                        'pulse-slow': 'pulseOpacity 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        slideUpEnter: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        successFlash: {
+                            '0%': { color: '#f5f5f5', transform: 'scale(1)' },
+                            '15%': { color: '#22c55e', transform: 'scale(1.08)' },
+                            '50%': { color: '#22c55e', transform: 'scale(1)' },
+                            '100%': { color: '#f5f5f5', transform: 'scale(1)' }
+                        },
+                        feedItemEnter: {
+                            '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        pulseOpacity: {
+                            '0%, 100%': { opacity: '0.4' },
+                            '50%': { opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- ======================================================================= -->
+    <!-- CUSTOM ENTERPRISE CSS & HARDWARE ACCELERATION                           -->
+    <!-- ======================================================================= -->
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-        
-        :root {
-            --ott-bg: #030712;
-            --ott-surface: #0b1526;
-            --ott-primary: #3b82f6;
-            --ott-accent: #a855f7;
-        }
-
-        body {
-            background-color: var(--ott-bg);
-            color: #ffffff;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+        /* Base Global Styling */
+        html, body {
+            background-color: #030303;
+            color: #f5f5f5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin: 0;
+            padding: 0;
+            height: 100%;
             overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
         }
 
-        /* JioHotstar Inspired Cinematic Glow Layer */
-        .fog-overlay {
+        /* Complex Geometric Grid Background */
+        .architectural-grid {
             position: fixed;
-            inset: 0;
-            z-index: -2;
-            background: radial-gradient(circle at 50% -20%, #1e3a8a 0%, #0b1526 45%, #030712 100%);
-        }
-
-        .ambient-glow {
-            position: fixed;
-            top: -10%;
-            left: -10%;
-            width: 120%;
-            height: 60%;
-            background: radial-gradient(circle at 30% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
-                        radial-gradient(circle at 70% 40%, rgba(59, 130, 246, 0.2) 0%, transparent 60%);
-            filter: blur(80px);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-size: 50px 50px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            -webkit-mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
+            mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
             z-index: -1;
             pointer-events: none;
         }
 
-        /* Glassmorphic Core Design */
-        .glass-panel {
-            background: rgba(11, 21, 38, 0.6);
-            backdrop-filter: blur(24px) saturate(160%);
-            -webkit-backdrop-filter: blur(24px) saturate(160%);
-            border: 1px solid rgba(255, 255, 255, 0.07);
+        /* Glassmorphic Surface Cards */
+        .glass-surface {
+            background: rgba(13, 13, 13, 0.85);
+            backdrop-filter: blur(24px) saturate(150%);
+            -webkit-backdrop-filter: blur(24px) saturate(150%);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 
+                0 25px 50px -12px rgba(0,0,0,0.8), 
+                inset 0 1px 0 0 rgba(255,255,255,0.05);
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+        /* Advanced Input Micro-Interactions */
+        .premium-input {
+            transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.015);
+            will-change: border-color, box-shadow;
+        }
+        .premium-input:focus {
+            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.02);
+            outline: none;
+        }
+        .premium-input::placeholder {
+            color: rgba(255, 255, 255, 0.2);
         }
 
-        .glass-card:active {
-            transform: scale(0.97);
-            background: rgba(255, 255, 255, 0.06);
-        }
-
-        /* Custom Horizontal Scroll Lock */
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        /* Fullscreen-Safe Responsive Watermark System */
-        .player-root {
+        /* Premium Primary Action Button */
+        .btn-action-primary {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            background-color: #ffffff;
+            color: #000000;
             position: relative;
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: #000000;
-            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            will-change: transform;
+        }
+        .btn-action-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px -10px rgba(255, 255, 255, 0.4);
+        }
+        .btn-action-primary:active:not(:disabled) {
+            transform: translateY(1px) scale(0.98);
+            box-shadow: 0 5px 15px -5px rgba(255, 255, 255, 0.3);
+        }
+        .btn-action-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
         }
 
-        .watermark-container {
-            position: absolute;
-            top: 4%;
-            right: 4%;
-            z-index: 2147483647;
-            width: 14%;
-            max-width: 90px;
-            min-width: 50px;
-            pointer-events: none;
-            opacity: 0.65;
-            transition: opacity 0.3s ease;
+        /* Custom OS-level Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { 
+            background: rgba(255, 255, 255, 0.1); 
+            border-radius: 10px; 
         }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
 
-        /* Active Episode Playing State Animations */
-        .playing-active-card {
-            border: 1.5px solid var(--ott-primary) !important;
-            background: linear-gradient(90deg, rgba(59, 130, 246, 0.12) 0%, rgba(11, 21, 38, 0.8) 100%) !important;
-            box-shadow: 0 0 20px rgba(59, 130, 246, 0.25);
-            position: relative;
-        }
-
-        /* Equalizer Wave Engine */
-        .eq-container {
-            display: flex;
-            align-items: flex-end;
-            gap: 3px;
-            width: 18px;
-            height: 18px;
-        }
-
-        .eq-bar {
-            width: 3px;
-            height: 100%;
-            background-color: var(--ott-primary);
-            border-radius: 2px;
-            animation: bounceEqualizer 0.8s ease-in-out infinite alternate;
-        }
-        .eq-bar:nth-child(2) { animation-delay: 0.2s; animation-duration: 0.6s; }
-        .eq-bar:nth-child(3) { animation-delay: 0.4s; animation-duration: 0.9s; }
-
-        @keyframes bounceEqualizer {
-            0% { height: 20%; }
-            100% { height: 100%; }
-        }
-
-        /* Shimmer Base Infrastructure */
-        .shimmer-bg {
-            background: linear-gradient(90deg, #0b1526 25%, #16253f 50%, #0b1526 75%);
-            background-size: 200% 100%;
-            animation: shimmerSwipe 1.6s infinite linear;
-        }
-
-        @keyframes shimmerSwipe {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
-
-        /* Splash Page Transition Elements */
-        #splash-screen {
-            position: fixed;
-            inset: 0;
-            background: #030712;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .logo-glow {
-            filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.5));
-            animation: logoScale 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
-
-        @keyframes logoScale {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        /* Custom Spinner for Video Stream Loading States */
-        .video-loading-spinner {
-            position: absolute;
-            inset: 0;
-            margin: auto;
-            width: 50px;
-            height: 50px;
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-top-color: var(--ott-primary);
+        /* Hardware Accelerated CSS Spinner */
+        .enterprise-spinner {
+            border: 2px solid rgba(0,0,0,0.1);
+            border-top-color: #000000;
             border-radius: 50%;
-            animation: rotateSpin 0.8s linear infinite;
-            z-index: 40;
-            display: none;
+            width: 20px; height: 20px;
+            animation: spin 0.7s linear infinite;
         }
-
-        @keyframes rotateSpin {
+        @keyframes spin { 
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        
+        /* Utility class to handle Single Page App state hiding */
+        .state-hidden { display: none !important; }
     </style>
 </head>
-<body class="antialiased select-none">
+<body class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-8 relative selection:bg-white selection:text-black">
 
-    <div class="fog-overlay"></div>
-    <div class="ambient-glow"></div>
+    <!-- Ambient Architectural Grid -->
+    <div class="architectural-grid"></div>
 
-    <div id="splash-screen">
-        <img src="https://i.postimg.cc/9FGyQx3c/Picsart-26-07-09-11-25-31-749.png" alt="PlotPulse" class="h-24 md:h-32 object-contain logo-glow">
-        <div class="w-16 h-1 bg-blue-500 rounded-full mt-6 overflow-hidden relative">
-            <div class="absolute inset-0 bg-white w-1/2 rounded-full animation-load" style="animation: shimmerSwipe 1s infinite linear;"></div>
-        </div>
+    <!-- ======================================================================= -->
+    <!-- GLOBAL TOAST NOTIFICATION SYSTEM LAYER                                  -->
+    <!-- ======================================================================= -->
+    <div id="global-toast-layer" class="fixed top-8 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-3 w-full max-w-sm pointer-events-none" aria-live="polite">
+        <!-- Dynamically injected notifications will appear here -->
     </div>
 
-    <div id="app-only-popup" class="fixed inset-0 z-[120000] hidden items-center justify-center bg-[#030712]/80 backdrop-blur-md transition-opacity duration-300 opacity-0 px-4">
-        <div class="glass-card p-6 rounded-3xl w-full max-w-sm flex flex-col items-center text-center transform scale-90 transition-transform duration-300 border border-white/10 shadow-[0_0_40px_rgba(59,130,246,0.15)] relative overflow-hidden" id="app-only-inner">
-            <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-500/20 rounded-full blur-2xl pointer-events-none"></div>
-            <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-purple-500/20 rounded-full blur-2xl pointer-events-none"></div>
-            
-            <div class="relative z-10 w-16 h-16 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-full flex items-center justify-center mb-4 shadow-lg shadow-blue-500/30">
-                <span class="text-3xl">📱</span>
-            </div>
-            
-            <h3 class="text-xl font-black text-white tracking-tight relative z-10 mb-2">App Only Feature</h3>
-            <p class="text-xs font-medium text-gray-300 mb-6 relative z-10 tracking-wide leading-relaxed">This feature is available for only android app user so download app and enjoy full app features.</p>
-            
-            <div class="flex gap-3 w-full relative z-10">
-                <button onclick="closeAppOnlyPopup()" class="flex-1 py-3 bg-white/5 hover:bg-white/10 text-white border border-white/10 font-bold text-[12px] uppercase tracking-wider rounded-xl transition-all active:scale-95">Close</button>
-                <a href="https://hrry.online/?id=Yadav0001" class="flex-1 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold text-[12px] uppercase tracking-wider rounded-xl transition-all active:scale-95 shadow-[0_0_15px_rgba(37,99,235,0.4)] flex items-center justify-center gap-2">
-                    Download 📥
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <div id="sponsor-popup" class="fixed inset-0 z-[100000] hidden items-center justify-center bg-[#030712]/70 backdrop-blur-md transition-opacity duration-500 opacity-0 px-4">
-        <div class="glass-card p-6 rounded-3xl w-full max-w-sm flex flex-col items-center text-center transform scale-90 transition-transform duration-500 border border-white/10 shadow-[0_0_40px_rgba(59,130,246,0.15)] relative overflow-hidden">
-            <div class="absolute -top-10 -right-10 w-32 h-32 bg-blue-500/20 rounded-full blur-2xl pointer-events-none"></div>
-            <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-purple-500/20 rounded-full blur-2xl pointer-events-none"></div>
-            
-            <span class="px-3 py-1 bg-white/5 text-gray-400 text-[10px] font-black tracking-widest rounded-md uppercase border border-white/10 mb-5 relative z-10">SPONSOR</span>
-            
-            <div class="relative z-10 w-16 h-16 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-full flex items-center justify-center mb-4 shadow-lg shadow-blue-500/30">
-                <span class="text-3xl">👨‍💻</span>
-            </div>
-            
-            <h3 class="text-xl font-black text-white tracking-tight relative z-10">Developer</h3>
-            <p class="text-sm font-bold text-blue-400 mb-6 relative z-10 tracking-wide">@himanshurajyadav</p>
-            
-            <div class="flex gap-3 w-full relative z-10">
-                <button onclick="closeSponsorPopup()" class="flex-1 py-3 bg-red-600/90 hover:bg-red-600 text-white border border-red-500 font-bold text-[12px] uppercase tracking-wider rounded-xl transition-all active:scale-95 shadow-[0_0_15px_rgba(220,38,38,0.4)]">Close</button>
-                <a href="http://hrry.online" target="_blank" onclick="closeSponsorPopup()" class="flex-1 py-3 bg-green-500/90 hover:bg-green-500 text-white border border-green-400/50 font-bold text-[12px] uppercase tracking-wider rounded-xl transition-all active:scale-95 shadow-[0_0_15px_rgba(34,197,94,0.3)] flex items-center justify-center">Open</a>
-            </div>
-        </div>
-    </div>
-
-    <nav class="fixed top-0 inset-x-0 h-16 glass-panel z-50 px-2 md:px-4 flex justify-between items-center">
-        <div class="flex items-center gap-3">
-            <img src="https://i.postimg.cc/9FGyQx3c/Picsart-26-07-09-11-25-31-749.png" alt="PlotPulse Logo" class="h-6 md:h-8 cursor-pointer object-contain" onclick="navigateHome()">
-        </div>
+    <!-- ======================================================================= -->
+    <!-- MAIN APPLICATION VIEWPORT                                               -->
+    <!-- ======================================================================= -->
+    <main id="application-viewport" class="w-full max-w-[440px] relative z-10">
         
-        <div class="flex-1 max-w-md mx-2 md:mx-6 relative">
-            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm">🔍</span>
-            <input type="text" id="master-search" oninput="executeSearchFilter(this.value)" placeholder="खोजें..." class="w-full h-9 pl-9 pr-4 bg-white/5 border border-white/10 rounded-full text-xs text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:bg-white/10 transition-all">
-        </div>
-
-        <div class="flex items-center gap-1.5 md:gap-2">
-            <a href="https://hrry.online/?id=Yadav0001" class="px-3 py-1.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-bold text-[10px] md:text-xs border border-blue-500/20 transition-all active:scale-90 flex items-center gap-1 shadow-sm whitespace-nowrap">
-                <span>Install App</span> 📥
-            </a>
+        <!-- =================================================================== -->
+        <!-- VIEW 1: REGISTRATION MODULE                                         -->
+        <!-- =================================================================== -->
+        <section id="module-registration" class="glass-surface rounded-2xl p-8 w-full shadow-2xl animate-enter-slide-up">
             
-            <button id="mobile-cast-status-btn" onclick="showAppOnlyPopup()" class="px-2 md:px-3 py-1.5 rounded-full bg-red-500/10 text-red-500 font-bold text-[10px] md:text-xs border border-red-500/20 transition-all active:scale-90 flex items-center gap-1 shadow-sm whitespace-nowrap">
-                <span class="hidden sm:inline">Cast On TV</span> 📺
-            </button>
-            
-            <button id="notif-btn" onclick="toggleNotificationPanel(event)" class="relative p-2 rounded-full hover:bg-white/5 transition-all active:scale-90">
-                <span class="text-xl">🔔</span>
-                <span id="notif-badge" class="absolute top-1 right-1 w-2.5 h-2.5 bg-blue-500 rounded-full hidden"></span>
-            </button>
-        </div>
-    </nav>
-
-    <div id="mobile-cast-master-modal" class="fixed inset-0 z-[110000] hidden items-center justify-center bg-black/80 backdrop-blur-xl px-4 transition-all duration-300">
-        <div class="glass-card bg-[#030712] border border-white/10 p-6 rounded-3xl w-full max-w-md shadow-2xl relative overflow-hidden transition-all duration-300" id="cast-modal-inner-card">
-            <div id="mobile-cast-view-selector">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-lg font-black tracking-tight text-white flex items-center gap-2">📺 Connect With TV</h3>
-                    <button onclick="closePremiumCastSelectionPopup()" class="text-gray-400 bg-white/5 hover:bg-white/10 px-3 py-1 rounded-xl text-xs">Close</button>
+            <!-- Header Section -->
+            <header class="text-center mb-10">
+                <div class="w-16 h-16 bg-white/[0.02] border border-white/[0.08] rounded-full mx-auto mb-6 flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.03)]">
+                    <i class="ph-fill ph-hexagons text-3xl text-white"></i>
                 </div>
-            </div>
-        </div>
-    </div>
+                <h1 class="text-2xl font-bold tracking-tight text-white mb-2 font-sans">HRRY study mods</h1>
+                <p class="text-sm text-brand-textSub font-medium">Request secure network access.</p>
+            </header>
 
-    <div id="mobile-cast-sticky-hud-strip" class="fixed bottom-4 inset-x-4 h-14 glass-panel border border-green-500/30 bg-[#030712]/90 rounded-2xl z-[100000] hidden items-center justify-between px-4 shadow-xl shadow-green-900/10 animate-bounce transition-all duration-300">
-        <div class="flex items-center gap-3 min-w-0">
-            <span class="text-green-400 text-md flex-shrink-0 animate-pulse">📺</span>
-            <div class="min-w-0">
-                <p class="text-[11px] font-black tracking-wide text-white uppercase" id="sticky-hud-status-text">Casting On Your TV</p>
-                <p class="text-[9px] text-gray-400 truncate" id="sticky-hud-media-title">No Media Playing</p>
-            </div>
-        </div>
-        <button onclick="breakActiveCastingChannelPipeline()" class="px-3 py-1 bg-red-600 text-white font-bold text-[10px] rounded-lg tracking-wider uppercase flex-shrink-0 shadow-lg shadow-red-600/30">Stop</button>
-    </div>
+            <!-- Registration Form Element -->
+            <form id="form-registration" class="space-y-6" novalidate aria-label="Registration Form">
+                
+                <!-- Input Group: Full Name -->
+                <div class="input-group">
+                    <label for="input-fullName" class="block text-[11px] font-bold text-brand-textSub uppercase tracking-[0.2em] mb-2 pl-1">Legal Full Name</label>
+                    <div class="relative group">
+                        <i class="ph ph-user absolute left-4 top-1/2 -translate-y-1/2 text-brand-textSub group-focus-within:text-white transition-colors duration-300 text-lg"></i>
+                        <input type="text" id="input-fullName" required placeholder="e.g. Johnathan Doe" autocomplete="name"
+                            class="premium-input w-full text-white rounded-xl py-4 pl-12 pr-4 text-sm font-medium">
+                    </div>
+                </div>
 
-    <main class="pt-20 px-4 pb-24 max-w-6xl mx-auto space-y-8" id="view-home">
-        
-        <section id="hero-slider-container" class="relative w-full aspect-[16/7] md:aspect-[16/5] rounded-3xl overflow-hidden glass-card shadow-2xl">
-            <div id="hero-slider-target" class="w-full h-full relative">
-                <div class="w-full h-full shimmer-bg"></div>
-            </div>
+                <!-- Input Group: Cohort / Class -->
+                <div class="input-group">
+                    <label for="input-userClass" class="block text-[11px] font-bold text-brand-textSub uppercase tracking-[0.2em] mb-2 pl-1">Assigned Cohort</label>
+                    <div class="relative group">
+                        <i class="ph ph-bookmark-simple absolute left-4 top-1/2 -translate-y-1/2 text-brand-textSub group-focus-within:text-white transition-colors duration-300 text-lg"></i>
+                        <select id="input-userClass" required
+                            class="premium-input w-full text-white rounded-xl py-4 pl-12 pr-10 appearance-none cursor-pointer text-sm font-medium">
+                            <option value="" disabled selected class="text-gray-800">Select cohort designation</option>
+                            <option value="Class 10" class="text-gray-900">Secondary - Class 10</option>
+                            <option value="Class 11" class="text-gray-900">Senior Sec - Class 11</option>
+                            <option value="Class 12" class="text-gray-900">Senior Sec - Class 12</option>
+                            <option value="Undergraduate" class="text-gray-900">Undergraduate Level</option>
+                            <option value="Professional" class="text-gray-900">Working Professional</option>
+                        </select>
+                        <i class="ph ph-caret-down absolute right-4 top-1/2 -translate-y-1/2 text-brand-textSub pointer-events-none"></i>
+                    </div>
+                </div>
+
+                <!-- Input Group: Statement of Purpose -->
+                <div class="input-group">
+                    <label for="input-message" class="block text-[11px] font-bold text-brand-textSub uppercase tracking-[0.2em] mb-2 pl-1">Statement of Purpose</label>
+                    <textarea id="input-message" rows="3" required placeholder="State your reason for network access..."
+                        class="premium-input w-full text-white rounded-xl py-4 px-4 resize-none text-sm font-medium"></textarea>
+                </div>
+
+                <!-- Validation Error Display -->
+                <div id="display-error" class="hidden bg-brand-danger/10 border border-brand-danger/20 text-brand-danger text-xs px-4 py-3 rounded-xl flex items-center gap-3">
+                    <i class="ph-fill ph-warning-circle text-lg"></i>
+                    <span id="text-error" class="font-medium"></span>
+                </div>
+
+                <!-- Submission Action -->
+                <div class="pt-2">
+                    <button type="submit" id="btn-submit" 
+                        class="btn-action-primary w-full font-bold rounded-xl py-4 flex items-center justify-center gap-2 text-sm tracking-wide">
+                        <span id="text-submit">Authorize Identity</span>
+                        <div id="spinner-submit" class="enterprise-spinner state-hidden"></div>
+                    </button>
+                </div>
+            </form>
+            
+            <footer class="mt-6 text-center">
+                <p class="text-[10px] text-brand-textSub uppercase tracking-widest opacity-60">End-to-End Encrypted via Firebase</p>
+            </footer>
         </section>
 
-        <section class="space-y-4">
-            <div class="flex justify-between items-center">
-                <h2 class="text-sm font-bold tracking-widest text-blue-400 uppercase">Latest Uploads Today</h2>
-                <span class="h-px bg-white/10 flex-1 ml-4"></span>
-            </div>
-            <div id="today-uploads-target" class="flex gap-4 overflow-x-auto hide-scrollbar py-2"></div>
-        </section>
+        <!-- =================================================================== -->
+        <!-- VIEW 2: ENTERPRISE DASHBOARD (100% REAL DATA ONLY)                  -->
+        <!-- =================================================================== -->
+        <section id="module-dashboard" class="state-hidden w-full space-y-5">
+            
+            <!-- User Profile Identity Card -->
+            <article class="glass-surface rounded-2xl p-6 flex justify-between items-center animate-enter-slide-up" style="animation-delay: 0.1s;">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10 shadow-inner">
+                        <i class="ph-fill ph-user-focus text-2xl text-white"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-semibold text-white tracking-tight" id="display-userName">Authenticated User</h2>
+                        <div class="flex items-center gap-2 mt-1">
+                            <span class="relative flex h-2 w-2">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-success opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-success"></span>
+                            </span>
+                            <span class="text-[10px] text-brand-success font-bold uppercase tracking-[0.15em]">System Online</span>
+                        </div>
+                    </div>
+                </div>
+                <button id="btn-terminate-session" class="text-brand-textSub hover:text-white hover:bg-white/5 p-3 rounded-xl transition-all" aria-label="Sign Out">
+                    <i class="ph ph-power text-xl"></i>
+                </button>
+            </article>
 
-        <section id="continue-watching-section" class="space-y-4 hidden">
-            <div class="flex justify-between items-center">
-                <h2 class="text-sm font-bold tracking-widest text-purple-400 uppercase">Continue Watching</h2>
-                <span class="h-px bg-white/10 flex-1 ml-4"></span>
-            </div>
-            <div id="continue-watching-target" class="flex gap-4 overflow-x-auto hide-scrollbar py-2"></div>
-        </section>
+            <!-- Metrics Analytics Card (REAL COUNT ONLY) -->
+            <article class="glass-surface rounded-2xl p-8 relative overflow-hidden animate-enter-slide-up" style="animation-delay: 0.2s;">
+                <!-- Decorative Watermark Graphic -->
+                <div class="absolute -right-10 -top-10 opacity-[0.02] pointer-events-none">
+                    <i class="ph-fill ph-fingerprint text-[200px]"></i>
+                </div>
+                
+                <header class="flex items-center justify-between mb-6 relative z-10">
+                    <p class="text-[11px] text-brand-textSub uppercase tracking-[0.2em] font-bold flex items-center gap-2">
+                        <i class="ph-fill ph-database text-white"></i> Global Registry Count
+                    </p>
+                    <span class="text-[10px] bg-white/10 text-white px-2 py-1 rounded border border-white/5 font-medium tracking-wide">REAL-TIME</span>
+                </header>
+                
+                <div class="flex items-baseline gap-3 relative z-10">
+                    <!-- 
+                        CRITICAL UPDATE: 
+                        This counter now strictly displays the EXACT total from Firebase.
+                        No fake numbers, no base padding. If DB is empty, it shows 0.
+                    -->
+                    <span id="display-liveCounter" class="text-7xl font-bold tracking-tighter text-white font-sans tabular-nums">
+                        --
+                    </span>
+                    <span class="text-sm font-medium text-brand-textSub uppercase tracking-wider mb-2">Total Users</span>
+                </div>
+                
+                <div class="mt-6 border-t border-white/[0.05] pt-4 flex items-center justify-between">
+                    <p class="text-[10px] text-brand-textSub font-medium">Data precision guaranteed.</p>
+                    <div class="h-1 w-16 bg-white/[0.05] rounded overflow-hidden">
+                        <div class="h-full bg-white/20 w-1/3 animate-pulse-slow"></div>
+                    </div>
+                </div>
+            </article>
 
-        <section class="space-y-4">
-            <div class="flex justify-between items-center">
-                <h2 class="text-sm font-bold tracking-widest text-gray-400 uppercase">All Shows</h2>
-                <span class="h-px bg-white/10 flex-1 ml-4"></span>
-            </div>
-            <div id="all-shows-target" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                <div class="h-28 shimmer-bg rounded-2xl"></div>
-                <div class="h-28 shimmer-bg rounded-2xl"></div>
-                <div class="h-28 shimmer-bg rounded-2xl"></div>
-            </div>
+            <!-- Live Network Activity Log -->
+            <article class="glass-surface rounded-2xl p-6 animate-enter-slide-up" style="animation-delay: 0.3s;">
+                <header class="mb-5 flex items-center justify-between">
+                    <h3 class="text-[11px] font-bold text-brand-textSub uppercase tracking-[0.2em] flex items-center gap-2">
+                        <i class="ph-fill ph-activity text-white"></i> Live Network Activity
+                    </h3>
+                </header>
+                
+                <!-- Dynamically Populated Feed Container -->
+                <div id="container-activityFeed" class="space-y-3 max-h-[220px] overflow-y-auto pr-2 custom-scrollbar">
+                    <div class="text-xs text-brand-textSub text-center py-6 font-medium bg-white/[0.02] rounded-xl border border-white/[0.05] border-dashed" id="msg-feedEmpty">
+                        Establishing secure connection... waiting for data logs.
+                    </div>
+                </div>
+            </article>
+
         </section>
     </main>
 
-    <div id="view-detail" class="hidden pt-20 px-4 pb-24 max-w-4xl mx-auto space-y-6">
-        <button onclick="navigateHome()" class="flex items-center gap-2 text-xs font-semibold text-blue-400 bg-white/5 px-4 py-2 rounded-full border border-white/5 active:scale-95 transition-transform">
-            <span>←</span> मुख्य पृष्ठ पर वापस जाएँ
-        </button>
-
-        <div id="detail-structural-target" class="space-y-6">
-            </div>
-    </div>
-
-    <div id="notification-sidebar" class="fixed top-16 right-0 bottom-0 w-80 glass-panel z-40 transform translate-x-full transition-transform duration-300 ease-in-out p-4 overflow-y-auto space-y-4">
-        <div class="flex justify-between items-center border-b border-white/10 pb-2">
-            <h3 class="font-bold text-sm tracking-wide text-gray-300">अपलोड नोटिफिकेशन</h3>
-            <button onclick="toggleNotificationPanel(event)" class="text-xs text-blue-400 px-2 py-1 bg-white/5 rounded-md">बंद करें</button>
-        </div>
-        <div id="notification-stack-target" class="space-y-3">
-            <p class="text-xs text-gray-400 text-center py-8">कोई नया नोटिफिकेशन नहीं है</p>
-        </div>
-    </div>
-
-    <script>
-        const firebaseConfig = {
-            databaseURL: "https://hry-study-default-rtdb.firebaseio.com/"
-        };
+    <!-- ======================================================================= -->
+    <!-- ENTERPRISE JAVASCRIPT ARCHITECTURE & FIREBASE INTEGRATION               -->
+    <!-- ======================================================================= -->
+    <script type="module">
+        /**
+         * @file HRRY study mods Application Logic
+         * @description Comprehensive, highly verbose implementation of the Firebase SPA.
+         * Features strict state management, modular utility classes, and absolute
+         * real-time truth for data presentation (Zero Fake Metrics).
+         */
         
-        firebase.initializeApp(firebaseConfig);
-        const databaseRef = firebase.database();
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, push, set, onValue, onChildAdded, query, limitToLast } 
+            from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-        let systemDatabasePayload = null;
-        let activeSliderSequenceIndex = 0;
-        let runningSliderIntervalHandle = null;
-        let localStateTargetShowId = null;
-        let localStateTargetEpisodeId = null;
-
-        /* Mobile Cast Core Variables */
-        let html5QrScannerInstancePointerRef = null;
-        let connectedTvDeviceIdentificationStringKey = localStorage.getItem('plotpulse_connected_tv_uuid') || '';
-        let currentValidatedPairingCodeString = '';
-        let isMobileCastActiveConnectionState = false;
-        let tvConnectionListener = null;
-        let reconnectingTimeout = null;
-
-        // --- App Only Feature Popup Handler ---
-        function showAppOnlyPopup() {
-            const popup = document.getElementById("app-only-popup");
-            const popupInner = document.getElementById("app-only-inner");
-            popup.classList.remove("hidden");
-            popup.classList.add("flex");
-            setTimeout(() => {
-                popup.classList.remove("opacity-0");
-                popupInner.classList.remove("scale-90");
-                popupInner.classList.add("scale-100");
-            }, 10);
-        }
-
-        function closeAppOnlyPopup() {
-            const popup = document.getElementById("app-only-popup");
-            const popupInner = document.getElementById("app-only-inner");
-            popup.classList.add("opacity-0");
-            popupInner.classList.remove("scale-100");
-            popupInner.classList.add("scale-90");
-            setTimeout(() => {
-                popup.classList.add("hidden");
-                popup.classList.remove("flex");
-            }, 300);
-        }
-
-        // --- Sponsor Popup Handler ---
-        function showSponsorPopup() {
-            const popup = document.getElementById("sponsor-popup");
-            const popupCard = popup.querySelector('.glass-card');
-            popup.classList.remove("hidden");
-            popup.classList.add("flex");
-            setTimeout(() => {
-                popup.classList.remove("opacity-0");
-                popupCard.classList.remove("scale-90");
-                popupCard.classList.add("scale-100");
-            }, 50);
-        }
-
-        function closeSponsorPopup() {
-            const popup = document.getElementById("sponsor-popup");
-            const popupCard = popup.querySelector('.glass-card');
-            popup.classList.add("opacity-0");
-            popupCard.classList.remove("scale-100");
-            popupCard.classList.add("scale-90");
-            setTimeout(() => {
-                popup.classList.add("hidden");
-                popup.classList.remove("flex");
-            }, 500);
-        }
-
-        document.addEventListener('click', (e) => {
-            const panel = document.getElementById("notification-sidebar");
-            const btn = document.getElementById("notif-btn");
-            if (!panel.classList.contains("translate-x-full") && !panel.contains(e.target) && !btn.contains(e.target)) {
-                panel.classList.add("translate-x-full");
+        // =====================================================================
+        // 1. SYSTEM CONFIGURATION & CONSTANTS
+        // =====================================================================
+        const SYSTEM_CONFIG = {
+            FIREBASE: {
+                apiKey: "AIzaSy_YOUR_API_KEY_PLACEHOLDER", // Expected by SDK
+                authDomain: "hrry-store-default-rtdb.firebaseapp.com",
+                databaseURL: "https://hrry-store-default-rtdb.firebaseio.com/",
+                projectId: "hrry-store",
+            },
+            STORAGE_KEY: 'hrry_enterprise_session_v2',
+            DB_NODE_USERS: 'users',
+            UI: {
+                TOAST_DURATION_MS: 4500,
+                SIMULATED_NETWORK_DELAY: 800 // To demonstrate loading state gracefully
             }
-        });
+        };
 
-        function extractSystemNormalizedDate() {
-            const liveClock = new Date();
-            const dateDigit = String(liveClock.getDate()).padStart(2, '0');
-            const monthDigit = String(liveClock.getMonth() + 1).padStart(2, '0');
-            const yearDigit = liveClock.getFullYear();
-            
-            return {
-                slashed: `${dateDigit}/${monthDigit}/${yearDigit}`,
-                hyphenated: `${yearDigit}-${monthDigit}-${dateDigit}`
-            };
-        }
-
-        function formatToDdMmYyyy(dateStr) {
-            if (!dateStr) return "N/A";
-            const cleanStr = String(dateStr).trim();
-            if (cleanStr.includes("-")) {
-                const parts = cleanStr.split("-");
-                if (parts[0].length === 4) {
-                    return `${parts[2]}/${parts[1]}/${parts[0]}`;
-                }
-            }
-            return cleanStr;
-        }
-
-        document.addEventListener("DOMContentLoaded", () => {
-            synchronizeMasterApplicationData();
-            evaluateClientTrackingBuffer();
-            setupActiveCastingHUDStateSynchronizer();
-            
-            setTimeout(() => {
-                const mask = document.getElementById("splash-screen");
-                mask.style.opacity = "0";
-                setTimeout(() => {
-                    mask.style.display = "none";
-                    setTimeout(showSponsorPopup, 4000); 
-                }, 600);
-            }, 1200);
-        });
-
-        function synchronizeMasterApplicationData() {
-            databaseRef.ref('shows').on('value', (dataSnapshot) => {
-                if(dataSnapshot.exists()) {
-                    systemDatabasePayload = dataSnapshot.val();
-                    generateHeroBannerSystem();
-                    renderLatestUploadsToday();
-                    renderGlobalShowsCatalogue();
-                    
-                    if(document.getElementById('view-detail').classList.contains('hidden') === false && localStateTargetShowId) {
-                        renderShowDetailsViewerPage(localStateTargetShowId, false);
-                    }
-                }
-            });
-        }
-
-        function generateHeroBannerSystem() {
-            clearInterval(runningSliderIntervalHandle);
-            const targetNode = document.getElementById("hero-slider-target");
-            let cumulativeEpisodesList = [];
-
-            Object.entries(systemDatabasePayload).forEach(([showKey, showDetails]) => {
-                if(showDetails.episodes) {
-                    Object.entries(showDetails.episodes).forEach(([epKey, epDetails]) => {
-                        cumulativeEpisodesList.push({
-                            showId: showKey,
-                            showName: showDetails.name,
-                            episodeId: epKey,
-                            ...epDetails
-                        });
-                    });
-                }
-            });
-
-            if(cumulativeEpisodesList.length === 0) return;
-
-            cumulativeEpisodesList.sort((leftRecord, rightRecord) => (parseInt(rightRecord.num) || 0) - (parseInt(leftRecord.num) || 0));
-            const boundarySliderSliceLimit = cumulativeEpisodesList.slice(0, 5);
-            
-            const executeSliderRenderCycle = () => {
-                if(activeSliderSequenceIndex >= boundarySliderSliceLimit.length) activeSliderSequenceIndex = 0;
-                const activeRecord = boundarySliderSliceLimit[activeSliderSequenceIndex];
-                
-                targetNode.innerHTML = `
-                    <div class="w-full h-full relative transition-all duration-700 ease-in-out bg-black overflow-hidden">
-                        <img src="${activeRecord.thumb || '1000015927_2.jpg'}" class="absolute inset-0 w-full h-full object-cover">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#030712] via-[#030712]/50 to-transparent"></div>
-                        <div class="absolute bottom-4 left-4 right-4 space-y-2 max-w-md z-10">
-                            <span class="px-2 py-0.5 bg-blue-500 text-[9px] font-bold tracking-widest rounded uppercase">LATEST ADDITION</span>
-                            <h2 class="text-lg md:text-2xl font-black text-white tracking-tight line-clamp-1 drop-shadow-lg">${activeRecord.showName}</h2>
-                            <p class="text-xs text-gray-200 font-medium line-clamp-1 drop-shadow-md">एपिसोड ${activeRecord.num || '0'} : ${activeRecord.title || 'Untitled Episode'}</p>
-                            <button onclick="initiateOTTPlayerStream('${activeRecord.showId}', '${activeRecord.episodeId}')" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold text-xs rounded-xl flex items-center gap-2 shadow-lg shadow-blue-600/50 transition-all mt-1">
-                                <span>▶</span> WATCH NOW
-                            </button>
-                        </div>
-                    </div>`;
-                activeSliderSequenceIndex++;
-            };
-
-            executeSliderRenderCycle();
-            runningSliderIntervalHandle = setInterval(executeSliderRenderCycle, 5000);
-        }
-
-        function renderLatestUploadsToday() {
-            const targetInterfaceSlot = document.getElementById("today-uploads-target");
-            const structuralClockMatrix = extractSystemNormalizedDate();
-            let matchedUploadsList = [];
-
-            Object.entries(systemDatabasePayload).forEach(([showKey, showDetails]) => {
-                if(showDetails.episodes) {
-                    Object.entries(showDetails.episodes).forEach(([epKey, epDetails]) => {
-                        const dynamicSanitizedDateStr = String(epDetails.date || "").trim();
-                        if(dynamicSanitizedDateStr === structuralClockMatrix.slashed || dynamicSanitizedDateStr === structuralClockMatrix.hyphenated) {
-                            matchedUploadsList.push({
-                                showId: showKey,
-                                showName: showDetails.name,
-                                episodeId: epKey,
-                                ...epDetails
-                            });
-                        }
-                    });
-                }
-            });
-
-            if(matchedUploadsList.length === 0) {
-                targetInterfaceSlot.innerHTML = `
-                    <div class="w-full py-6 px-4 bg-white/5 border border-white/5 rounded-2xl flex flex-col justify-center items-center text-center">
-                        <span class="text-xl mb-1">📅</span>
-                        <p class="text-xs font-bold text-gray-400">COMING SOON</p>
-                        <p class="text-[10px] text-gray-500">No New Upload Today</p>
-                    </div>`;
-                return;
+        // =====================================================================
+        // 2. MODULAR UTILITY CLASSES
+        // =====================================================================
+        
+        /**
+         * String formatting and anonymization utilities.
+         */
+        class StringFormatter {
+            /**
+             * Extracts the first name from a full name string.
+             * @param {string} fullName 
+             * @returns {string} First name
+             */
+            static extractFirstName(fullName) {
+                if (!fullName) return "User";
+                return fullName.trim().split(' ')[0];
             }
 
-            targetInterfaceSlot.innerHTML = matchedUploadsList.map(item => `
-                <div class="min-w-[240px] max-w-[240px] glass-card p-2 rounded-2xl space-y-2 flex-shrink-0">
-                    <div class="relative aspect-video rounded-xl overflow-hidden bg-black">
-                        <img src="${item.thumb || '1000015927_2.jpg'}" class="w-full h-full object-cover">
-                        <span class="absolute bottom-1 right-1 bg-black/70 px-1.5 py-0.5 rounded text-[9px] font-bold text-blue-400">EP ${item.num}</span>
-                    </div>
-                    <div class="space-y-1">
-                        <h4 class="text-xs font-bold text-white tracking-tight line-clamp-1">${item.showName}</h4>
-                        <p class="text-[10px] text-gray-400 line-clamp-1">${item.title}</p>
-                    </div>
-                    <button onclick="initiateOTTPlayerStream('${item.showId}', '${item.episodeId}')" class="w-full py-1.5 bg-white/5 hover:bg-blue-600 border border-white/10 hover:border-transparent text-white font-bold text-[11px] rounded-xl transition-all">
-                        WATCH NOW
-                    </button>
-                </div>
-            `).join('');
-            
-            propagateRuntimeNotifications(matchedUploadsList);
-        }
-
-        function propagateRuntimeNotifications(todayArrays) {
-            const containerElement = document.getElementById("notification-stack-target");
-            const indicatorBadge = document.getElementById("notif-badge");
-
-            if(todayArrays.length === 0) {
-                indicatorBadge.classList.add("hidden");
-                return;
-            }
-
-            indicatorBadge.classList.remove("hidden");
-            containerElement.innerHTML = todayArrays.map(item => `
-                <div onclick="initiateOTTPlayerStream('${item.showId}', '${item.episodeId}')" class="p-2 bg-white/5 border border-white/10 rounded-xl flex gap-3 items-center cursor-pointer hover:bg-white/10 transition-all active:scale-95">
-                    <img src="${item.thumb || '1000015927_2.jpg'}" class="w-16 aspect-video object-cover rounded-lg bg-black">
-                    <div class="flex-1 min-w-0">
-                        <h5 class="text-xs font-bold text-white truncate">${item.showName}</h5>
-                        <p class="text-[10px] text-gray-400 truncate">EP ${item.num}: ${item.title}</p>
-                        <p class="text-[8px] text-blue-400 font-semibold mt-0.5">${item.date || ''}</p>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        function renderGlobalShowsCatalogue() {
-            const primaryGridContainer = document.getElementById("all-shows-target");
-            primaryGridContainer.innerHTML = "";
-
-            Object.entries(systemDatabasePayload).forEach(([showId, showValue]) => {
-                const localizedEpisodesCount = showValue.episodes ? Object.keys(showValue.episodes).length : 0;
-                
-                let latestEpNum = "0";
-                let latestEpDate = "N/A";
-                if(localizedEpisodesCount > 0) {
-                    const epList = Object.values(showValue.episodes);
-                    epList.sort((a, b) => (parseInt(b.num) || 0) - (parseInt(a.num) || 0));
-                    latestEpNum = epList[0].num || "0";
-                    latestEpDate = formatToDdMmYyyy(epList[0].date);
+            /**
+             * Anonymizes a full name for public feed display (e.g. "Rahul S.")
+             * @param {string} fullName 
+             * @returns {string} Anonymized name
+             */
+            static anonymizeForFeed(fullName) {
+                const parts = fullName.trim().split(' ');
+                if (parts.length > 1) {
+                    return `${parts[0]} ${parts[1].charAt(0)}.`;
                 }
-
-                primaryGridContainer.innerHTML += `
-                    <div onclick="renderShowDetailsViewerPage('${showId}', true)" class="glass-card p-3 rounded-2xl flex flex-col gap-3 cursor-pointer border border-white/5 hover:border-blue-500/30 transition-all">
-                        <div class="flex items-center gap-4">
-                            <div class="relative w-24 aspect-video rounded-xl overflow-hidden bg-black flex-shrink-0">
-                                <img src="${showValue.thumb || '1000015927_2.jpg'}" class="w-full h-full object-cover">
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <h3 class="text-sm font-bold text-white tracking-tight truncate">${showValue.name}</h3>
-                                <p class="text-[11px] text-gray-400 font-medium mt-0.5">${localizedEpisodesCount} Total Episodes</p>
-                            </div>
-                            <span class="text-gray-500 text-sm pr-1">❯</span>
-                        </div>
-                        <div class="flex gap-2 w-full pt-1">
-                            <div class="flex-1 bg-blue-600/20 border border-blue-500/30 rounded-xl p-1.5 text-center">
-                                <p class="text-[8px] uppercase tracking-wider text-blue-400 font-bold">Latest Episode</p>
-                                <p class="text-xs font-black text-blue-50 mt-0.5">EP-${latestEpNum}</p>
-                            </div>
-                            <div class="flex-1 bg-green-500/20 border border-green-500/40 rounded-xl p-1.5 text-center shadow-[inset_0_0_10px_rgba(34,197,94,0.1)]">
-                                <p class="text-[8px] uppercase tracking-wider text-green-400 font-bold">Uploaded Date</p>
-                                <p class="text-xs font-black text-green-300 mt-0.5 drop-shadow-sm">${latestEpDate}</p>
-                            </div>
-                        </div>
-                    </div>`;
-            });
+                return parts[0];
+            }
         }
 
-        function renderShowDetailsViewerPage(showId, transitWithScrollFocus = true) {
-            localStateTargetShowId = showId;
-            const routerHomeDOM = document.getElementById("view-home");
-            const routerDetailDOM = document.getElementById("view-detail");
-            const UIStructureTargetNode = document.getElementById("detail-structural-target");
-
-            routerHomeDOM.classList.add("hidden");
-            routerDetailDOM.classList.remove("hidden");
-            if(transitWithScrollFocus) window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            const structuralTargetShowRecord = systemDatabasePayload[showId];
-            if(!structuralTargetShowRecord) return;
-
-            let rawUnprocessedEpisodesArray = [];
-            if(structuralTargetShowRecord.episodes) {
-                Object.entries(structuralTargetShowRecord.episodes).forEach(([idString, dataProps]) => {
-                    rawUnprocessedEpisodesArray.push({ episodeUniqueKey: idString, ...dataProps });
+        /**
+         * Time and Date formatting utilities.
+         */
+        class TimeUtils {
+            /**
+             * Returns the current time in a localized short format.
+             * @returns {string} (e.g. "14:35")
+             */
+            static getShortTime() {
+                return new Date().toLocaleTimeString([], { 
+                    hour: '2-digit', 
+                    minute: '2-digit',
+                    hour12: true
                 });
             }
-            rawUnprocessedEpisodesArray.sort((leftNode, rightNode) => (parseInt(rightNode.num) || 0) - (parseInt(leftNode.num) || 0));
-
-            let targetActiveSelectedEpisode = null;
-            if(localStateTargetEpisodeId && structuralTargetShowRecord.episodes[localStateTargetEpisodeId]) {
-                targetActiveSelectedEpisode = { episodeUniqueKey: localStateTargetEpisodeId, ...structuralTargetShowRecord.episodes[localStateTargetEpisodeId] };
-            } else if(rawUnprocessedEpisodesArray.length > 0) {
-                targetActiveSelectedEpisode = rawUnprocessedEpisodesArray[0];
-                localStateTargetEpisodeId = targetActiveSelectedEpisode.episodeUniqueKey;
-            }
-
-            if(!targetActiveSelectedEpisode) {
-                UIStructureTargetNode.innerHTML = `<p class="text-xs text-center text-gray-400 py-12">इस शो में कोई एपिसोड उपलब्ध नहीं है।</p>`;
-                return;
-            }
-
-            updateClientLocalCacheTrackingBuffer(showId, targetActiveSelectedEpisode);
-
-            UIStructureTargetNode.innerHTML = `
-                <div class="player-root group">
-                    <div class="watermark-container pointer-events-none">
-                        <img src="https://i.postimg.cc/yd1s4hdw/c73c0d3d-0c8f-4f55-ba34-017747e2a68d.png" class="w-full h-auto object-contain">
-                    </div>
-                    <div id="stream-loader-spinner" class="video-loading-spinner"></div>
-                    
-                    <video id="ott-core-media-player" controls playsinline class="w-full h-full object-contain bg-black absolute inset-0 z-0" style="display: none;"></video>
-                    
-                    <div id="tv-casting-active-overlay-plate" class="absolute inset-0 bg-gradient-to-b from-[#0b1526] to-[#030712] z-30 hidden flex-col justify-center items-center gap-2 p-4 text-center border border-green-500/20">
-                        <div class="w-16 h-16 rounded-full bg-green-500/10 border border-green-500/30 flex justify-center items-center text-green-400 text-3xl animate-pulse">📺</div>
-                        <h4 class="text-sm font-black text-white uppercase tracking-wider mt-2">Casting Mode Active</h4>
-                        <p class="text-xs text-gray-400 max-w-xs">यह वीडियो वर्तमान में आपके कनेक्टेड स्मार्ट टीवी पर स्ट्रीम हो रहा है।</p>
-                    </div>
-
-                    <div id="alternative-autoplay-ui-action-plate" class="absolute inset-0 bg-[#0b1526] z-20 flex flex-col justify-center items-center gap-3 p-4 text-center">
-                        <div class="w-14 h-14 rounded-full bg-blue-600 flex justify-center items-center text-white text-xl font-bold cursor-pointer hover:bg-blue-700 shadow-xl shadow-blue-600/20 active:scale-90 transition-transform animate-bounce" onclick="triggerManualBypassAutoplayOverrideStream()">▶</div>
-                        <p class="text-xs font-bold text-white tracking-wide uppercase">टैप करें और एपिसोड चलाएं</p>
-                        <p class="text-[10px] text-gray-400 max-w-xs">यदि आपका ब्राउज़र वीडियो लोड नहीं करता है, तो इस ओवरराइड ACTION प्लेट बटन पर टैप करें।</p>
-                    </div>
-                </div>
-
-                <div class="glass-panel p-5 rounded-2xl space-y-3 relative overflow-hidden">
-                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-blue-600/10 rounded-full blur-xl pointer-events:none"></div>
-                    <div class="flex flex-wrap items-center gap-2">
-                        <span class="px-2 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] font-extrabold tracking-widest rounded-md uppercase border border-blue-500/10">STREAMING NOW</span>
-                    </div>
-                    <div class="space-y-1">
-                        <h2 class="text-xl font-black text-white tracking-tight">${structuralTargetShowRecord.name}</h2>
-                        <h3 class="text-sm font-bold text-blue-400">एपिसोड ${targetActiveSelectedEpisode.num} : ${targetActiveSelectedEpisode.title || 'Untitled Title'}</h3>
-                    </div>
-                    <div class="flex items-center gap-4 text-xs font-semibold text-gray-400 border-t border-b border-white/5 py-2">
-                        <p>अपलोड तिथि: <span class="text-gray-200">${formatToDdMmYyyy(targetActiveSelectedEpisode.date)}</span></p>
-                    </div>
-                    <p class="text-xs text-gray-300 leading-relaxed font-medium">${targetActiveSelectedEpisode.desc || 'इस एपिसोड के लिए कोई विवरण उपलब्ध नहीं है।'}</p>
-                </div>
-
-                <div class="space-y-4">
-                    <h3 class="text-xs font-black tracking-widest text-gray-400 uppercase">सभी एपिसोड्स (${rawUnprocessedEpisodesArray.length})</h3>
-                    <div class="space-y-3" id="episode-array-listing-target-node">
-                        ${rawUnprocessedEpisodesArray.map(epItem => {
-                            const validationCheckStringLink = String(epItem.video || "").trim();
-                            const checkIsActiveCurrentlyPlaying = (epItem.episodeUniqueKey === localStateTargetEpisodeId);
-                            const evaluationStatusMissingLink = (validationCheckStringLink === "" || validationCheckStringLink === "null" || validationCheckStringLink === "undefined");
-
-                            return `
-                                <div id="card-ep-${epItem.episodeUniqueKey}" class="glass-card p-3 rounded-2xl flex items-center justify-between gap-4 border border-white/5 ${checkIsActiveCurrentlyPlaying ? 'playing-active-card' : ''}">
-                                    <div class="flex items-center gap-3 min-w-0 flex-1">
-                                        <div class="relative w-20 aspect-video bg-black rounded-lg overflow-hidden flex-shrink-0">
-                                            <img src="${epItem.thumb || structuralTargetShowRecord.thumb || '1000015927_2.jpg'}" class="w-full h-full object-cover ${checkIsActiveCurrentlyPlaying ? 'opacity-80' : ''}">
-                                            ${checkIsActiveCurrentlyPlaying ? `
-                                                <div class="absolute inset-0 m-auto bg-blue-600/20 flex justify-center items-center">
-                                                    <div class="eq-container">
-                                                        <div class="eq-bar"></div>
-                                                        <div class="eq-bar"></div>
-                                                        <div class="eq-bar"></div>
-                                                    </div>
-                                                </div>
-                                            ` : ''}
-                                        </div>
-                                        <div class="min-w-0 flex-1">
-                                            <div class="flex items-center gap-2">
-                                                <h4 class="text-xs font-extrabold text-white truncate">${epItem.title || 'Untitled Episode'}</h4>
-                                            </div>
-                                            <p class="text-[10px] text-gray-400 font-semibold mt-0.5">एपिसोड ${epItem.num} • ${formatToDdMmYyyy(epItem.date)}</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex-shrink-0">
-                                        ${evaluationStatusMissingLink ? `
-                                            <button class="px-3 py-1.5 bg-gray-700/50 text-gray-500 text-[10px] font-extrabold tracking-wider rounded-xl cursor-not-allowed border border-white/5" disabled>COMING SOON</button>
-                                        ` : `
-                                            <button onclick="switchActiveTargetEpisodeExecutionSequence('${epItem.episodeUniqueKey}')" class="px-4 py-1.5 ${checkIsActiveCurrentlyPlaying ? 'bg-blue-600 text-white' : 'bg-white/5 hover:bg-white/10 text-gray-200'} text-[11px] font-extrabold tracking-wider rounded-xl transition-all active:scale-95">
-                                                ${checkIsActiveCurrentlyPlaying ? 'REPLAY' : 'PLAY'}
-                                            </button>
-                                        `}
-                                    </div>
-                                </div>
-                            `;
-                        }).join('')}
-                    </div>
-                </div>`;
-
-            mountVideoPlayerEngineInstance(targetActiveSelectedEpisode.video, structuralTargetShowRecord.name, targetActiveSelectedEpisode.num, targetActiveSelectedEpisode.title, targetActiveSelectedEpisode.thumb);
         }
 
-        function mountVideoPlayerEngineInstance(sourcePayloadURL, showName = "", epNum = "", epTitle = "", thumbUrl = "") {
-            const playerElement = document.getElementById("ott-core-media-player");
-            const proxyLoaderSpinner = document.getElementById("stream-loader-spinner");
-            const manualActionBypassPlate = document.getElementById("alternative-autoplay-ui-action-plate");
-            const tvCastingPlate = document.getElementById("tv-casting-active-overlay-plate");
-
-            playerElement.style.display = "none";
-            playerElement.pause();
-            playerElement.removeAttribute('src');
+        // =====================================================================
+        // 3. CORE APPLICATION CONTROLLER
+        // =====================================================================
+        
+        class Hrrystudy modsApplication {
             
-            if (tvCastingPlate) tvCastingPlate.style.display = "none";
-
-            if(isMobileCastActiveConnectionState && connectedTvDeviceIdentificationStringKey) {
-                databaseRef.ref('casting_session/' + connectedTvDeviceIdentificationStringKey).set({
-                    videoUrl: sourcePayloadURL,
-                    showName: showName,
-                    epNum: epNum,
-                    epTitle: epTitle,
-                    thumbUrl: thumbUrl,
-                    trackId: localStateTargetShowId + "_" + epNum,
-                    timestamp: Date.now()
-                });
-                document.getElementById('sticky-hud-media-title').innerText = `${showName} - EP ${epNum}`;
+            /**
+             * Initializes the application, state, DOM cache, and boots Firebase.
+             */
+            constructor() {
+                console.log("[HRRY System] Boot sequence initiated...");
                 
-                if (tvCastingPlate) tvCastingPlate.style.display = "flex";
-                if (manualActionBypassPlate) manualActionBypassPlate.style.display = "none";
-                if (proxyLoaderSpinner) proxyLoaderSpinner.style.display = "none";
-                return;
+                // --- State Management ---
+                this.localSessionData = this.retrieveLocalSession();
+                this.trueDatabaseCount = -1; // Represents the EXACT number of entries
+                this.isInitialBootPhase = true;
+                this.processedFeedKeys = new Set(); // To ensure unique feed items
+                
+                // --- Initialization Sequence ---
+                this.cacheDomElements();
+                this.attachPrimaryEventListeners();
+                this.initializeFirebaseSubsystem();
+                
+                // Execute initial render pass
+                this.executeRenderCycle();
             }
 
-            if(!sourcePayloadURL || String(sourcePayloadURL).trim() === "" || String(sourcePayloadURL).trim() === "null") {
-                manualActionBypassPlate.style.display = "flex";
-                manualActionBypassPlate.innerHTML = `<p class="text-xs font-bold text-gray-400">STREAM ERROR: Link Missing</p>`;
-                return;
-            }
-
-            let validatedTargetSourceString = String(sourcePayloadURL).trim();
-
-            if(!validatedTargetSourceString.startsWith("http://") && !validatedTargetSourceString.startsWith("https://")) {
-                validatedTargetSourceString = `https://telegram-video-proxy.vercel.app/stream?file_id=${validatedTargetSourceString}`;
-            }
-
-            playerElement.src = validatedTargetSourceString;
-            playerElement.load();
-
-            proxyLoaderSpinner.style.display = "block";
-
-            playerElement.play().then(() => {
-                proxyLoaderSpinner.style.display = "none";
-                manualActionBypassPlate.style.display = "none";
-                playerElement.style.display = "block";
-            }).catch(() => {
-                proxyLoaderSpinner.style.display = "none";
-                manualActionBypassPlate.style.display = "flex"; 
-            });
-
-            playerElement.onwaiting = () => proxyLoaderSpinner.style.display = "block";
-            playerElement.onplaying = () => proxyLoaderSpinner.style.display = "none";
-
-            playerElement.ontimeupdate = () => {
-                if(isMobileCastActiveConnectionState && playerElement.duration > 0) {
-                    databaseRef.ref('playback_controls/' + connectedTvDeviceIdentificationStringKey).update({
-                        currentPosition: playerElement.currentTime,
-                        duration: playerElement.duration,
-                        lastUpdated: Date.now()
-                    });
+            /**
+             * Retrieves existing session from LocalStorage securely.
+             * @returns {Object|null} Session data or null
+             */
+            retrieveLocalSession() {
+                try {
+                    const rawData = localStorage.getItem(SYSTEM_CONFIG.STORAGE_KEY);
+                    return rawData ? JSON.parse(rawData) : null;
+                } catch (error) {
+                    console.error("[HRRY System] Failed to parse local session.", error);
+                    return null;
                 }
-            };
-        }
-
-        function triggerManualBypassAutoplayOverrideStream() {
-            if (isMobileCastActiveConnectionState) return;
-            const playerElement = document.getElementById("ott-core-media-player");
-            const manualActionBypassPlate = document.getElementById("alternative-autoplay-ui-action-plate");
-            
-            manualActionBypassPlate.style.display = "none";
-            playerElement.style.display = "block";
-            playerElement.play();
-        }
-
-        function switchActiveTargetEpisodeExecutionSequence(targetEpisodeKeyIdString) {
-            localStateTargetEpisodeId = targetEpisodeKeyIdString;
-            renderShowDetailsViewerPage(localStateTargetShowId, false);
-        }
-
-        function navigateHome() {
-            killNativeMobileVideoPlayerChannelStream();
-            localStateTargetShowId = null;
-            localStateTargetEpisodeId = null;
-            
-            document.getElementById("view-detail").classList.add("hidden");
-            document.getElementById("view-home").classList.remove("hidden");
-            document.getElementById("master-search").value = "";
-            renderGlobalShowsCatalogue();
-            evaluateClientTrackingBuffer();
-        }
-
-        function killNativeMobileVideoPlayerChannelStream() {
-            const playerElement = document.getElementById("ott-core-media-player");
-            if (playerElement) {
-                playerElement.pause();
-                playerElement.src = "";
-                playerElement.removeAttribute('src');
-                playerElement.load(); 
-            }
-        }
-
-        function executeSearchFilter(searchQueryString) {
-            const homeViewRouteDOMElement = document.getElementById("view-home");
-            const detailViewRouteDOMElement = document.getElementById("view-detail");
-            
-            if(homeViewRouteDOMElement.classList.contains("hidden")) {
-                killNativeMobileVideoPlayerChannelStream();
-                detailViewRouteDOMElement.classList.add("hidden");
-                homeViewRouteDOMElement.className = "pt-20 px-4 pb-24 max-w-6xl mx-auto space-y-8";
             }
 
-            const cleanNormalizedSearchValue = String(searchQueryString).trim().toLowerCase();
-            const primaryGridContainer = document.getElementById("all-shows-target");
-
-            if(cleanNormalizedSearchValue === "") {
-                renderGlobalShowsCatalogue();
-                return;
+            /**
+             * Exhaustive caching of all DOM elements to prevent querySelector overhead.
+             */
+            cacheDomElements() {
+                // Modules (Views)
+                this.domRegistrationModule = document.getElementById('module-registration');
+                this.domDashboardModule = document.getElementById('module-dashboard');
+                
+                // Form Interactions
+                this.domForm = document.getElementById('form-registration');
+                this.domInputName = document.getElementById('input-fullName');
+                this.domInputClass = document.getElementById('input-userClass');
+                this.domInputMsg = document.getElementById('input-message');
+                this.domBtnSubmit = document.getElementById('btn-submit');
+                this.domTxtSubmit = document.getElementById('text-submit');
+                this.domSpinner = document.getElementById('spinner-submit');
+                
+                // Error Display
+                this.domErrorContainer = document.getElementById('display-error');
+                this.domErrorText = document.getElementById('text-error');
+                
+                // Dashboard Elements
+                this.domUserName = document.getElementById('display-userName');
+                this.domLiveCounter = document.getElementById('display-liveCounter');
+                this.domBtnTerminate = document.getElementById('btn-terminate-session');
+                this.domActivityFeed = document.getElementById('container-activityFeed');
+                this.domFeedEmptyMsg = document.getElementById('msg-feedEmpty');
+                
+                // Global UI
+                this.domToastLayer = document.getElementById('global-toast-layer');
             }
 
-            primaryGridContainer.innerHTML = "";
-            let matchValidationTrackerCount = 0;
+            /**
+             * Binds interaction events to DOM elements.
+             */
+            attachPrimaryEventListeners() {
+                this.domForm.addEventListener('submit', (event) => this.processRegistrationSubmission(event));
+                this.domBtnTerminate.addEventListener('click', () => this.terminateActiveSession());
+            }
 
-            Object.entries(systemDatabasePayload).forEach(([idString, showValue]) => {
-                const targetMatchShowNameStr = String(showValue.name || "").toLowerCase();
-                let checkEpisodeKeywordMatchFound = false;
-
-                if(showValue.episodes) {
-                    Object.values(showValue.episodes).forEach(epNode => {
-                        if(String(epNode.title || "").toLowerCase().includes(cleanNormalizedSearchValue)) checkEpisodeKeywordMatchFound = true;
-                    });
-                }
-
-                if(targetMatchShowNameStr.includes(cleanNormalizedSearchValue) || checkEpisodeKeywordMatchFound) {
-                    matchValidationTrackerCount++;
-                    const localizedCount = showValue.episodes ? Object.keys(showValue.episodes).length : 0;
+            /**
+             * Instantiates Firebase app and Realtime Database references.
+             */
+            initializeFirebaseSubsystem() {
+                try {
+                    this.firebaseApp = initializeApp(SYSTEM_CONFIG.FIREBASE);
+                    this.database = getDatabase(this.firebaseApp);
+                    this.dbUsersRef = ref(this.database, SYSTEM_CONFIG.DB_NODE_USERS);
                     
-                    primaryGridContainer.innerHTML += `
-                        <div onclick="renderShowDetailsViewerPage('${idString}', true)" class="glass-card p-3 rounded-2xl flex items-center gap-4 cursor-pointer border border-blue-500/40 bg-blue-950/20 transition-all">
-                            <div class="relative w-28 aspect-video rounded-xl overflow-hidden bg-black flex-shrink-0">
-                                <img src="${showValue.thumb || '1000015927_2.jpg'}" class="w-full h-full object-cover">
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <span class="text-[8px] bg-blue-500 text-white font-extrabold px-1.5 py-0.5 rounded tracking-widest uppercase">MATCH FOUND</span>
-                                <h3 class="text-sm font-bold text-white tracking-tight truncate mt-1">${showValue.name}</h3>
-                                <p class="text-xs text-gray-400 font-medium mt-0.5">${localizedCount} Episodes</p>
-                            </div>
-                        </div>`;
+                    console.log("[HRRY System] Firebase subsystem initialized.");
+                    
+                    // Start realtime synchronization only after successful init
+                    this.startRealtimeDataSynchronization();
+                } catch (error) {
+                    console.error("[HRRY System] Critical failure initializing Firebase.", error);
+                    this.displayFormError("System offline. Backend connection failed.");
                 }
-            });
-
-            if(matchValidationTrackerCount === 0) {
-                primaryGridContainer.innerHTML = `<div class="col-span-full py-12 text-center text-xs text-gray-400 font-semibold glass-panel rounded-2xl">🔍 आपकी खोज के अनुकूल कोई शो या एपिसोड नहीं मिला।</div>`;
             }
-        }
 
-        function updateClientLocalCacheTrackingBuffer(showKeyId, episodeNodeDetails) {
-            try {
-                let cacheRegistryMapObject = JSON.parse(localStorage.getItem("plotpulse_local_tracking_registry")) || {};
-                cacheRegistryMapObject[showKeyId] = {
-                    episodeId: episodeNodeDetails.episodeUniqueKey,
-                    episodeNum: episodeNodeDetails.num,
-                    episodeTitle: episodeNodeDetails.title || 'Untitled Title',
-                    thumbGraphic: episodeNodeDetails.thumb || '1000015927_2.jpg',
-                    updatedTimestampTicks: Date.now()
-                };
-                localStorage.setItem("plotpulse_local_tracking_registry", JSON.stringify(cacheRegistryMapObject));
-            } catch(e) {}
-        }
-
-        function evaluateClientTrackingBuffer() {
-            const sectionWrapperNode = document.getElementById("continue-watching-section");
-            const listingTargetSlot = document.getElementById("continue-watching-target");
-
-            try {
-                const cacheRegistryMapObject = JSON.parse(localStorage.getItem("plotpulse_local_tracking_registry")) || {};
-                const mapRecordsEntriesArray = Object.entries(cacheRegistryMapObject);
-
-                if(mapRecordsEntriesArray.length === 0 || !systemDatabasePayload) {
-                    sectionWrapperNode.classList.add("hidden");
-                    return;
-                }
-
-                mapRecordsEntriesArray.sort((leftElement, rightElement) => rightElement[1].updatedTimestampTicks - leftElement[1].updatedTimestampTicks);
-                sectionWrapperNode.classList.remove("hidden");
-                listingTargetSlot.innerHTML = "";
-
-                mapRecordsEntriesArray.forEach(([showKeyId, trackingMetaProps]) => {
-                    if(systemDatabasePayload[showKeyId]) {
-                        const targetParentShowNameStr = systemDatabasePayload[showKeyId].name;
-                        listingTargetSlot.innerHTML += `
-                            <div onclick="initiateOTTPlayerStream('${showKeyId}', '${trackingMetaProps.episodeId}')" class="min-w-[200px] max-w-[200px] glass-card p-2 rounded-2xl flex-shrink-0 relative group cursor-pointer border border-white/5 hover:border-purple-500/30">
-                                <div class="relative aspect-video rounded-xl overflow-hidden bg-black">
-                                    <img src="${trackingMetaProps.thumbGraphic || '1000015927_2.jpg'}" class="w-full h-full object-cover opacity-80">
-                                    <div class="absolute bottom-0 inset-x-0 h-1 bg-purple-500"></div>
-                                </div>
-                                <div class="space-y-0.5 mt-1.5">
-                                    <h4 class="text-[11px] font-black text-white truncate tracking-tight">${targetParentShowNameStr}</h4>
-                                    <p class="text-[9px] text-gray-400 truncate font-semibold">EP ${trackingMetaProps.episodeNum}: ${trackingMetaProps.episodeTitle}</p>
-                                </div>
-                            </div>`;
-                    }
-                });
-            } catch(e) { sectionWrapperNode.classList.add("hidden"); }
-        }
-
-        function initiateOTTPlayerStream(showIdString, episodeIdString) {
-            localStateTargetShowId = showIdString;
-            localStateTargetEpisodeId = episodeIdString;
-            renderShowDetailsViewerPage(showIdString, true);
-        }
-
-        function toggleNotificationPanel(event) {
-            if (event) event.stopPropagation(); 
-            const elementDomPanel = document.getElementById("notification-sidebar");
-            elementDomPanel.classList.toggle("translate-x-full");
-        }
-
-        function startTVPresenceListener() {
-            if (!connectedTvDeviceIdentificationStringKey) return;
-            
-            const tvRef = databaseRef.ref('tv_devices/' + connectedTvDeviceIdentificationStringKey);
-            
-            if (tvConnectionListener) tvRef.off('value', tvConnectionListener);
-
-            tvConnectionListener = tvRef.on('value', (snapshot) => {
-                if (snapshot.exists()) {
-                    const tvData = snapshot.val();
-                    if (tvData.connection === true) {
-                        clearTimeout(reconnectingTimeout);
-                        isMobileCastActiveConnectionState = true;
-                        
-                        const castBtn = document.getElementById('mobile-cast-status-btn');
-                        if(castBtn) {
-                            castBtn.innerHTML = '<span>Connected</span> 🟢';
-                            castBtn.className = "px-3 py-1.5 rounded-full bg-green-500 text-white font-bold text-xs transition-all active:scale-90 flex items-center gap-1.5 shadow-md shadow-green-500/20";
-                        }
-                        
-                        const stickyHud = document.getElementById('mobile-cast-sticky-hud-strip');
-                        if (stickyHud) {
-                            stickyHud.classList.remove('hidden');
-                            stickyHud.classList.add('flex');
-                            const statusText = document.getElementById('sticky-hud-status-text');
-                            if(statusText) {
-                                statusText.innerText = "Casting On Your TV";
-                                statusText.classList.replace('text-yellow-400', 'text-white');
-                            }
-                        }
-
-                        if(localStateTargetShowId && !document.getElementById('view-detail').classList.contains('hidden') && !document.getElementById('tv-casting-active-overlay-plate')?.style.display.includes('flex')) {
-                            renderShowDetailsViewerPage(localStateTargetShowId, false);
-                        }
-
-                    } else {
-                        handleTVDisconnecting();
-                    }
+            /**
+             * The primary view router. Determines which module to display.
+             */
+            executeRenderCycle() {
+                if (this.localSessionData) {
+                    // State: Authenticated
+                    this.domRegistrationModule.classList.add('state-hidden');
+                    this.domDashboardModule.classList.remove('state-hidden');
+                    
+                    // Populate User Data
+                    const userFirstName = StringFormatter.extractFirstName(this.localSessionData.fullName);
+                    this.domUserName.textContent = userFirstName;
                 } else {
-                    handleTVDisconnecting();
-                }
-            });
-        }
-
-        function handleTVDisconnecting() {
-            if (!isMobileCastActiveConnectionState) return;
-            
-            const castBtn = document.getElementById('mobile-cast-status-btn');
-            if(castBtn) {
-                castBtn.innerHTML = '<span>Reconnecting</span> ⏳';
-                castBtn.className = "px-3 py-1.5 rounded-full bg-yellow-500/90 text-white font-bold text-xs transition-all active:scale-90 flex items-center gap-1.5 shadow-md shadow-yellow-500/20";
-            }
-            
-            const stickyHud = document.getElementById('mobile-cast-sticky-hud-strip');
-            if(stickyHud) {
-                const statusText = document.getElementById('sticky-hud-status-text');
-                if(statusText) {
-                    statusText.innerText = "Reconnecting To TV...";
-                    statusText.classList.add('text-yellow-400');
+                    // State: Unauthenticated
+                    this.domDashboardModule.classList.add('state-hidden');
+                    this.domRegistrationModule.classList.remove('state-hidden');
+                    this.domForm.reset();
+                    this.hideFormError();
                 }
             }
 
-            clearTimeout(reconnectingTimeout);
-            reconnectingTimeout = setTimeout(() => {
-                breakActiveCastingChannelPipeline();
-            }, 8000);
-        }
-
-        function setupActiveCastingHUDStateSynchronizer() {
-            if(!connectedTvDeviceIdentificationStringKey) {
-                breakActiveCastingChannelPipeline();
-                return;
-            }
-            startTVPresenceListener();
-        }
-
-        function breakActiveCastingChannelPipeline() {
-            clearTimeout(reconnectingTimeout);
-            if (tvConnectionListener && connectedTvDeviceIdentificationStringKey) {
-                databaseRef.ref('tv_devices/' + connectedTvDeviceIdentificationStringKey).off('value', tvConnectionListener);
-                tvConnectionListener = null;
-            }
-
-            isMobileCastActiveConnectionState = false;
+            // =================================================================
+            // REGISTRATION LOGIC & DATA INGESTION
+            // =================================================================
             
-            if(connectedTvDeviceIdentificationStringKey) {
-                databaseRef.ref('tv_devices/' + connectedTvDeviceIdentificationStringKey).remove();
-                databaseRef.ref('casting_session/' + connectedTvDeviceIdentificationStringKey).remove();
-                databaseRef.ref('playback_controls/' + connectedTvDeviceIdentificationStringKey).remove();
-            }
-            
-            connectedTvDeviceIdentificationStringKey = '';
-            currentValidatedPairingCodeString = '';
-            localStorage.removeItem('plotpulse_connected_tv_uuid');
+            /**
+             * Handles the complete form submission lifecycle.
+             * @param {Event} event 
+             */
+            async processRegistrationSubmission(event) {
+                event.preventDefault(); // Prevent standard HTTP post
+                
+                // 1. Data Extraction
+                const payload = {
+                    fullName: this.domInputName.value.trim(),
+                    userClass: this.domInputClass.value,
+                    message: this.domInputMsg.value.trim(),
+                    clientTimestamp: Date.now()
+                };
 
-            const castBtn = document.getElementById('mobile-cast-status-btn');
-            if (castBtn) {
-                castBtn.innerHTML = '<span class="hidden sm:inline">Cast On TV</span> 📺';
-                castBtn.className = "px-2 md:px-3 py-1.5 rounded-full bg-red-500/10 text-red-500 font-bold text-[10px] md:text-xs border border-red-500/20 transition-all active:scale-90 flex items-center gap-1 shadow-sm whitespace-nowrap";
+                // 2. Strict Validation Check
+                if (!this.validatePayload(payload)) return;
+
+                // 3. UI State: Loading
+                this.toggleSubmissionState(true);
+                this.hideFormError();
+
+                try {
+                    // 4. Data Transmission to Firebase
+                    const newUserRef = push(this.dbUsersRef);
+                    payload.recordId = newUserRef.key; // Store unique key
+                    
+                    await set(newUserRef, payload);
+
+                    // 5. Successful write operations
+                    this.localSessionData = payload;
+                    localStorage.setItem(SYSTEM_CONFIG.STORAGE_KEY, JSON.stringify(payload));
+                    
+                    // 6. Artificial UX delay & Render transition
+                    setTimeout(() => {
+                        this.toggleSubmissionState(false);
+                        this.executeRenderCycle();
+                        this.dispatchGlobalToast(
+                            'Authorization Successful', 
+                            'Your identity has been secured on the network.', 
+                            'ph-shield-check'
+                        );
+                    }, SYSTEM_CONFIG.UI.SIMULATED_NETWORK_DELAY);
+
+                } catch (writeError) {
+                    console.error("[HRRY System] Database write rejection.", writeError);
+                    this.displayFormError("Network transmission failed. Please try again.");
+                    this.toggleSubmissionState(false);
+                }
             }
-            
-            const stickyHud = document.getElementById('mobile-cast-sticky-hud-strip');
-            if (stickyHud) {
-                stickyHud.classList.add('hidden');
-                stickyHud.classList.remove('flex');
-                const statusText = document.getElementById('sticky-hud-status-text');
-                if(statusText) statusText.classList.remove('text-yellow-400');
+
+            /**
+             * Validates extracted form data.
+             * @param {Object} payload 
+             * @returns {boolean} Is valid?
+             */
+            validatePayload(payload) {
+                if (!payload.fullName || !payload.userClass || !payload.message) {
+                    this.displayFormError('All fields must be strictly populated.');
+                    return false;
+                }
+                if (payload.fullName.length < 3) {
+                    this.displayFormError('Legal name must exceed 2 characters.');
+                    return false;
+                }
+                return true;
             }
+
+            /**
+             * Mutates the submit button visually to prevent double submissions.
+             * @param {boolean} isProcessing 
+             */
+            toggleSubmissionState(isProcessing) {
+                if (isProcessing) {
+                    this.domBtnSubmit.disabled = true;
+                    this.domTxtSubmit.style.opacity = '0';
+                    this.domSpinner.classList.remove('state-hidden');
+                } else {
+                    this.domBtnSubmit.disabled = false;
+                    this.domTxtSubmit.style.opacity = '1';
+                    this.domSpinner.classList.add('state-hidden');
+                }
+            }
+
+            /**
+             * Renders error message on the form.
+             * @param {string} text 
+             */
+            displayFormError(text) {
+                this.domErrorText.textContent = text;
+                this.domErrorContainer.classList.remove('hidden');
+            }
+
+            /**
+             * Clears form errors.
+             */
+            hideFormError() {
+                this.domErrorContainer.classList.add('hidden');
+                this.domErrorText.textContent = '';
+            }
+
+            /**
+             * Destroys local session and returns to registration view.
+             */
+            terminateActiveSession() {
+                localStorage.removeItem(SYSTEM_CONFIG.STORAGE_KEY);
+                this.localSessionData = null;
+                this.executeRenderCycle();
+            }
+
+            // =================================================================
+            // REAL-TIME DATA SYNCHRONIZATION ENGINE
+            // =================================================================
             
-            if(localStateTargetShowId && !document.getElementById('view-detail').classList.contains('hidden')) {
-                renderShowDetailsViewerPage(localStateTargetShowId, false);
-                setTimeout(() => {
-                    const manualActionBypassPlate = document.getElementById("alternative-autoplay-ui-action-plate");
-                    if (manualActionBypassPlate && manualActionBypassPlate.style.display !== "none") {
-                         triggerManualBypassAutoplayOverrideStream();
-                    } else {
-                        const player = document.getElementById("ott-core-media-player");
-                        if(player) player.play().catch(e => console.log("Autoplay blocked", e));
+            /**
+             * Attaches persistent Firebase listeners for live data updates.
+             */
+            startRealtimeDataSynchronization() {
+                
+                // 1. LIVE COUNTER LISTENER (ABSOLUTE TRUTH ONLY)
+                // This fetches the snapshot and strictly sets the counter to snapshot.size.
+                onValue(this.dbUsersRef, (snapshot) => {
+                    let strictDatabaseCount = 0;
+                    
+                    if (snapshot.exists()) {
+                        strictDatabaseCount = snapshot.size;
                     }
-                }, 500);
+                    
+                    // If the number actually changed and it's not the first load, trigger visual flash
+                    if (this.trueDatabaseCount !== strictDatabaseCount && !this.isInitialBootPhase) {
+                        this.triggerCounterVisualFeedback();
+                    }
+                    
+                    this.trueDatabaseCount = strictDatabaseCount;
+                    
+                    // Format strictly (e.g. "0" becomes "00", "5" becomes "05") for aesthetics
+                    // but the underlying value is 100% real.
+                    const displayFormattedCount = strictDatabaseCount < 10 
+                        ? `0${strictDatabaseCount}` 
+                        : strictDatabaseCount.toLocaleString();
+                        
+                    this.domLiveCounter.textContent = displayFormattedCount;
+                });
+
+                // 2. LIVE ACTIVITY LOG LISTENER
+                // Listen to only the last 6 entries to conserve memory on the client
+                const recentLogsQuery = query(this.dbUsersRef, limitToLast(6));
+                
+                onChildAdded(recentLogsQuery, (snapshot) => {
+                    const documentData = snapshot.val();
+                    
+                    // Ensure document exists and hasn't been rendered yet
+                    if (!documentData || this.processedFeedKeys.has(documentData.recordId)) return;
+                    
+                    this.processedFeedKeys.add(documentData.recordId);
+                    this.injectLogIntoFeed(documentData);
+
+                    // Global Toast Notification logic (Skipped on initial load flood)
+                    if (!this.isInitialBootPhase) {
+                        // Suppress toast if the action was performed by the local user
+                        const isSelf = this.localSessionData && documentData.recordId === this.localSessionData.recordId;
+                        
+                        if (!isSelf) {
+                            const maskedName = StringFormatter.anonymizeForFeed(documentData.fullName);
+                            this.dispatchGlobalToast(
+                                'New Network Node Active', 
+                                `${maskedName} has entered the global registry.`, 
+                                'ph-plugs-connected'
+                            );
+                        }
+                    }
+                });
+
+                // Conclude initial boot phase gracefully after data settles
+                setTimeout(() => { 
+                    this.isInitialBootPhase = false; 
+                }, 2000);
+            }
+
+            /**
+             * Triggers a hardware-accelerated CSS keyframe on the numeric counter.
+             * This proves to the user that a real-time update just occurred.
+             */
+            triggerCounterVisualFeedback() {
+                // DOM Reflow hack to restart CSS animation instantly
+                this.domLiveCounter.classList.remove('animate-success-flash');
+                void this.domLiveCounter.offsetWidth; 
+                this.domLiveCounter.classList.add('animate-success-flash');
+            }
+
+            /**
+             * Constructs and injects a DOM node into the activity feed.
+             * @param {Object} documentData 
+             */
+            injectLogIntoFeed(documentData) {
+                // Remove the empty state placeholder if it exists
+                if (this.domFeedEmptyMsg && this.domFeedEmptyMsg.parentNode) {
+                    this.domFeedEmptyMsg.remove();
+                }
+
+                const maskedName = StringFormatter.anonymizeForFeed(documentData.fullName);
+                const eventTime = TimeUtils.getShortTime();
+
+                // Construct Element
+                const logElement = document.createElement('div');
+                logElement.className = 'flex items-center justify-between p-3 rounded-xl bg-white/[0.015] border border-white/[0.04] animate-feed-item-enter transition-colors hover:bg-white/[0.03]';
+                
+                logElement.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-black flex items-center justify-center border border-white/10 text-brand-textSub">
+                            <i class="ph-fill ph-user-circle text-lg"></i>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="text-sm text-white font-semibold leading-tight">${maskedName}</span>
+                            <span class="text-[10px] text-brand-textSub font-medium tracking-wide">${documentData.userClass}</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-end">
+                        <span class="text-[10px] text-brand-textSub bg-black px-2 py-1 rounded-md border border-white/5 font-medium shadow-inner">${eventTime}</span>
+                    </div>
+                `;
+
+                // Prepend to top of feed
+                this.domActivityFeed.insertBefore(logElement, this.domActivityFeed.firstChild);
+
+                // Memory Management: Keep max 6 nodes in DOM
+                while (this.domActivityFeed.children.length > 6) {
+                    this.domActivityFeed.removeChild(this.domActivityFeed.lastChild);
+                }
+            }
+
+            /**
+             * Generates a floating notification mimicking OS-level toasts.
+             * @param {string} title 
+             * @param {string} message 
+             * @param {string} iconClass 
+             */
+            dispatchGlobalToast(title, message, iconClass) {
+                const toastNode = document.createElement('div');
+                toastNode.className = 'glass-surface p-4 rounded-xl flex items-center gap-3 animate-enter-slide-up pointer-events-auto border-l-[3px] border-l-white';
+                
+                toastNode.innerHTML = `
+                    <div class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center shrink-0 border border-white/5 shadow-inner">
+                        <i class="ph ${iconClass} text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-bold text-white tracking-wide">${title}</h4>
+                        <p class="text-[11px] font-medium text-brand-textSub mt-0.5">${message}</p>
+                    </div>
+                `;
+
+                this.domToastLayer.appendChild(toastNode);
+
+                // Self-destruct sequence
+                setTimeout(() => {
+                    toastNode.style.transition = 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+                    toastNode.style.opacity = '0';
+                    toastNode.style.transform = 'translateY(-20px) scale(0.95)';
+                    
+                    // Remove from DOM post-animation
+                    setTimeout(() => toastNode.remove(), 500);
+                }, SYSTEM_CONFIG.UI.TOAST_DURATION_MS);
             }
         }
+
+        // =====================================================================
+        // APPLICATION BOOTSTRAP
+        // =====================================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            // Instantiate and expose globally for debugging purposes if needed
+            window.HRRY_ENTERPRISE_INSTANCE = new Hrrystudy modsApplication();
+        });
+
     </script>
 </body>
 </html>
