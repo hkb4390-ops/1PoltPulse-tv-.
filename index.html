@@ -1,849 +1,1674 @@
 <!DOCTYPE html>
-<html lang="en" class="antialiased dark">
+<html lang="en">
 <head>
-    <!-- ======================================================================= -->
-    <!-- DOCUMENT METADATA & SEO CONFIGURATION                                   -->
-    <!-- ======================================================================= -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="theme-color" content="#000000">
-    <meta name="description" content="HRRY Premium Registration - Exclusive Enterprise Access Portal">
-    <meta name="author" content="HRRY Architecture Team">
-    
-    <!-- Open Graph / Social Media Preview Optimization -->
-    <meta property="og:title" content="HRRY Premium | Enterprise Registration">
-    <meta property="og:description" content="Secure and exclusive registration portal for HRRY members.">
-    <meta property="og:image" content="https://hrry.online/whatsapp-preview-image.jpg">
-    <meta property="og:url" content="https://hrry.online">
-    <meta property="og:type" content="website">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
 
-    <title>HRRY | Official Premium Registration</title>
+<title>StudyMods.HRRY — 24 HR Key Generator</title>
 
-    <!-- ======================================================================= -->
-    <!-- EXTERNAL DEPENDENCIES & LIBRARIES                                       -->
-    <!-- ======================================================================= -->
-    <!-- Tailwind CSS (CDN for rapid styling) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Phosphor Icons (Premium typography-matched iconography) -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet">
 
-    <!-- ======================================================================= -->
-    <!-- TAILWIND CONFIGURATION & EXTENDED THEME SYSTEM                          -->
-    <!-- ======================================================================= -->
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', 'Inter', 'Helvetica Neue', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            bg: '#030303',
-                            surface: '#0d0d0d',
-                            surfaceBorder: '#1f1f1f',
-                            inputBg: '#121212',
-                            textMain: '#f5f5f5',
-                            textSub: '#8a8a8a',
-                            success: '#22c55e',
-                            danger: '#ef4444'
-                        }
-                    },
-                    animation: {
-                        'enter-slide-up': 'slideUpEnter 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-                        'fade-in-slow': 'fadeIn 1.2s ease-out forwards',
-                        'success-flash': 'successFlash 1.5s cubic-bezier(0.16, 1, 0.3, 1)',
-                        'feed-item-enter': 'feedItemEnter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards',
-                        'pulse-slow': 'pulseOpacity 3s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        slideUpEnter: {
-                            '0%': { opacity: '0', transform: 'translateY(40px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' }
-                        },
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' }
-                        },
-                        successFlash: {
-                            '0%': { color: '#f5f5f5', transform: 'scale(1)' },
-                            '15%': { color: '#22c55e', transform: 'scale(1.08)' },
-                            '50%': { color: '#22c55e', transform: 'scale(1)' },
-                            '100%': { color: '#f5f5f5', transform: 'scale(1)' }
-                        },
-                        feedItemEnter: {
-                            '0%': { opacity: '0', transform: 'translateX(-30px)' },
-                            '100%': { opacity: '1', transform: 'translateX(0)' }
-                        },
-                        pulseOpacity: {
-                            '0%, 100%': { opacity: '0.4' },
-                            '50%': { opacity: '1' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+<style>
+:root{
+    --bg:#030407;
+    --card:rgba(13,18,29,.88);
+    --cyan:#00f2fe;
+    --blue:#4facfe;
+    --gold:#ffcc33;
+    --green:#00e676;
+    --red:#ff3158;
+    --white:#fff;
+    --muted:#94a3b8;
+    --border:rgba(255,255,255,.11);
+}
 
-    <!-- ======================================================================= -->
-    <!-- CUSTOM ENTERPRISE CSS & HARDWARE ACCELERATION                           -->
-    <!-- ======================================================================= -->
-    <style>
-        /* Base Global Styling */
-        html, body {
-            background-color: #030303;
-            color: #f5f5f5;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow-x: hidden;
-        }
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    -webkit-tap-highlight-color:transparent;
+}
 
-        /* Complex Geometric Grid Background */
-        .architectural-grid {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-size: 50px 50px;
-            background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-            -webkit-mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
-            mask-image: radial-gradient(circle at 50% 50%, black 30%, transparent 80%);
-            z-index: -1;
-            pointer-events: none;
-        }
+html,body{
+    width:100%;
+    min-height:100%;
+}
 
-        /* Glassmorphic Surface Cards */
-        .glass-surface {
-            background: rgba(13, 13, 13, 0.85);
-            backdrop-filter: blur(24px) saturate(150%);
-            -webkit-backdrop-filter: blur(24px) saturate(150%);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: 
-                0 25px 50px -12px rgba(0,0,0,0.8), 
-                inset 0 1px 0 0 rgba(255,255,255,0.05);
-        }
+body{
+    background:var(--bg);
+    color:#fff;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    overflow-x:hidden;
+}
 
-        /* Advanced Input Micro-Interactions */
-        .premium-input {
-            transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            background: rgba(255, 255, 255, 0.015);
-            will-change: border-color, box-shadow;
-        }
-        .premium-input:focus {
-            background: rgba(255, 255, 255, 0.03);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.02);
-            outline: none;
-        }
-        .premium-input::placeholder {
-            color: rgba(255, 255, 255, 0.2);
-        }
+body:before{
+    content:"";
+    position:fixed;
+    inset:-30%;
+    z-index:-3;
+    background:
+        radial-gradient(circle at 15% 15%,rgba(0,242,254,.18),transparent 25%),
+        radial-gradient(circle at 85% 85%,rgba(127,0,255,.16),transparent 28%),
+        radial-gradient(circle at 50% 45%,rgba(255,179,71,.08),transparent 25%);
+    animation:bgMove 10s ease-in-out infinite alternate;
+}
 
-        /* Premium Primary Action Button */
-        .btn-action-primary {
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            background-color: #ffffff;
-            color: #000000;
-            position: relative;
-            overflow: hidden;
-            will-change: transform;
-        }
-        .btn-action-primary:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px -10px rgba(255, 255, 255, 0.4);
-        }
-        .btn-action-primary:active:not(:disabled) {
-            transform: translateY(1px) scale(0.98);
-            box-shadow: 0 5px 15px -5px rgba(255, 255, 255, 0.3);
-        }
-        .btn-action-primary:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
+@keyframes bgMove{
+    from{transform:scale(1) rotate(0deg)}
+    to{transform:scale(1.12) rotate(3deg)}
+}
 
-        /* Custom OS-level Scrollbar */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { 
-            background: rgba(255, 255, 255, 0.1); 
-            border-radius: 10px; 
-        }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
+canvas{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    pointer-events:none;
+}
 
-        /* Hardware Accelerated CSS Spinner */
-        .enterprise-spinner {
-            border: 2px solid rgba(0,0,0,0.1);
-            border-top-color: #000000;
-            border-radius: 50%;
-            width: 20px; height: 20px;
-            animation: spin 0.7s linear infinite;
-        }
-        @keyframes spin { 
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Utility class to handle Single Page App state hiding */
-        .state-hidden { display: none !important; }
-    </style>
+.page{
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:28px 18px;
+}
+
+.container{
+    width:100%;
+    max-width:430px;
+}
+
+.brand{
+    text-align:center;
+    margin-bottom:22px;
+}
+
+.brand-name{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:30px;
+    font-weight:900;
+    letter-spacing:-1px;
+}
+
+.brand-name span{
+    background:linear-gradient(135deg,#ffb347,#ffcc33);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.brand-sub{
+    margin-top:6px;
+    color:var(--cyan);
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+.card{
+    position:relative;
+    overflow:hidden;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:32px;
+    padding:30px 22px 24px;
+    backdrop-filter:blur(30px);
+    -webkit-backdrop-filter:blur(30px);
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.7),
+        0 0 35px rgba(0,242,254,.10);
+}
+
+.card:before{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    border-radius:32px;
+    padding:1px;
+    background:linear-gradient(
+        135deg,
+        rgba(0,242,254,.45),
+        transparent 40%,
+        rgba(255,204,51,.35)
+    );
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite:xor;
+    mask-composite:exclude;
+}
+
+.icon{
+    width:78px;
+    height:78px;
+    margin:0 auto 20px;
+    border-radius:25px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,242,254,.10);
+    border:1px solid rgba(0,242,254,.35);
+    box-shadow:0 0 35px rgba(0,242,254,.25);
+    animation:iconPulse 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes iconPulse{
+    from{
+        transform:scale(.97);
+        box-shadow:0 0 25px rgba(0,242,254,.18);
+    }
+    to{
+        transform:scale(1.03);
+        box-shadow:0 0 45px rgba(0,242,254,.4);
+    }
+}
+
+.icon svg{
+    width:38px;
+    height:38px;
+    stroke:var(--cyan);
+    fill:none;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+h1{
+    text-align:center;
+    font-family:'Space Grotesk',sans-serif;
+    font-size:27px;
+    line-height:1.12;
+    font-weight:900;
+    letter-spacing:-.8px;
+}
+
+h1 span{
+    background:linear-gradient(135deg,#00f2fe,#4facfe);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+.description{
+    text-align:center;
+    margin:12px auto 24px;
+    max-width:330px;
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.55;
+    font-weight:500;
+}
+
+.generate-btn,
+.copy-btn,
+.restart-btn{
+    width:100%;
+    border:0;
+    border-radius:20px;
+    padding:17px 18px;
+    font-family:inherit;
+    font-size:15px;
+    font-weight:900;
+    cursor:pointer;
+    transition:.25s ease;
+}
+
+.generate-btn{
+    background:linear-gradient(135deg,#00f2fe,#4facfe);
+    color:#001015;
+    box-shadow:0 0 30px rgba(0,242,254,.28);
+}
+
+.generate-btn:active,
+.copy-btn:active,
+.restart-btn:active{
+    transform:scale(.96);
+}
+
+.generate-btn:disabled{
+    opacity:.35;
+    cursor:not-allowed;
+    box-shadow:none;
+}
+
+.key-box{
+    display:none;
+    margin-top:20px;
+}
+
+.key-box.show{
+    display:block;
+    animation:keyAppear .45s ease;
+}
+
+@keyframes keyAppear{
+    from{
+        opacity:0;
+        transform:translateY(15px) scale(.97);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+.key-label{
+    color:var(--muted);
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+}
+
+.key-value{
+    width:100%;
+    padding:17px 14px;
+    border-radius:18px;
+    border:1px solid rgba(0,242,254,.28);
+    background:rgba(0,242,254,.06);
+    color:#fff;
+    font-family:'Space Grotesk',monospace;
+    font-size:18px;
+    font-weight:800;
+    text-align:center;
+    letter-spacing:1.3px;
+    word-break:break-all;
+    box-shadow:inset 0 0 25px rgba(0,242,254,.04);
+}
+
+.copy-btn{
+    margin-top:12px;
+    background:rgba(255,255,255,.07);
+    color:#fff;
+    border:1px solid rgba(255,255,255,.13);
+}
+
+.copy-btn.copied{
+    background:rgba(0,230,118,.12);
+    border-color:rgba(0,230,118,.4);
+    color:var(--green);
+}
+
+.restart-btn{
+    display:none;
+    margin-top:12px;
+    background:linear-gradient(135deg,#ffb347,#ffcc33);
+    color:#160d00;
+    box-shadow:0 0 30px rgba(255,179,71,.22);
+}
+
+.restart-btn.show{
+    display:block;
+    animation:buttonIn .4s ease;
+}
+
+@keyframes buttonIn{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
+}
+
+.info{
+    margin-top:18px;
+    padding:14px;
+    border-radius:17px;
+    background:rgba(255,255,255,.035);
+    border:1px solid rgba(255,255,255,.07);
+    text-align:center;
+}
+
+.info-title{
+    color:#fff;
+    font-size:12px;
+    font-weight:800;
+}
+
+.info-text{
+    margin-top:5px;
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.5;
+}
+
+.status{
+    margin-top:16px;
+    text-align:center;
+    min-height:18px;
+    color:var(--muted);
+    font-size:12px;
+    font-weight:700;
+}
+
+.status.success{color:var(--green)}
+.status.error{color:var(--red)}
+.status.loading{color:var(--cyan)}
+
+.footer{
+    text-align:center;
+    margin-top:17px;
+    color:#526174;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.5px;
+}
+
+/* RESTART */
+
+#restartScreen{
+    position:fixed;
+    inset:0;
+    z-index:99999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:
+        radial-gradient(circle at 50% 30%,rgba(0,242,254,.12),transparent 30%),
+        #030407;
+    opacity:0;
+    visibility:hidden;
+    transition:.45s ease;
+    padding:22px;
+}
+
+#restartScreen.active{
+    opacity:1;
+    visibility:visible;
+}
+
+.restart-content{
+    width:100%;
+    max-width:390px;
+    text-align:center;
+}
+
+.phone{
+    width:150px;
+    height:285px;
+    margin:0 auto 30px;
+    border:4px solid rgba(255,255,255,.8);
+    border-radius:28px;
+    position:relative;
+    background:#0b1019;
+    box-shadow:
+        0 0 0 2px rgba(0,242,254,.2),
+        0 0 55px rgba(0,242,254,.2);
+    overflow:hidden;
+}
+
+.phone-notch{
+    position:absolute;
+    top:7px;
+    left:50%;
+    transform:translateX(-50%);
+    width:55px;
+    height:15px;
+    border-radius:10px;
+    background:#000;
+}
+
+.phone-app{
+    position:absolute;
+    left:50%;
+    top:52%;
+    transform:translate(-50%,-50%);
+    width:85px;
+    height:85px;
+    border-radius:23px;
+    background:linear-gradient(135deg,#00f2fe,#4facfe);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 0 30px rgba(0,242,254,.5);
+    animation:appShake 2s ease-in-out infinite;
+}
+
+.phone-app svg{
+    width:42px;
+    height:42px;
+    stroke:#001015;
+    fill:none;
+    stroke-width:2;
+}
+
+@keyframes appShake{
+    0%,100%{transform:translate(-50%,-50%)}
+    20%{transform:translate(-55%,-50%)}
+    40%{transform:translate(-47%,-50%)}
+    60%{transform:translate(-53%,-50%)}
+}
+
+.swipe{
+    position:absolute;
+    left:50%;
+    bottom:25px;
+    width:42px;
+    height:4px;
+    transform:translateX(-50%);
+    border-radius:5px;
+    background:#fff;
+}
+
+.swipe-arrow{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:55px;
+    height:55px;
+    transform:translate(-50%,-50%);
+    border:2px solid var(--cyan);
+    border-radius:50%;
+    opacity:.8;
+    animation:swipeArrow 1.5s ease-in-out infinite;
+}
+
+@keyframes swipeArrow{
+    0%{
+        transform:translate(-50%,-30%);
+        opacity:0;
+    }
+    30%{opacity:1}
+    100%{
+        transform:translate(-50%,-110%);
+        opacity:0;
+    }
+}
+
+.restart-content h2{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:28px;
+    font-weight:900;
+}
+
+.restart-content h2 span{
+    color:var(--cyan);
+}
+
+.restart-content p{
+    margin-top:10px;
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.6;
+}
+
+.close-restart{
+    margin-top:22px;
+    padding:12px 22px;
+    border-radius:15px;
+    border:1px solid rgba(255,255,255,.12);
+    background:rgba(255,255,255,.05);
+    color:#fff;
+    font-family:inherit;
+    font-weight:800;
+}
+
+/* TOAST */
+
+#toast{
+    position:fixed;
+    left:50%;
+    bottom:25px;
+    transform:translate(-50%,20px);
+    z-index:100000;
+    padding:12px 18px;
+    border-radius:15px;
+    background:rgba(15,20,32,.95);
+    border:1px solid rgba(0,242,254,.25);
+    box-shadow:0 10px 35px rgba(0,0,0,.5);
+    color:#fff;
+    font-size:12px;
+    font-weight:800;
+    opacity:0;
+    pointer-events:none;
+    transition:.3s ease;
+    white-space:nowrap;
+}
+
+#toast.show{
+    opacity:1;
+    transform:translate(-50%,0);
+}
+
+/* LOADER */
+
+.loader{
+    width:18px;
+    height:18px;
+    border:2px solid rgba(0,0,0,.25);
+    border-top-color:#001015;
+    border-radius:50%;
+    display:inline-block;
+    vertical-align:middle;
+    animation:spin .7s linear infinite;
+    margin-right:7px;
+}
+
+@keyframes spin{
+    to{transform:rotate(360deg)}
+}
+
+@media(max-height:650px){
+    .page{
+        align-items:flex-start;
+        padding-top:18px;
+    }
+
+    .brand{
+        margin-bottom:14px;
+    }
+
+    .card{
+        padding-top:22px;
+    }
+
+    .icon{
+        width:65px;
+        height:65px;
+        margin-bottom:14px;
+    }
+}
+</style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-8 relative selection:bg-white selection:text-black">
 
-    <!-- Ambient Architectural Grid -->
-    <div class="architectural-grid"></div>
+<body>
 
-    <!-- ======================================================================= -->
-    <!-- GLOBAL TOAST NOTIFICATION SYSTEM LAYER                                  -->
-    <!-- ======================================================================= -->
-    <div id="global-toast-layer" class="fixed top-8 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-3 w-full max-w-sm pointer-events-none" aria-live="polite">
-        <!-- Dynamically injected notifications will appear here -->
+<canvas id="particles"></canvas>
+
+<main class="page">
+<div class="container">
+
+<div class="brand">
+    <div class="brand-name">
+        studymods.<span>hrry</span>
     </div>
 
-    <!-- ======================================================================= -->
-    <!-- MAIN APPLICATION VIEWPORT                                               -->
-    <!-- ======================================================================= -->
-    <main id="application-viewport" class="w-full max-w-[440px] relative z-10">
-        
-        <!-- =================================================================== -->
-        <!-- VIEW 1: REGISTRATION MODULE                                         -->
-        <!-- =================================================================== -->
-        <section id="module-registration" class="glass-surface rounded-2xl p-8 w-full shadow-2xl animate-enter-slide-up">
-            
-            <!-- Header Section -->
-            <header class="text-center mb-10">
-                <div class="w-16 h-16 bg-white/[0.02] border border-white/[0.08] rounded-full mx-auto mb-6 flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.03)]">
-                    <i class="ph-fill ph-hexagons text-3xl text-white"></i>
-                </div>
-                <h1 class="text-2xl font-bold tracking-tight text-white mb-2 font-sans">HRRY Enterprise</h1>
-                <p class="text-sm text-brand-textSub font-medium">Request secure network access.</p>
-            </header>
+    <div class="brand-sub">
+        Official Key Generator
+    </div>
+</div>
 
-            <!-- Registration Form Element -->
-            <form id="form-registration" class="space-y-6" novalidate aria-label="Registration Form">
-                
-                <!-- Input Group: Full Name -->
-                <div class="input-group">
-                    <label for="input-fullName" class="block text-[11px] font-bold text-brand-textSub uppercase tracking-[0.2em] mb-2 pl-1">Legal Full Name</label>
-                    <div class="relative group">
-                        <i class="ph ph-user absolute left-4 top-1/2 -translate-y-1/2 text-brand-textSub group-focus-within:text-white transition-colors duration-300 text-lg"></i>
-                        <input type="text" id="input-fullName" required placeholder="e.g. Johnathan Doe" autocomplete="name"
-                            class="premium-input w-full text-white rounded-xl py-4 pl-12 pr-4 text-sm font-medium">
-                    </div>
-                </div>
+<section class="card">
 
-                <!-- Input Group: Cohort / Class -->
-                <div class="input-group">
-                    <label for="input-userClass" class="block text-[11px] font-bold text-brand-textSub uppercase tracking-[0.2em] mb-2 pl-1">Assigned Cohort</label>
-                    <div class="relative group">
-                        <i class="ph ph-bookmark-simple absolute left-4 top-1/2 -translate-y-1/2 text-brand-textSub group-focus-within:text-white transition-colors duration-300 text-lg"></i>
-                        <select id="input-userClass" required
-                            class="premium-input w-full text-white rounded-xl py-4 pl-12 pr-10 appearance-none cursor-pointer text-sm font-medium">
-                            <option value="" disabled selected class="text-gray-800">Select cohort designation</option>
-                            <option value="Class 10" class="text-gray-900">Secondary - Class 10</option>
-                            <option value="Class 11" class="text-gray-900">Senior Sec - Class 11</option>
-                            <option value="Class 12" class="text-gray-900">Senior Sec - Class 12</option>
-                            <option value="Undergraduate" class="text-gray-900">Undergraduate Level</option>
-                            <option value="Professional" class="text-gray-900">Working Professional</option>
-                        </select>
-                        <i class="ph ph-caret-down absolute right-4 top-1/2 -translate-y-1/2 text-brand-textSub pointer-events-none"></i>
-                    </div>
-                </div>
+<div class="icon">
+<svg viewBox="0 0 24 24">
+    <circle cx="7.5" cy="15.5" r="3.5"/>
+    <path d="M10 13l8-8"/>
+    <path d="M16 5l3 3"/>
+    <path d="M14 7l3 3"/>
+</svg>
+</div>
 
-                <!-- Input Group: Statement of Purpose -->
-                <div class="input-group">
-                    <label for="input-message" class="block text-[11px] font-bold text-brand-textSub uppercase tracking-[0.2em] mb-2 pl-1">Statement of Purpose</label>
-                    <textarea id="input-message" rows="3" required placeholder="State your reason for network access..."
-                        class="premium-input w-full text-white rounded-xl py-4 px-4 resize-none text-sm font-medium"></textarea>
-                </div>
+<h1>
+GET <span>24 HR ACCESS</span>
+</h1>
 
-                <!-- Validation Error Display -->
-                <div id="display-error" class="hidden bg-brand-danger/10 border border-brand-danger/20 text-brand-danger text-xs px-4 py-3 rounded-xl flex items-center gap-3">
-                    <i class="ph-fill ph-warning-circle text-lg"></i>
-                    <span id="text-error" class="font-medium"></span>
-                </div>
+<p class="description">
+Generate your StudyMods.HRRY access key.
+One key provides access for 24 hours.
+Your key is securely registered for User App verification.
+</p>
 
-                <!-- Submission Action -->
-                <div class="pt-2">
-                    <button type="submit" id="btn-submit" 
-                        class="btn-action-primary w-full font-bold rounded-xl py-4 flex items-center justify-center gap-2 text-sm tracking-wide">
-                        <span id="text-submit">Authorize Identity</span>
-                        <div id="spinner-submit" class="enterprise-spinner state-hidden"></div>
-                    </button>
-                </div>
-            </form>
-            
-            <footer class="mt-6 text-center">
-                <p class="text-[10px] text-brand-textSub uppercase tracking-widest opacity-60">End-to-End Encrypted via Firebase</p>
-            </footer>
-        </section>
+<button
+    id="generateBtn"
+    class="generate-btn"
+    type="button">
+    GENERATE KEY
+</button>
 
-        <!-- =================================================================== -->
-        <!-- VIEW 2: ENTERPRISE DASHBOARD (100% REAL DATA ONLY)                  -->
-        <!-- =================================================================== -->
-        <section id="module-dashboard" class="state-hidden w-full space-y-5">
-            
-            <!-- User Profile Identity Card -->
-            <article class="glass-surface rounded-2xl p-6 flex justify-between items-center animate-enter-slide-up" style="animation-delay: 0.1s;">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10 shadow-inner">
-                        <i class="ph-fill ph-user-focus text-2xl text-white"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-base font-semibold text-white tracking-tight" id="display-userName">Authenticated User</h2>
-                        <div class="flex items-center gap-2 mt-1">
-                            <span class="relative flex h-2 w-2">
-                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-success opacity-75"></span>
-                              <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-success"></span>
-                            </span>
-                            <span class="text-[10px] text-brand-success font-bold uppercase tracking-[0.15em]">System Online</span>
-                        </div>
-                    </div>
-                </div>
-                <button id="btn-terminate-session" class="text-brand-textSub hover:text-white hover:bg-white/5 p-3 rounded-xl transition-all" aria-label="Sign Out">
-                    <i class="ph ph-power text-xl"></i>
-                </button>
-            </article>
+<div id="keyBox" class="key-box">
 
-            <!-- Metrics Analytics Card (REAL COUNT ONLY) -->
-            <article class="glass-surface rounded-2xl p-8 relative overflow-hidden animate-enter-slide-up" style="animation-delay: 0.2s;">
-                <!-- Decorative Watermark Graphic -->
-                <div class="absolute -right-10 -top-10 opacity-[0.02] pointer-events-none">
-                    <i class="ph-fill ph-fingerprint text-[200px]"></i>
-                </div>
-                
-                <header class="flex items-center justify-between mb-6 relative z-10">
-                    <p class="text-[11px] text-brand-textSub uppercase tracking-[0.2em] font-bold flex items-center gap-2">
-                        <i class="ph-fill ph-database text-white"></i> Global Registry Count
-                    </p>
-                    <span class="text-[10px] bg-white/10 text-white px-2 py-1 rounded border border-white/5 font-medium tracking-wide">REAL-TIME</span>
-                </header>
-                
-                <div class="flex items-baseline gap-3 relative z-10">
-                    <!-- 
-                        CRITICAL UPDATE: 
-                        This counter now strictly displays the EXACT total from Firebase.
-                        No fake numbers, no base padding. If DB is empty, it shows 0.
-                    -->
-                    <span id="display-liveCounter" class="text-7xl font-bold tracking-tighter text-white font-sans tabular-nums">
-                        --
-                    </span>
-                    <span class="text-sm font-medium text-brand-textSub uppercase tracking-wider mb-2">Total Users</span>
-                </div>
-                
-                <div class="mt-6 border-t border-white/[0.05] pt-4 flex items-center justify-between">
-                    <p class="text-[10px] text-brand-textSub font-medium">Data precision guaranteed.</p>
-                    <div class="h-1 w-16 bg-white/[0.05] rounded overflow-hidden">
-                        <div class="h-full bg-white/20 w-1/3 animate-pulse-slow"></div>
-                    </div>
-                </div>
-            </article>
+<div class="key-label">
+Your 24 Hour Access Key
+</div>
 
-            <!-- Live Network Activity Log -->
-            <article class="glass-surface rounded-2xl p-6 animate-enter-slide-up" style="animation-delay: 0.3s;">
-                <header class="mb-5 flex items-center justify-between">
-                    <h3 class="text-[11px] font-bold text-brand-textSub uppercase tracking-[0.2em] flex items-center gap-2">
-                        <i class="ph-fill ph-activity text-white"></i> Live Network Activity
-                    </h3>
-                </header>
-                
-                <!-- Dynamically Populated Feed Container -->
-                <div id="container-activityFeed" class="space-y-3 max-h-[220px] overflow-y-auto pr-2 custom-scrollbar">
-                    <div class="text-xs text-brand-textSub text-center py-6 font-medium bg-white/[0.02] rounded-xl border border-white/[0.05] border-dashed" id="msg-feedEmpty">
-                        Establishing secure connection... waiting for data logs.
-                    </div>
-                </div>
-            </article>
+<div id="keyValue" class="key-value">
+—
+</div>
 
-        </section>
-    </main>
+<button
+    id="copyBtn"
+    class="copy-btn"
+    type="button">
+    COPY KEY
+</button>
 
-    <!-- ======================================================================= -->
-    <!-- ENTERPRISE JAVASCRIPT ARCHITECTURE & FIREBASE INTEGRATION               -->
-    <!-- ======================================================================= -->
-    <script type="module">
-        /**
-         * @file HRRY Enterprise Application Logic
-         * @description Comprehensive, highly verbose implementation of the Firebase SPA.
-         * Features strict state management, modular utility classes, and absolute
-         * real-time truth for data presentation (Zero Fake Metrics).
-         */
-        
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, push, set, onValue, onChildAdded, query, limitToLast } 
-            from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+<button
+    id="restartBtn"
+    class="restart-btn"
+    type="button">
+    RESTART YOUR APP
+</button>
 
-        // =====================================================================
-        // 1. SYSTEM CONFIGURATION & CONSTANTS
-        // =====================================================================
-        const SYSTEM_CONFIG = {
-            FIREBASE: {
-                apiKey: "AIzaSy_YOUR_API_KEY_PLACEHOLDER", // Expected by SDK
-                authDomain: "hrry-store-default-rtdb.firebaseapp.com",
-                databaseURL: "https://hrry-store-default-rtdb.firebaseio.com/",
-                projectId: "hrry-store",
+</div>
+
+<div id="status" class="status"></div>
+
+<div class="info">
+<div class="info-title">
+🔐 One-Time Generation
+</div>
+
+<div class="info-text">
+One key is generated per device.
+The same device cannot repeatedly generate new keys.
+</div>
+</div>
+
+</section>
+
+<div class="footer">
+STUDY MODS HRRY • 24 HOUR ACCESS SYSTEM
+</div>
+
+</div>
+</main>
+
+
+<!-- RESTART SCREEN -->
+
+<div id="restartScreen">
+
+<div class="restart-content">
+
+<div class="phone">
+
+<div class="phone-notch"></div>
+
+<div class="phone-app">
+
+<svg viewBox="0 0 24 24">
+<path d="M4 7h16"/>
+<path d="M4 12h16"/>
+<path d="M4 17h16"/>
+</svg>
+
+</div>
+
+<div class="swipe-arrow"></div>
+<div class="swipe"></div>
+
+</div>
+
+<h2>
+RESTART <span>YOUR APP</span>
+</h2>
+
+<p>
+Your key has been copied successfully.<br>
+Open recent apps and swipe the StudyMods.HRRY app completely away,
+then open it again.
+</p>
+
+<button
+    id="closeRestart"
+    class="close-restart"
+    type="button">
+    GOT IT
+</button>
+
+</div>
+</div>
+
+<div id="toast">
+Copied successfully
+</div>
+
+
+<script type="module">
+
+/* ============================================================
+   FIREBASE — YOUR ACTUAL PROJECT
+   ============================================================ */
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+
+import {
+    getDatabase,
+    ref,
+    get,
+    set,
+    runTransaction
+}
+from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAGJsBtv72SIH0rQjk42SMFgMb2DpzwlBI",
+
+    authDomain:
+        "ewhe-1827a.firebaseapp.com",
+
+    databaseURL:
+        "https://ewhe-1827a-default-rtdb.firebaseio.com",
+
+    projectId:
+        "ewhe-1827a",
+
+    storageBucket:
+        "ewhe-1827a.firebasestorage.app",
+
+    messagingSenderId:
+        "528686843390",
+
+    appId:
+        "1:528686843390:web:08daf51901bd1c58ffacaf",
+
+    measurementId:
+        "G-W5W71D3CJP"
+};
+
+
+const firebaseApp =
+    initializeApp(firebaseConfig);
+
+const db =
+    getDatabase(firebaseApp);
+
+
+/* ============================================================
+   SETTINGS
+   ============================================================ */
+
+const KEY_VALIDITY_MS =
+    24 * 60 * 60 * 1000;
+
+/* Generator cooldown: same device may generate again after 1 hour. */
+const GENERATOR_COOLDOWN_MS =
+    60 * 60 * 1000;
+
+const KEY_PREFIX =
+    "HRRY";
+
+
+/* ============================================================
+   DEVICE ID
+   ============================================================ */
+
+function getDeviceId(){
+
+    let id =
+        localStorage.getItem(
+            "hr_keys_device_id"
+        );
+
+    if(!id){
+
+        if(
+            window.crypto &&
+            crypto.randomUUID
+        ){
+
+            id =
+                "dev_" +
+                crypto.randomUUID();
+
+        }else{
+
+            id =
+                "dev_" +
+                Date.now() +
+                "_" +
+                Math.random()
+                    .toString(36)
+                    .slice(2);
+
+        }
+
+        localStorage.setItem(
+            "hr_keys_device_id",
+            id
+        );
+    }
+
+    return id;
+}
+
+
+const deviceId =
+    getDeviceId();
+
+
+/* ============================================================
+   LOCAL STORAGE
+   ============================================================ */
+
+const LOCAL_KEY =
+    "hr_generated_key";
+
+const LOCAL_TIME =
+    "hr_generated_key_time";
+
+const LOCAL_COPIED =
+    "hr_key_copied";
+
+
+function getLocalKey(){
+
+    return localStorage.getItem(
+        LOCAL_KEY
+    );
+}
+
+
+function getLocalTime(){
+
+    return Number(
+        localStorage.getItem(
+            LOCAL_TIME
+        ) || 0
+    );
+}
+
+
+function hasLocalGenerationLock(){
+
+    const key =
+        getLocalKey();
+
+    const time =
+        getLocalTime();
+
+    if(!key || !time){
+        return false;
+    }
+
+    return (
+        Date.now() - time <
+        GENERATOR_COOLDOWN_MS
+    );
+}
+
+
+/* ============================================================
+   KEY GENERATOR
+   ============================================================ */
+
+function randomPart(length){
+
+    const chars =
+        "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+    let result = "";
+
+    const values =
+        new Uint32Array(length);
+
+    crypto.getRandomValues(values);
+
+    for(
+        let i = 0;
+        i < length;
+        i++
+    ){
+
+        result +=
+            chars[
+                values[i] %
+                chars.length
+            ];
+    }
+
+    return result;
+}
+
+
+function createKey(){
+
+    return (
+        KEY_PREFIX +
+        "-" +
+        randomPart(5) +
+        "-" +
+        randomPart(5) +
+        "-" +
+        randomPart(5)
+    );
+}
+
+
+/* ============================================================
+   UI HELPERS
+   ============================================================ */
+
+function setStatus(
+    message,
+    type = ""
+){
+
+    const status =
+        document.getElementById(
+            "status"
+        );
+
+    status.textContent =
+        message;
+
+    status.className =
+        "status " + type;
+}
+
+
+function showKey(key){
+
+    document.getElementById(
+        "keyValue"
+    ).textContent = key;
+
+    document.getElementById(
+        "keyBox"
+    ).classList.add(
+        "show"
+    );
+}
+
+
+function lockGenerateButton(){
+
+    document.getElementById(
+        "generateBtn"
+    ).disabled = true;
+}
+
+
+/* ============================================================
+   GENERATOR COOLDOWN AUTO-UNLOCK
+   ============================================================ */
+
+let cooldownTimer = null;
+
+function updateGeneratorCooldown(){
+
+    const button =
+        document.getElementById("generateBtn");
+
+    const key = getLocalKey();
+    const time = getLocalTime();
+
+    if(!key || !time){
+        if(button){
+            button.disabled = false;
+            button.innerHTML = "GENERATE KEY";
+        }
+        return;
+    }
+
+    const remaining =
+        GENERATOR_COOLDOWN_MS - (Date.now() - time);
+
+    if(remaining <= 0){
+
+        if(button){
+            button.disabled = false;
+            button.innerHTML = "GENERATE KEY";
+        }
+
+        setStatus(
+            "1-hour generator cooldown complete. You can generate a new key now.",
+            "success"
+        );
+
+        if(cooldownTimer){
+            clearInterval(cooldownTimer);
+            cooldownTimer = null;
+        }
+
+        return;
+    }
+
+    if(button){
+        button.disabled = true;
+        button.innerHTML = "GENERATE KEY";
+    }
+}
+
+function startCooldownWatcher(){
+    if(cooldownTimer) clearInterval(cooldownTimer);
+    updateGeneratorCooldown();
+    cooldownTimer = setInterval(updateGeneratorCooldown, 1000);
+}
+
+
+/* ============================================================
+   RESTORE EXISTING KEY
+   ============================================================ */
+
+function restoreLocalKey(){
+
+    const key =
+        getLocalKey();
+
+    if(!key){
+        return;
+    }
+
+    /*
+       If the local 1-hour generator cooldown
+       has expired, allow another generation.
+       The generated key itself remains valid for 24 hours.
+    */
+
+    if(!hasLocalGenerationLock()){
+
+        localStorage.removeItem(
+            LOCAL_KEY
+        );
+
+        localStorage.removeItem(
+            LOCAL_TIME
+        );
+
+        localStorage.removeItem(
+            LOCAL_COPIED
+        );
+
+        return;
+    }
+
+
+    showKey(key);
+
+    lockGenerateButton();
+
+
+    if(
+        localStorage.getItem(
+            LOCAL_COPIED
+        ) === "true"
+    ){
+
+        const copyBtn =
+            document.getElementById(
+                "copyBtn"
+            );
+
+        copyBtn.textContent =
+            "✓ KEY COPIED";
+
+        copyBtn.classList.add(
+            "copied"
+        );
+
+        document.getElementById(
+            "restartBtn"
+        ).classList.add(
+            "show"
+        );
+
+    }
+
+    setStatus(
+        "Your existing key is saved on this device. Generate again after the 1-hour cooldown.",
+        "success"
+    );
+}
+
+
+/* ============================================================
+   GENERATE KEY
+   ============================================================ */
+
+async function generateKey(){
+
+    const button =
+        document.getElementById(
+            "generateBtn"
+        );
+
+
+    if(hasLocalGenerationLock()){
+
+        restoreLocalKey();
+startCooldownWatcher();
+
+        setStatus(
+            "Generator cooldown is still active on this device. Please wait 1 hour between generations.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    button.disabled = true;
+
+    button.innerHTML =
+        '<span class="loader"></span> GENERATING...';
+
+    setStatus(
+        "Connecting to secure key server...",
+        "loading"
+    );
+
+
+    try{
+
+        const key =
+            createKey();
+
+        /*
+           IMPORTANT: This path is shared with the User App.
+           User App verifies: keys/{KEY}
+        */
+        const keyRef =
+            ref(
+                db,
+                "keys/" + encodeURIComponent(key)
+            );
+
+
+        /*
+           Firebase transaction guarantees
+           that the same generated key cannot
+           overwrite an existing key.
+        */
+
+        const result =
+            await runTransaction(
+                keyRef,
+                currentData => {
+
+                    if(
+                        currentData !== null
+                    ){
+
+                        return;
+                    }
+
+                    return {
+
+                        key:key,
+
+                        deviceId:deviceId,
+
+                        createdAt:
+                            Date.now(),
+
+                        expiresAt:
+                            Date.now() +
+                            KEY_VALIDITY_MS,
+
+                        active:true,
+
+                        used:false,
+
+                        usedBy:"",
+
+                        usedAt:0,
+
+                        status:"active",
+
+                        copied:false
+
+                    };
+                }
+            );
+
+
+        if(!result.committed){
+
+            throw new Error(
+                "KEY_CONFLICT"
+            );
+        }
+
+
+        /*
+           Save the generated key locally.
+        */
+
+        localStorage.setItem(
+            LOCAL_KEY,
+            key
+        );
+
+        localStorage.setItem(
+            LOCAL_TIME,
+            String(Date.now())
+        );
+
+        localStorage.setItem(
+            LOCAL_COPIED,
+            "false"
+        );
+
+
+        showKey(key);
+
+        lockGenerateButton();
+
+
+        button.textContent =
+            "✓ KEY GENERATED";
+
+
+        setStatus(
+            "Key generated successfully.",
+            "success"
+        );
+
+
+    }catch(error){
+
+        console.error(
+            "Key generation error:",
+            error
+        );
+
+
+        button.disabled = false;
+
+        button.textContent =
+            "GENERATE KEY";
+
+
+        if(
+            error?.code ===
+            "PERMISSION_DENIED"
+        ){
+
+            setStatus(
+                "Firebase permission denied. Check Realtime Database Rules.",
+                "error"
+            );
+
+        }else{
+
+            setStatus(
+                "Generation failed. Check Firebase connection and database rules.",
+                "error"
+            );
+        }
+    }
+}
+
+
+/* ============================================================
+   COPY KEY
+   ============================================================ */
+
+async function copyKey(){
+
+    const key =
+        getLocalKey();
+
+    if(!key){
+
+        setStatus(
+            "No key available.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    try{
+
+        await navigator.clipboard.writeText(
+            key
+        );
+
+    }catch{
+
+        const textarea =
+            document.createElement(
+                "textarea"
+            );
+
+        textarea.value =
+            key;
+
+        textarea.style.position =
+            "fixed";
+
+        textarea.style.left =
+            "-9999px";
+
+        document.body.appendChild(
+            textarea
+        );
+
+        textarea.select();
+
+        document.execCommand(
+            "copy"
+        );
+
+        textarea.remove();
+    }
+
+
+    localStorage.setItem(
+        LOCAL_COPIED,
+        "true"
+    );
+
+
+    /*
+       Update Firebase.
+    */
+
+    try{
+
+        await set(
+            ref(
+                db,
+                "keys/" +
+                encodeURIComponent(key) +
+                "/copied"
+            ),
+            true
+        );
+
+    }catch(error){
+
+        console.warn(
+            "Copy status could not be saved:",
+            error
+        );
+    }
+
+
+    const copyBtn =
+        document.getElementById(
+            "copyBtn"
+        );
+
+    copyBtn.textContent =
+        "✓ KEY COPIED";
+
+    copyBtn.classList.add(
+        "copied"
+    );
+
+
+    document.getElementById(
+        "restartBtn"
+    ).classList.add(
+        "show"
+    );
+
+
+    showToast(
+        "Key copied successfully"
+    );
+}
+
+
+/* ============================================================
+   RESTART SCREEN
+   ============================================================ */
+
+function showRestartScreen(){
+
+    document.getElementById(
+        "restartScreen"
+    ).classList.add(
+        "active"
+    );
+}
+
+
+function closeRestartScreen(){
+
+    document.getElementById(
+        "restartScreen"
+    ).classList.remove(
+        "active"
+    );
+}
+
+
+/* ============================================================
+   TOAST
+   ============================================================ */
+
+let toastTimer = null;
+
+function showToast(message){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+    toast.textContent =
+        message;
+
+    toast.classList.add(
+        "show"
+    );
+
+    clearTimeout(
+        toastTimer
+    );
+
+    toastTimer =
+        setTimeout(
+            () => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
             },
-            STORAGE_KEY: 'hrry_enterprise_session_v2',
-            DB_NODE_USERS: 'users',
-            UI: {
-                TOAST_DURATION_MS: 4500,
-                SIMULATED_NETWORK_DELAY: 800 // To demonstrate loading state gracefully
-            }
-        };
+            2200
+        );
+}
 
-        // =====================================================================
-        // 2. MODULAR UTILITY CLASSES
-        // =====================================================================
-        
-        /**
-         * String formatting and anonymization utilities.
-         */
-        class StringFormatter {
-            /**
-             * Extracts the first name from a full name string.
-             * @param {string} fullName 
-             * @returns {string} First name
-             */
-            static extractFirstName(fullName) {
-                if (!fullName) return "User";
-                return fullName.trim().split(' ')[0];
+
+/* ============================================================
+   BUTTON EVENTS
+   ============================================================ */
+
+document
+    .getElementById(
+        "generateBtn"
+    )
+    .addEventListener(
+        "click",
+        generateKey
+    );
+
+
+document
+    .getElementById(
+        "copyBtn"
+    )
+    .addEventListener(
+        "click",
+        copyKey
+    );
+
+
+document
+    .getElementById(
+        "restartBtn"
+    )
+    .addEventListener(
+        "click",
+        showRestartScreen
+    );
+
+
+document
+    .getElementById(
+        "closeRestart"
+    )
+    .addEventListener(
+        "click",
+        closeRestartScreen
+    );
+
+
+/* ============================================================
+   START
+   ============================================================ */
+
+restoreLocalKey();
+
+</script>
+
+
+<script>
+
+/* ============================================================
+   PARTICLES
+   ============================================================ */
+
+const canvas =
+    document.getElementById(
+        "particles"
+    );
+
+const ctx =
+    canvas.getContext(
+        "2d"
+    );
+
+let particles = [];
+
+function resizeCanvas(){
+
+    canvas.width =
+        window.innerWidth;
+
+    canvas.height =
+        window.innerHeight;
+}
+
+resizeCanvas();
+
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+
+const count =
+    Math.min(
+        45,
+        Math.max(
+            20,
+            Math.floor(
+                window.innerWidth / 12
+            )
+        )
+    );
+
+
+for(
+    let i = 0;
+    i < count;
+    i++
+){
+
+    particles.push({
+
+        x:
+            Math.random() *
+            innerWidth,
+
+        y:
+            Math.random() *
+            innerHeight,
+
+        r:
+            Math.random() *
+            1.7 + .5,
+
+        vx:
+            (Math.random()-.5) *
+            .25,
+
+        vy:
+            (Math.random()-.5) *
+            .25,
+
+        a:
+            Math.random() *
+            .45 + .12
+    });
+}
+
+
+function animate(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    particles.forEach(
+        p => {
+
+            p.x += p.vx;
+            p.y += p.vy;
+
+
+            if(
+                p.x < -10 ||
+                p.x >
+                canvas.width + 10
+            ){
+
+                p.vx *= -1;
             }
 
-            /**
-             * Anonymizes a full name for public feed display (e.g. "Rahul S.")
-             * @param {string} fullName 
-             * @returns {string} Anonymized name
-             */
-            static anonymizeForFeed(fullName) {
-                const parts = fullName.trim().split(' ');
-                if (parts.length > 1) {
-                    return `${parts[0]} ${parts[1].charAt(0)}.`;
-                }
-                return parts[0];
+
+            if(
+                p.y < -10 ||
+                p.y >
+                canvas.height + 10
+            ){
+
+                p.vy *= -1;
             }
+
+
+            ctx.beginPath();
+
+            ctx.arc(
+                p.x,
+                p.y,
+                p.r,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                `rgba(0,242,254,${p.a})`;
+
+            ctx.fill();
+
         }
+    );
 
-        /**
-         * Time and Date formatting utilities.
-         */
-        class TimeUtils {
-            /**
-             * Returns the current time in a localized short format.
-             * @returns {string} (e.g. "14:35")
-             */
-            static getShortTime() {
-                return new Date().toLocaleTimeString([], { 
-                    hour: '2-digit', 
-                    minute: '2-digit',
-                    hour12: true
-                });
-            }
-        }
 
-        // =====================================================================
-        // 3. CORE APPLICATION CONTROLLER
-        // =====================================================================
-        
-        class HrryEnterpriseApplication {
-            
-            /**
-             * Initializes the application, state, DOM cache, and boots Firebase.
-             */
-            constructor() {
-                console.log("[HRRY System] Boot sequence initiated...");
-                
-                // --- State Management ---
-                this.localSessionData = this.retrieveLocalSession();
-                this.trueDatabaseCount = -1; // Represents the EXACT number of entries
-                this.isInitialBootPhase = true;
-                this.processedFeedKeys = new Set(); // To ensure unique feed items
-                
-                // --- Initialization Sequence ---
-                this.cacheDomElements();
-                this.attachPrimaryEventListeners();
-                this.initializeFirebaseSubsystem();
-                
-                // Execute initial render pass
-                this.executeRenderCycle();
-            }
+    requestAnimationFrame(
+        animate
+    );
+}
 
-            /**
-             * Retrieves existing session from LocalStorage securely.
-             * @returns {Object|null} Session data or null
-             */
-            retrieveLocalSession() {
-                try {
-                    const rawData = localStorage.getItem(SYSTEM_CONFIG.STORAGE_KEY);
-                    return rawData ? JSON.parse(rawData) : null;
-                } catch (error) {
-                    console.error("[HRRY System] Failed to parse local session.", error);
-                    return null;
-                }
-            }
 
-            /**
-             * Exhaustive caching of all DOM elements to prevent querySelector overhead.
-             */
-            cacheDomElements() {
-                // Modules (Views)
-                this.domRegistrationModule = document.getElementById('module-registration');
-                this.domDashboardModule = document.getElementById('module-dashboard');
-                
-                // Form Interactions
-                this.domForm = document.getElementById('form-registration');
-                this.domInputName = document.getElementById('input-fullName');
-                this.domInputClass = document.getElementById('input-userClass');
-                this.domInputMsg = document.getElementById('input-message');
-                this.domBtnSubmit = document.getElementById('btn-submit');
-                this.domTxtSubmit = document.getElementById('text-submit');
-                this.domSpinner = document.getElementById('spinner-submit');
-                
-                // Error Display
-                this.domErrorContainer = document.getElementById('display-error');
-                this.domErrorText = document.getElementById('text-error');
-                
-                // Dashboard Elements
-                this.domUserName = document.getElementById('display-userName');
-                this.domLiveCounter = document.getElementById('display-liveCounter');
-                this.domBtnTerminate = document.getElementById('btn-terminate-session');
-                this.domActivityFeed = document.getElementById('container-activityFeed');
-                this.domFeedEmptyMsg = document.getElementById('msg-feedEmpty');
-                
-                // Global UI
-                this.domToastLayer = document.getElementById('global-toast-layer');
-            }
+animate();
 
-            /**
-             * Binds interaction events to DOM elements.
-             */
-            attachPrimaryEventListeners() {
-                this.domForm.addEventListener('submit', (event) => this.processRegistrationSubmission(event));
-                this.domBtnTerminate.addEventListener('click', () => this.terminateActiveSession());
-            }
+</script>
 
-            /**
-             * Instantiates Firebase app and Realtime Database references.
-             */
-            initializeFirebaseSubsystem() {
-                try {
-                    this.firebaseApp = initializeApp(SYSTEM_CONFIG.FIREBASE);
-                    this.database = getDatabase(this.firebaseApp);
-                    this.dbUsersRef = ref(this.database, SYSTEM_CONFIG.DB_NODE_USERS);
-                    
-                    console.log("[HRRY System] Firebase subsystem initialized.");
-                    
-                    // Start realtime synchronization only after successful init
-                    this.startRealtimeDataSynchronization();
-                } catch (error) {
-                    console.error("[HRRY System] Critical failure initializing Firebase.", error);
-                    this.displayFormError("System offline. Backend connection failed.");
-                }
-            }
-
-            /**
-             * The primary view router. Determines which module to display.
-             */
-            executeRenderCycle() {
-                if (this.localSessionData) {
-                    // State: Authenticated
-                    this.domRegistrationModule.classList.add('state-hidden');
-                    this.domDashboardModule.classList.remove('state-hidden');
-                    
-                    // Populate User Data
-                    const userFirstName = StringFormatter.extractFirstName(this.localSessionData.fullName);
-                    this.domUserName.textContent = userFirstName;
-                } else {
-                    // State: Unauthenticated
-                    this.domDashboardModule.classList.add('state-hidden');
-                    this.domRegistrationModule.classList.remove('state-hidden');
-                    this.domForm.reset();
-                    this.hideFormError();
-                }
-            }
-
-            // =================================================================
-            // REGISTRATION LOGIC & DATA INGESTION
-            // =================================================================
-            
-            /**
-             * Handles the complete form submission lifecycle.
-             * @param {Event} event 
-             */
-            async processRegistrationSubmission(event) {
-                event.preventDefault(); // Prevent standard HTTP post
-                
-                // 1. Data Extraction
-                const payload = {
-                    fullName: this.domInputName.value.trim(),
-                    userClass: this.domInputClass.value,
-                    message: this.domInputMsg.value.trim(),
-                    clientTimestamp: Date.now()
-                };
-
-                // 2. Strict Validation Check
-                if (!this.validatePayload(payload)) return;
-
-                // 3. UI State: Loading
-                this.toggleSubmissionState(true);
-                this.hideFormError();
-
-                try {
-                    // 4. Data Transmission to Firebase
-                    const newUserRef = push(this.dbUsersRef);
-                    payload.recordId = newUserRef.key; // Store unique key
-                    
-                    await set(newUserRef, payload);
-
-                    // 5. Successful write operations
-                    this.localSessionData = payload;
-                    localStorage.setItem(SYSTEM_CONFIG.STORAGE_KEY, JSON.stringify(payload));
-                    
-                    // 6. Artificial UX delay & Render transition
-                    setTimeout(() => {
-                        this.toggleSubmissionState(false);
-                        this.executeRenderCycle();
-                        this.dispatchGlobalToast(
-                            'Authorization Successful', 
-                            'Your identity has been secured on the network.', 
-                            'ph-shield-check'
-                        );
-                    }, SYSTEM_CONFIG.UI.SIMULATED_NETWORK_DELAY);
-
-                } catch (writeError) {
-                    console.error("[HRRY System] Database write rejection.", writeError);
-                    this.displayFormError("Network transmission failed. Please try again.");
-                    this.toggleSubmissionState(false);
-                }
-            }
-
-            /**
-             * Validates extracted form data.
-             * @param {Object} payload 
-             * @returns {boolean} Is valid?
-             */
-            validatePayload(payload) {
-                if (!payload.fullName || !payload.userClass || !payload.message) {
-                    this.displayFormError('All fields must be strictly populated.');
-                    return false;
-                }
-                if (payload.fullName.length < 3) {
-                    this.displayFormError('Legal name must exceed 2 characters.');
-                    return false;
-                }
-                return true;
-            }
-
-            /**
-             * Mutates the submit button visually to prevent double submissions.
-             * @param {boolean} isProcessing 
-             */
-            toggleSubmissionState(isProcessing) {
-                if (isProcessing) {
-                    this.domBtnSubmit.disabled = true;
-                    this.domTxtSubmit.style.opacity = '0';
-                    this.domSpinner.classList.remove('state-hidden');
-                } else {
-                    this.domBtnSubmit.disabled = false;
-                    this.domTxtSubmit.style.opacity = '1';
-                    this.domSpinner.classList.add('state-hidden');
-                }
-            }
-
-            /**
-             * Renders error message on the form.
-             * @param {string} text 
-             */
-            displayFormError(text) {
-                this.domErrorText.textContent = text;
-                this.domErrorContainer.classList.remove('hidden');
-            }
-
-            /**
-             * Clears form errors.
-             */
-            hideFormError() {
-                this.domErrorContainer.classList.add('hidden');
-                this.domErrorText.textContent = '';
-            }
-
-            /**
-             * Destroys local session and returns to registration view.
-             */
-            terminateActiveSession() {
-                localStorage.removeItem(SYSTEM_CONFIG.STORAGE_KEY);
-                this.localSessionData = null;
-                this.executeRenderCycle();
-            }
-
-            // =================================================================
-            // REAL-TIME DATA SYNCHRONIZATION ENGINE
-            // =================================================================
-            
-            /**
-             * Attaches persistent Firebase listeners for live data updates.
-             */
-            startRealtimeDataSynchronization() {
-                
-                // 1. LIVE COUNTER LISTENER (ABSOLUTE TRUTH ONLY)
-                // This fetches the snapshot and strictly sets the counter to snapshot.size.
-                onValue(this.dbUsersRef, (snapshot) => {
-                    let strictDatabaseCount = 0;
-                    
-                    if (snapshot.exists()) {
-                        strictDatabaseCount = snapshot.size;
-                    }
-                    
-                    // If the number actually changed and it's not the first load, trigger visual flash
-                    if (this.trueDatabaseCount !== strictDatabaseCount && !this.isInitialBootPhase) {
-                        this.triggerCounterVisualFeedback();
-                    }
-                    
-                    this.trueDatabaseCount = strictDatabaseCount;
-                    
-                    // Format strictly (e.g. "0" becomes "00", "5" becomes "05") for aesthetics
-                    // but the underlying value is 100% real.
-                    const displayFormattedCount = strictDatabaseCount < 10 
-                        ? `0${strictDatabaseCount}` 
-                        : strictDatabaseCount.toLocaleString();
-                        
-                    this.domLiveCounter.textContent = displayFormattedCount;
-                });
-
-                // 2. LIVE ACTIVITY LOG LISTENER
-                // Listen to only the last 6 entries to conserve memory on the client
-                const recentLogsQuery = query(this.dbUsersRef, limitToLast(6));
-                
-                onChildAdded(recentLogsQuery, (snapshot) => {
-                    const documentData = snapshot.val();
-                    
-                    // Ensure document exists and hasn't been rendered yet
-                    if (!documentData || this.processedFeedKeys.has(documentData.recordId)) return;
-                    
-                    this.processedFeedKeys.add(documentData.recordId);
-                    this.injectLogIntoFeed(documentData);
-
-                    // Global Toast Notification logic (Skipped on initial load flood)
-                    if (!this.isInitialBootPhase) {
-                        // Suppress toast if the action was performed by the local user
-                        const isSelf = this.localSessionData && documentData.recordId === this.localSessionData.recordId;
-                        
-                        if (!isSelf) {
-                            const maskedName = StringFormatter.anonymizeForFeed(documentData.fullName);
-                            this.dispatchGlobalToast(
-                                'New Network Node Active', 
-                                `${maskedName} has entered the global registry.`, 
-                                'ph-plugs-connected'
-                            );
-                        }
-                    }
-                });
-
-                // Conclude initial boot phase gracefully after data settles
-                setTimeout(() => { 
-                    this.isInitialBootPhase = false; 
-                }, 2000);
-            }
-
-            /**
-             * Triggers a hardware-accelerated CSS keyframe on the numeric counter.
-             * This proves to the user that a real-time update just occurred.
-             */
-            triggerCounterVisualFeedback() {
-                // DOM Reflow hack to restart CSS animation instantly
-                this.domLiveCounter.classList.remove('animate-success-flash');
-                void this.domLiveCounter.offsetWidth; 
-                this.domLiveCounter.classList.add('animate-success-flash');
-            }
-
-            /**
-             * Constructs and injects a DOM node into the activity feed.
-             * @param {Object} documentData 
-             */
-            injectLogIntoFeed(documentData) {
-                // Remove the empty state placeholder if it exists
-                if (this.domFeedEmptyMsg && this.domFeedEmptyMsg.parentNode) {
-                    this.domFeedEmptyMsg.remove();
-                }
-
-                const maskedName = StringFormatter.anonymizeForFeed(documentData.fullName);
-                const eventTime = TimeUtils.getShortTime();
-
-                // Construct Element
-                const logElement = document.createElement('div');
-                logElement.className = 'flex items-center justify-between p-3 rounded-xl bg-white/[0.015] border border-white/[0.04] animate-feed-item-enter transition-colors hover:bg-white/[0.03]';
-                
-                logElement.innerHTML = `
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-full bg-black flex items-center justify-center border border-white/10 text-brand-textSub">
-                            <i class="ph-fill ph-user-circle text-lg"></i>
-                        </div>
-                        <div class="flex flex-col">
-                            <span class="text-sm text-white font-semibold leading-tight">${maskedName}</span>
-                            <span class="text-[10px] text-brand-textSub font-medium tracking-wide">${documentData.userClass}</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-col items-end">
-                        <span class="text-[10px] text-brand-textSub bg-black px-2 py-1 rounded-md border border-white/5 font-medium shadow-inner">${eventTime}</span>
-                    </div>
-                `;
-
-                // Prepend to top of feed
-                this.domActivityFeed.insertBefore(logElement, this.domActivityFeed.firstChild);
-
-                // Memory Management: Keep max 6 nodes in DOM
-                while (this.domActivityFeed.children.length > 6) {
-                    this.domActivityFeed.removeChild(this.domActivityFeed.lastChild);
-                }
-            }
-
-            /**
-             * Generates a floating notification mimicking OS-level toasts.
-             * @param {string} title 
-             * @param {string} message 
-             * @param {string} iconClass 
-             */
-            dispatchGlobalToast(title, message, iconClass) {
-                const toastNode = document.createElement('div');
-                toastNode.className = 'glass-surface p-4 rounded-xl flex items-center gap-3 animate-enter-slide-up pointer-events-auto border-l-[3px] border-l-white';
-                
-                toastNode.innerHTML = `
-                    <div class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center shrink-0 border border-white/5 shadow-inner">
-                        <i class="ph ${iconClass} text-white text-lg"></i>
-                    </div>
-                    <div>
-                        <h4 class="text-sm font-bold text-white tracking-wide">${title}</h4>
-                        <p class="text-[11px] font-medium text-brand-textSub mt-0.5">${message}</p>
-                    </div>
-                `;
-
-                this.domToastLayer.appendChild(toastNode);
-
-                // Self-destruct sequence
-                setTimeout(() => {
-                    toastNode.style.transition = 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
-                    toastNode.style.opacity = '0';
-                    toastNode.style.transform = 'translateY(-20px) scale(0.95)';
-                    
-                    // Remove from DOM post-animation
-                    setTimeout(() => toastNode.remove(), 500);
-                }, SYSTEM_CONFIG.UI.TOAST_DURATION_MS);
-            }
-        }
-
-        // =====================================================================
-        // APPLICATION BOOTSTRAP
-        // =====================================================================
-        document.addEventListener('DOMContentLoaded', () => {
-            // Instantiate and expose globally for debugging purposes if needed
-            window.HRRY_ENTERPRISE_INSTANCE = new HrryEnterpriseApplication();
-        });
-
-    </script>
 </body>
 </html>
